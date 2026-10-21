@@ -3,6 +3,7 @@
 
   "tipos": {
     "planificacion": {
+      "grupo": "escrito",
       "nombre": "Fundamentación de proyecto",
       "titulo": "Proyecto: {tema_titulo}",
       "encabezado": [
@@ -119,10 +120,296 @@
       ],
       "extension": ["DESARROLLO", "AFIRMACION_LARGA", "TEORIA", "DESARROLLO"],
       "firma": "CARGO"
+    },
+
+    "rector": {
+      "grupo": "oral",
+      "nombre": "Palabras del rector/a",
+      "evento": "{EVENTO_RECTOR}",
+      "orador": "Rector/a de la institución",
+      "saludo": "{VOC_RECTOR}",
+      "secciones": [
+        {
+          "extensible": true,
+          "parrafos": [
+            ["RECTOR_APERTURA", "RECTOR_DESARROLLO", "ACOT_ACTO?"],
+            ["RECTOR_DESARROLLO", "RECTOR_DESARROLLO", "RECTOR_DESARROLLO", "ACOT_ACTO?"],
+            ["RECTOR_DESARROLLO", "RECTOR_DESARROLLO", "RECTOR_CIERRE", "ACOT_ACTO_FINAL"]
+          ]
+        }
+      ],
+      "extension": ["RECTOR_DESARROLLO", "RECTOR_DESARROLLO", "ACOT_ACTO?", "RECTOR_DESARROLLO"],
+      "pie": "Versión taquigráfica no corregida por el orador."
+    },
+
+    "especialista": {
+      "grupo": "oral",
+      "nombre": "Exposición de especialista",
+      "evento": "{EVENTO_ESP}",
+      "orador": "{ORADOR_ESP}",
+      "saludo": "{VOC_ESP}",
+      "secciones": [
+        {
+          "extensible": true,
+          "parrafos": [
+            ["ESP_APERTURA", "ESP_DESARROLLO", "ESP_DESARROLLO"],
+            ["ESP_DESARROLLO", "ESP_DESARROLLO", "ACOT_ESP?", "ESP_DESARROLLO", "ESP_DESARROLLO"],
+            ["ESP_DESARROLLO", "ESP_DESARROLLO", "ESP_DESARROLLO?", "ACOT_ESP?"],
+            ["ESP_CIERRE", "ESP_CIERRE_FINAL", "ACOT_APLAUSOS"]
+          ]
+        }
+      ],
+      "extension": ["ESP_DESARROLLO", "ESP_DESARROLLO", "ACOT_ESP?", "ESP_DESARROLLO", "ESP_DESARROLLO"],
+      "pie": "Desgrabación del encuentro. No revisada por la persona expositora."
+    },
+
+    "funcionario": {
+      "grupo": "oral",
+      "nombre": "Declaraciones de funcionario/a",
+      "evento": "{EVENTO_FUN}",
+      "orador": "Funcionario/a del área educativa",
+      "saludo": "{VOC_FUN}",
+      "secciones": [
+        {
+          "extensible": true,
+          "parrafos": [
+            ["FUN_APERTURA", "FUN_DESARROLLO", "FUN_DESARROLLO"],
+            ["FUN_DESARROLLO", "FUN_DESARROLLO", "FUN_DESARROLLO", "ACOT_FUN?"],
+            ["FUN_PREGUNTA", "FUN_PREGUNTA?"],
+            ["FUN_DESARROLLO", "FUN_CIERRE", "ACOT_FUN_FINAL"]
+          ]
+        }
+      ],
+      "extension": ["FUN_DESARROLLO", "FUN_DESARROLLO", "FUN_PREGUNTA", "FUN_DESARROLLO"],
+      "pie": "Transcripción de prensa. Las cifras mencionadas serán dadas a conocer oportunamente."
     }
   },
 
   "simbolos": {
+    "EVENTO_RECTOR": [
+      "Acto de inicio del ciclo lectivo",
+      "Acto de colación",
+      "Acto por el aniversario de la escuela",
+      "Reunión general de familias",
+      "Acto de cierre del ciclo lectivo",
+      "Inauguración de la muestra anual",
+      "Acto por el Día del Estudiante"
+    ],
+
+    "VOC_RECTOR": [
+      "Buenos días a todos y a todas. Señora supervisora, querido equipo docente, familias y, fundamentalmente, chicos y chicas:",
+      "Buenas tardes. Autoridades presentes, colegas, auxiliares, familias, estudiantes:",
+      "Bueno, buenos días. Gracias a todos por estar acá. ¿Se escucha atrás? Bien:",
+      "Buenas noches a todos. Queridas familias, queridos colegas, queridos egresados y egresadas:"
+    ],
+
+    "RECTOR_APERTURA": [
+      "Quiero empezar agradeciendo a todos los que hicieron posible este momento, que no es un momento más, sino un momento muy especial para nuestra escuela.",
+      "Cuando me propusieron decir unas palabras {TEMA_PP}, pensé mucho qué decir, porque es un tema que nos atraviesa a todos.",
+      "Hoy quiero hablarles de {TEMA_NP}, que es algo que como escuela nos venimos planteando hace tiempo.",
+      "Me pidieron que sea breve, así que voy a intentar serlo, aunque ustedes saben que eso a mí me cuesta un poco. (Risas.) Quiero decir unas palabras {TEMA_PP}.",
+      "No traje nada escrito, porque prefiero hablar desde el corazón. Y lo que quiero compartir con ustedes tiene que ver con {TEMA_NP}."
+    ],
+
+    "RECTOR_DESARROLLO": [
+      "Siempre digo que la escuela es mucho más que un edificio: es la gente que la habita todos los días.",
+      "Cuando pensamos en {TEMA_REF}, no podemos dejar de pensar en {OBJETO}.",
+      "Y esto no es algo que se logra de un día para el otro, sino con el esfuerzo de todos.",
+      "Sabemos que no es fácil, ¿no? Sabemos que hay dificultades. Pero también sabemos que juntos podemos.",
+      "Esta escuela tiene una historia, y esa historia la escribimos entre todos.",
+      "Yo les quiero decir a los chicos y chicas que esta escuela es de ustedes.",
+      "Las familias son parte fundamental de este proyecto, y eso hay que decirlo.",
+      "Quiero hacer un reconocimiento especial al equipo docente, que pone todos los días el cuerpo y el corazón.",
+      "Porque, en definitiva, de eso se trata: de {VERBO_INF} {OBJETO}, de acompañarnos, de estar.",
+      "No quiero dejar de mencionar a los auxiliares, que muchas veces no se ven pero son los que sostienen la escuela.",
+      "Tenemos muchos desafíos por delante, y {TEMA_REF} es, sin duda, uno de ellos.",
+      "Este año nos propusimos {VERBO_INF} {OBJETO}, y creo que, de a poco, lo estamos logrando.",
+      "Les pido a todos que sigamos apostando a la escuela como lugar de encuentro.",
+      "Como decía un viejo maestro que tuve, la escuela se hace todos los días.",
+      "Hay algo que quiero compartir con ustedes, y es que {AFIRMACION}.",
+      "Yo sé que a veces cuesta, que el día a día nos gana. Pero cuando uno ve a los chicos así, todo tiene sentido.",
+      "Y acá quiero ser muy claro: {TEMA_REF} no es un problema de unos pocos, es de todos.",
+      "Me emociona, la verdad, ver a tantas familias acompañando.",
+      "Educar es un acto de amor, y también, por qué no decirlo, un acto de esperanza.",
+      "Ustedes, chicos, son el presente; no el futuro, el presente."
+    ],
+
+    "RECTOR_CIERRE": [
+      "Así que nada, simplemente agradecerles a todos y desearles un muy buen año. Muchas gracias.",
+      "No los entretengo más. Muchas gracias a todos y a todas.",
+      "Termino como empecé: agradeciendo. Muchas gracias.",
+      "Me quedo con eso, con la idea de que juntos podemos. Gracias, de verdad."
+    ],
+
+    "ACOT_ACTO": [
+      "(Aplausos.)",
+      "(Risas.)",
+      "(Se acopla el micrófono.)",
+      "(Un estudiante grita algo desde el fondo.)",
+      "(Se corta el sonido unos segundos.)",
+      "(Murmullos.)",
+      "(Llora un bebé.)"
+    ],
+
+    "ACOT_ACTO_FINAL": [
+      "(Aplausos prolongados.)",
+      "(Aplausos. Suena la marcha de salida.)",
+      "(Aplausos. Alguien pide una foto grupal.)"
+    ],
+
+    "EVENTO_ESP": [
+      "Jornada de capacitación docente",
+      "Conversatorio «Pensar la escuela hoy»",
+      "Encuentro virtual de actualización pedagógica",
+      "Primer encuentro del trayecto formativo",
+      "Panel «Desafíos de la educación en el siglo XXI»",
+      "Congreso de innovación educativa, mesa 7"
+    ],
+
+    "ORADOR_ESP": [
+      "Especialista invitado/a",
+      "Lic. en Ciencias de la Educación (invitado/a)",
+      "Capacitador/a del programa",
+      "Coordinador/a del trayecto formativo"
+    ],
+
+    "VOC_ESP": [
+      "Bueno, buenas tardes a todas y a todos. Primero, agradecer la invitación; para mí es siempre un placer estar acá.",
+      "Hola, ¿se escucha? ¿Me ven la pantalla? Bien. Buenas tardes, y gracias por el espacio.",
+      "Buen día. Antes que nada, quiero agradecer a quienes organizaron este encuentro, y a ustedes por estar un sábado a la mañana."
+    ],
+
+    "ESP_APERTURA": [
+      "Yo quería empezar con una pregunta, que es la pregunta que va a atravesar todo este encuentro: ¿qué entendemos cuando hablamos de {tema}?",
+      "Me pidieron que hablara de {TEMA_NP}, y lo primero que quiero decir es que no vengo a traer recetas.",
+      "Voy a tratar de compartir algunas ideas {TEMA_PP}, más como preguntas que como respuestas.",
+      "Quisiera arrancar problematizando un poco el título mismo de esta exposición, que habla de {tema}."
+    ],
+
+    "ESP_DESARROLLO": [
+      "Y acá me parece que hay algo interesante para pensar.",
+      "Lo que nos dicen las investigaciones es que {AFIRMACION}.",
+      "Y esto no es menor.",
+      "Porque —y acá me voy a permitir una pequeña provocación— {AFIRMACION}.",
+      "No hay recetas. Lo que hay son preguntas, y las preguntas son, en sí mismas, una forma de saber.",
+      "Pienso, por ejemplo, en… bueno, en tantas situaciones que ustedes conocen mucho mejor que yo.",
+      "Si me permiten la palabra, diría que se trata de {VERBO_INF} {OBJETO}.",
+      "Esto lo vamos a retomar en el segundo encuentro.",
+      "Hay un autor que dice algo muy lindo sobre esto, que ahora no recuerdo textualmente, pero que va en esta línea.",
+      "Fíjense que no es lo mismo {VERBO_INF} {OBJETO} que {VERBO_INF} {OBJETO}.",
+      "Ahí hay una tensión que me parece productiva sostener, ¿no?",
+      "Dejo planteada la pregunta, porque creo que no tiene una única respuesta.",
+      "Y ustedes me dirán: «Bueno, pero en la práctica, ¿cómo se hace?». Y es una gran pregunta.",
+      "Es decir, {AFIRMACION}.",
+      "Digamos que el desafío es {VERBO_INF} {OBJETO} {ENFOQUE}.",
+      "Si pasamos a la próxima diapositiva… no, esa no, la otra. Ahí está.",
+      "Esto se ve muy claramente cuando analizamos {OBJETO}.",
+      "Hay que correrse de la lógica del déficit y pensar en términos de potencia.",
+      "En el fondo, lo que está en discusión es qué escuela queremos.",
+      "Y cuando digo {tema}, no estoy hablando solamente de {tema}: estoy hablando de {OBJETO}.",
+      "Me interesa detenerme en este punto, porque creo que es clave.",
+      "Ustedes que están en el aula todos los días lo saben mejor que nadie.",
+      "Pensemos {TEMA_REF} no como un problema, sino como una oportunidad.",
+      "Ahora bien, ¿desde dónde miramos {TEMA_REF}? Porque la mirada no es neutral."
+    ],
+
+    "ESP_CIERRE": [
+      "Bueno, me parece que voy a ir cerrando acá, porque veo que me están haciendo señas con el tiempo.",
+      "Más que conclusiones, me gustaría dejar abiertas algunas preguntas para seguir pensando juntos.",
+      "Voy redondeando, porque si no nos quedamos sin tiempo para el intercambio, que es lo más rico."
+    ],
+
+    "ESP_CIERRE_FINAL": [
+      "Les dejo la bibliografía en la última diapositiva, y quedo a disposición para las preguntas. Muchas gracias por la escucha.",
+      "Gracias por la escucha y por la paciencia. La presentación la van a recibir por correo.",
+      "Muchas gracias. Y como siempre digo: no se trata de llegar a respuestas, sino de hacernos mejores preguntas."
+    ],
+
+    "ACOT_ESP": [
+      "(Pasa la diapositiva.)",
+      "(Se acopla el micrófono.)",
+      "(Alguien pregunta si va a compartir la presentación.)",
+      "(Murmullos de asentimiento.)",
+      "(Vuelve a la diapositiva anterior.)",
+      "(Se congela la imagen unos segundos.)",
+      "(Varias personas toman fotos de la pantalla.)"
+    ],
+
+    "ACOT_APLAUSOS": ["(Aplausos.)", "(Aplausos. Se abre la ronda de preguntas, que no llega a realizarse por falta de tiempo.)"],
+
+    "EVENTO_FUN": [
+      "Conferencia de prensa",
+      "Lanzamiento de un nuevo programa educativo",
+      "Recorrida por establecimientos educativos",
+      "Inauguración de un edificio escolar",
+      "Entrevista radial",
+      "Firma de un convenio interjurisdiccional"
+    ],
+
+    "VOC_FUN": [
+      "Buenos días a todos. Gracias por acompañarnos.",
+      "Muchas gracias. Bueno, antes que nada, un saludo a todos los que nos están escuchando.",
+      "Buenas tardes. Quiero agradecer la presencia de los medios y de toda la comunidad educativa."
+    ],
+
+    "FUN_APERTURA": [
+      "Quiero decirles que desde el Ministerio venimos trabajando fuertemente {TEMA_PP}.",
+      "{TEMA_NP} es, para esta gestión, una prioridad absoluta.",
+      "Estamos convencidos de que {TEMA_NP} tiene que ser una política de Estado.",
+      "Hoy venimos a presentar una herramienta concreta {TEMA_PP}, que es fruto de un trabajo de muchos meses."
+    ],
+
+    "FUN_DESARROLLO": [
+      "Esta gestión asumió desde el primer día el compromiso de {VERBO_INF} {OBJETO}.",
+      "Y quiero ser muy claro en esto: no es un gasto, es una inversión.",
+      "Los números lo demuestran, y los vamos a dar a conocer oportunamente.",
+      "Vamos a seguir trabajando de manera articulada con todos los actores del sistema.",
+      "Estamos hablando de una inversión histórica, sin precedentes.",
+      "En los próximos meses vamos a avanzar con {ACCION}.",
+      "Esto no es una medida aislada, sino que forma parte de un plan integral.",
+      "Hemos escuchado a los docentes, a las familias, a los estudiantes, y esto es el resultado de esa escucha.",
+      "Tenemos una hoja de ruta clara, con objetivos medibles y plazos concretos.",
+      "Sabemos que hay mucho por hacer, pero también sabemos hacia dónde vamos.",
+      "No vamos a mirar para otro lado.",
+      "Y esto lo digo con total honestidad: {AFIRMACION}.",
+      "Lo que estamos haciendo es poner a la escuela en el centro de la agenda.",
+      "Estamos trabajando codo a codo con las jurisdicciones, de cara a {VERBO_INF} {OBJETO}.",
+      "Es un tema que no admite especulaciones de ningún tipo.",
+      "¿Hay problemas? Sí, claro que hay problemas. Pero estamos trabajando para resolverlos.",
+      "Esto se va a ver reflejado, sin duda, en la calidad de los aprendizajes.",
+      "Ya tenemos un equipo técnico abocado a {ACCION}.",
+      "Es un cambio de paradigma, y los cambios de paradigma llevan tiempo.",
+      "Lo vamos a hacer con responsabilidad, con gradualidad y, sobre todo, con diálogo.",
+      "Nuestro objetivo es muy claro: {VERBO_INF} {OBJETO}."
+    ],
+
+    "FUN_PREGUNTA": [
+      "(Un periodista pregunta por los plazos.) Eso lo vamos a estar comunicando en los próximos días.",
+      "(Un periodista pregunta por el presupuesto.) Es una muy buena pregunta, y lo que te puedo decir es que el compromiso está.",
+      "(Un periodista pregunta si hubo consulta con los gremios docentes.) Nosotros dialogamos con todos, siempre.",
+      "(Un periodista insiste.) Ya respondí esa pregunta.",
+      "(Un periodista pregunta cuántas escuelas alcanza la medida.) Todas las que sea necesario, no te quepa duda.",
+      "(Un periodista pregunta qué cambia concretamente.) Cambia todo. Cambia la mirada."
+    ],
+
+    "FUN_CIERRE": [
+      "Así que estamos muy contentos y vamos a seguir trabajando. Muchas gracias.",
+      "Muchas gracias a todos, y seguimos trabajando.",
+      "Seguimos. Gracias."
+    ],
+
+    "ACOT_FUN": [
+      "(Flashes.)",
+      "(Se acerca un asesor y le dice algo al oído.)",
+      "(Suena un celular.)",
+      "(Asiente el resto de la comitiva.)"
+    ],
+
+    "ACOT_FUN_FINAL": [
+      "(Aplausos de los presentes.)",
+      "(Se retira sin responder más preguntas.)",
+      "(Foto con la comitiva.)"
+    ],
     "APERTURA": [
       "En el marco de {NORMATIVA}, la presente propuesta se orienta a {VERBO_INF} {TEMA_NP} {ENFOQUE}.",
       "Pensar {TEMA_NP} en {ESCENARIO} supone, ante todo, {VERBO_INF} {OBJETO}.",

@@ -47,10 +47,10 @@
     var s = texto
       .replace(/\s+/g, ' ')
       .replace(/\s+([,.;:?!])/g, '$1')
-      .replace(/\b([Dd])e el\b/g, function (m, d) { return d + 'el'; })
-      .replace(/\b([Aa]) el\b/g, function (m, a) { return a + 'l'; })
+      .replace(/(?<![\p{L}])([Dd])e el(?![\p{L}])/gu, function (m, d) { return d + 'el'; })
+      .replace(/(?<![\p{L}])([Aa]) el(?![\p{L}])/gu, function (m, a) { return a + 'l'; })
       .trim();
-    s = s.replace(/(^|[.?!][⁰¹²³⁴⁵⁶⁷⁸⁹]*\s+)(¿?)([a-záéíóúñü])/g, function (m, pre, abre, letra) {
+    s = s.replace(/(^|[.?!][⁰¹²³⁴⁵⁶⁷⁸⁹]*\)?\s+)([¿(]?)([a-záéíóúñü])/g, function (m, pre, abre, letra) {
       return pre + abre + letra.toUpperCase();
     });
     return s;
@@ -157,12 +157,20 @@
       lugarFecha: 'Buenos Aires, ' + this._ctx.fecha,
       pie: this._expandir('{PIE}')
     };
-    doc.titulo = pulir(this._expandir(tipo.titulo));
+    doc.oral = tipo.grupo === 'oral';
+    if (doc.oral) {
+      doc.evento = this._expandir(tipo.evento);
+      doc.orador = this._expandir(tipo.orador);
+      doc.titulo = doc.evento;
+      doc.membrete.pie = tipo.pie || '';
+    } else {
+      doc.titulo = pulir(this._expandir(tipo.titulo));
+    }
     doc.encabezado = (tipo.encabezado || []).map(function (l) {
       var partes = l.split(': ');
       return { etiqueta: partes[0], valor: self._expandir(partes.slice(1).join(': ')) };
     });
-    doc.saludo = tipo.saludo || '';
+    doc.saludo = tipo.saludo ? pulir(this._expandir(tipo.saludo)) : '';
 
     tipo.secciones.forEach(function (sec) {
       var s = { titulo: sec.titulo || '', extensible: !!sec.extensible };
@@ -175,7 +183,7 @@
       doc.secciones.push(s);
     });
 
-    doc.firma = this.reglas[tipo.firma] ? this._expandir('{' + tipo.firma + '}') : tipo.firma;
+    doc.firma = !tipo.firma ? '' : (this.reglas[tipo.firma] ? this._expandir('{' + tipo.firma + '}') : tipo.firma);
     doc.talon = !!tipo.talon;
     this._estado = { usados: this._usados, ctx: this._ctx };
     doc._estado = this._estado;
@@ -217,6 +225,13 @@
   Motor.prototype.texto = function (doc) {
     var out = [];
     var m = doc.membrete;
+    if (doc.oral) {
+      out.push('VERSIÓN TAQUIGRÁFICA', doc.evento, 'Hace uso de la palabra: ' + doc.orador, m.lugarFecha, '');
+      if (doc.saludo) out.push(doc.saludo, '');
+      doc.secciones.forEach(function (s) { (s.parrafos || []).forEach(function (p) { out.push(p, ''); }); });
+      out.push(m.pie);
+      return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+    }
     out.push(m.organismo, m.direccion, m.escuela, '«' + m.lema + '»', '', m.lugarFecha, '');
     out.push(doc.titulo.toUpperCase(), '');
     doc.encabezado.forEach(function (e) { out.push(e.etiqueta + ': ' + e.valor); });
@@ -240,7 +255,12 @@
 
   Motor.prototype.estadisticas = function (doc) {
     var palabras = this.texto(doc).split(/\s+/).filter(Boolean).length;
-    return { palabras: palabras, carillas: Math.max(1, Math.ceil(palabras / 380)), ideas: 0 };
+    return {
+      palabras: palabras,
+      carillas: Math.max(1, Math.ceil(palabras / 380)),
+      minutos: Math.max(1, Math.round(palabras / 130)),
+      ideas: 0
+    };
   };
 
   Motor.normalizarTema = normalizarTema;

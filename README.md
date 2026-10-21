@@ -4,13 +4,21 @@ Generador paródico de discurso pedagógico-burocrático. Usted propone un tema;
 
 La app recibe un tema («el uso del celular en el aula», «los recreos») y produce un documento con todos los rasgos del género: fundamentación, propósitos, marco normativo, notas al pie, firma y sello. Todo es gramaticalmente correcto y nada es concreto. El contador de «ideas concretas» siempre marca cero.
 
-## Tipos de documento
+## Tipos de texto
+
+Documentos escritos, con membrete, sellos y firma:
 
 - Fundamentación de proyecto
 - Informe de trayectoria
 - Acta de reunión
 - Circular a familias (con talón para devolver firmado)
 - Convocatoria a jornada institucional
+
+Discursos orales, presentados como versión taquigráfica, con acotaciones del tipo «(Aplausos.)»:
+
+- Palabras del rector/a en un acto
+- Exposición de especialista en una capacitación
+- Declaraciones de funcionario/a ante la prensa
 
 ## Cómo se usa
 
@@ -23,7 +31,7 @@ Todo el texto está en la carpeta `data/`, separado del código:
 | Archivo | Qué contiene |
 | --- | --- |
 | `data/lexico.json` | Frases y piezas compartidas: marcos del tema, verbos vacíos, enfoques, conectores, afirmaciones, propuestas, cierres, notas al pie. |
-| `data/documentos.json` | La estructura de cada tipo de documento y sus frases propias. |
+| `data/documentos.json` | La estructura de cada tipo de texto y sus frases propias. Los discursos usan `"grupo": "oral"`. |
 | `data/membrete.json` | Organismos, direcciones, lemas del año y pie de página. |
 | `data/temas.json` | Temas que se usan al azar. |
 

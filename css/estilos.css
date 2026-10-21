@@ -157,17 +157,20 @@ main { max-width: 760px; margin: 0 auto; padding: 16px; }
 .btn-icono:active { transform: rotate(-12deg); }
 .ayuda { font-size: .8rem; color: var(--tinta-suave); margin: 6px 0 16px; }
 
-.tipos {
+.tipos { margin: 0 0 16px; }
+.grupo-tipos + .grupo-tipos { margin-top: 8px; }
+.subetiqueta { display: block; font-size: .74rem; color: var(--tinta-suave); margin: 0 0 4px; }
+.tipos-fila {
   display: flex;
   gap: 8px;
   overflow-x: auto;
   padding-bottom: 4px;
-  margin: 0 -16px 16px;
+  margin: 0 -16px;
   padding-left: 16px;
   padding-right: 16px;
   scrollbar-width: none;
 }
-.tipos::-webkit-scrollbar { display: none; }
+.tipos-fila::-webkit-scrollbar { display: none; }
 .tipo {
   flex: none;
   border: 1px solid var(--linea);
@@ -356,6 +359,25 @@ main { max-width: 760px; margin: 0 auto; padding: 16px; }
 }
 .estadisticas b { color: var(--tinta); }
 
+/* ---------- versión taquigráfica ---------- */
+.cabecera-oral { text-align: center; border-bottom: 1.5px solid #1d2433; padding-bottom: 12px; margin-bottom: 18px; }
+.cabecera-oral .rotulo {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border: 1px solid #1d2433;
+  padding: 2px 8px;
+  margin-bottom: 10px;
+}
+.cabecera-oral h2 { margin: 0 0 6px; text-transform: none; letter-spacing: 0; font-size: 1.2rem; }
+.cabecera-oral .orador { margin: 0; font-size: .92rem; }
+.lugar-fecha-oral { margin: 2px 0 0; font-size: .85rem; font-style: italic; color: #3d4354; }
+.saludo-oral { font-style: italic; margin: 0 0 12px; }
+.acotacion { color: #5a6072; }
+.hoja.oral p.cuerpo { text-indent: 0; }
+
 /* ---------- acciones ---------- */
 .acciones {
   position: fixed;
@@ -411,6 +433,7 @@ main { max-width: 760px; margin: 0 auto; padding: 16px; }
 
 @media (min-width: 640px) {
   main { padding: 24px 16px; }
+  .tipos-fila { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; }
   .hoja { padding: 52px 60px 40px; font-size: 1.06rem; }
   .membrete .lineas { font-size: .82rem; }
   .sello-recibido { top: 170px; left: 56px; font-size: .68rem; }

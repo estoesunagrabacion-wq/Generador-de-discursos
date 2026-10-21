@@ -76,6 +76,15 @@
   function pintarTipos() {
     var cont = $('tipos');
     cont.textContent = '';
+    var grupos = { escrito: 'Documentos', oral: 'Discursos' };
+    var filas = {};
+    Object.keys(grupos).forEach(function (g) {
+      var bloque = el('div', 'grupo-tipos');
+      bloque.appendChild(el('span', 'subetiqueta', grupos[g]));
+      filas[g] = el('div', 'tipos-fila');
+      bloque.appendChild(filas[g]);
+      cont.appendChild(bloque);
+    });
     Object.keys(motor.tipos).forEach(function (id) {
       var b = el('button', 'tipo', motor.tipos[id].nombre);
       b.type = 'button';
@@ -87,7 +96,7 @@
         pintarTipos();
         generar();
       });
-      cont.appendChild(b);
+      filas[motor.tipos[id].grupo === 'oral' ? 'oral' : 'escrito'].appendChild(b);
     });
   }
 
@@ -111,8 +120,11 @@
     motor.extender(doc);
     pintar(true);
     var e = doc.extensiones;
-    aviso(e === 1 ? 'Se agregó un párrafo. La idea sigue siendo la misma.' :
-      'Párrafo n.º ' + (e) + ' agregado. Faltan ' + Math.max(0, 2 - motor.estadisticas(doc).carillas) + ' carillas.');
+    if (doc.oral) {
+      aviso(e === 1 ? 'El orador pidió un minuto más.' : 'El orador sigue. Ya van ' + motor.estadisticas(doc).minutos + ' minutos.');
+    } else {
+      aviso(e === 1 ? 'Se agregó un párrafo. La idea sigue siendo la misma.' : 'Párrafo n.º ' + e + ' agregado. La idea sigue siendo la misma.');
+    }
   }
 
   /* ---------- dibujo del documento ---------- */
@@ -124,6 +136,8 @@
     if (!esExtension) hoja.classList.add('entra');
 
     var m = doc.membrete;
+    hoja.classList.toggle('oral', !!doc.oral);
+    if (doc.oral) { pintarOral(hoja); pintarEstadisticas(); return; }
     var mem = el('div', 'membrete');
     mem.appendChild(escudo());
     var lin = el('div', 'lineas');
@@ -214,12 +228,49 @@
 
     hoja.appendChild(el('p', 'pie-doc', m.pie));
 
+    pintarEstadisticas();
+  }
+
+  function pintarEstadisticas() {
     var est = motor.estadisticas(doc);
     var e = $('estadisticas');
     e.textContent = '';
-    e.appendChild(document.createTextNode(est.palabras + ' palabras · ' + est.carillas +
-      (est.carillas === 1 ? ' carilla' : ' carillas') + ' · Ideas concretas: '));
+    var medida = doc.oral
+      ? 'duración estimada: ' + est.minutos + (est.minutos === 1 ? ' minuto' : ' minutos')
+      : est.carillas + (est.carillas === 1 ? ' carilla' : ' carillas');
+    e.appendChild(document.createTextNode(est.palabras + ' palabras · ' + medida + ' · Ideas concretas: '));
     e.appendChild(el('b', null, '0'));
+  }
+
+  // Versión taquigráfica: sin membrete ni sellos; acotaciones en cursiva.
+  function pintarOral(hoja) {
+    var cab = el('div', 'cabecera-oral');
+    cab.appendChild(el('span', 'rotulo', 'Versión taquigráfica'));
+    cab.appendChild(el('h2', null, doc.evento));
+    var orador = el('p', 'orador');
+    orador.appendChild(el('span', null, 'Hace uso de la palabra: '));
+    orador.appendChild(el('b', null, doc.orador));
+    cab.appendChild(orador);
+    cab.appendChild(el('p', 'lugar-fecha-oral', doc.membrete.lugarFecha));
+    hoja.appendChild(cab);
+    if (doc.saludo) hoja.appendChild(conAcotaciones(el('p', 'saludo-oral'), doc.saludo));
+    doc.secciones.forEach(function (s) {
+      (s.parrafos || []).forEach(function (p) {
+        var nodo = conAcotaciones(el('p', 'cuerpo'), p);
+        if (p === doc.ultimoNuevo) nodo.classList.add('nuevo');
+        hoja.appendChild(nodo);
+      });
+    });
+    hoja.appendChild(el('p', 'pie-doc', doc.membrete.pie));
+  }
+
+  function conAcotaciones(nodo, texto) {
+    texto.split(/(\([^)]*\))/).forEach(function (trozo) {
+      if (!trozo) return;
+      if (/^\(.*\)$/.test(trozo)) nodo.appendChild(el('em', 'acotacion', trozo));
+      else nodo.appendChild(document.createTextNode(trozo));
+    });
+    return nodo;
   }
 
   /* ---------- adornos ---------- */
