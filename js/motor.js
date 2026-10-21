@@ -83,7 +83,7 @@
     var self = this;
     prof = prof || 0;
     if (prof > 12) return texto;
-    return texto.replace(/\{([A-Za-z_]+)\}/g, function (m, clave) {
+    return texto.replace(/\{([A-Za-z0-9_]+)\}/g, function (m, clave) {
       if (Object.prototype.hasOwnProperty.call(self._ctx, clave)) {
         var v = self._ctx[clave];
         return typeof v === 'function' ? v() : v;
@@ -203,11 +203,7 @@
         pd: Math.random() < 0.75 ? pulir(this._expandir('{CORREO_PD}')) : ''
       };
     }
-    if (doc.formato === 'whatsapp') {
-      doc.participantes = entre(28, 61);
-      doc._reloj = entre(22 * 60 + 35, 22 * 60 + 52);
-      doc.mensajes = this._mensajes(tipo.mensajes, doc);
-    }
+    if (doc.formato === 'whatsapp') this._whatsapp(tipo, doc);
     if (doc.formato === 'diapositivas') {
       doc.subtitulo = this._expandir(tipo.subtitulo);
       doc.diapositivas = this._diapositivas(doc);
@@ -232,6 +228,95 @@
     for (var i = 0; i < horas.length; i++) filas.push([horas[i], acts[i]]);
     filas.splice(3, 0, ['', 'Pausa']);
     return filas;
+  };
+
+  /* ---------- grupo de WhatsApp: conversación armada por escenas ---------- */
+  function pulirChat(s) {
+    return s
+      .replace(/(?<![\p{L}])([Dd])e el(?![\p{L}])/gu, function (m, d) { return d + 'el'; })
+      .replace(/(?<![\p{L}])([Aa]) el(?![\p{L}])/gu, function (m, a) { return a + 'l'; })
+      .replace(/[ \t]+/g, ' ').trim();
+  }
+  var DIAS = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
+  var HORAS_CHAT = [8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
+
+  Motor.prototype._persona = function (simbolo) {
+    var v = this._elegir(simbolo).split('|');
+    return { nombre: v[0], apodo: v[1] || v[0] };
+  };
+
+  Motor.prototype._escena = function (nombre, tipo, doc) {
+    var self = this;
+    var gente = {};
+    function persona(clave) {
+      if (clave === 'COORD') return doc.coord;
+      if (clave === 'WA_AUTOR') {
+        var p = self._persona('WA_AUTOR');
+        if (gente.A && p.nombre === gente.A.nombre) p = self._persona('WA_AUTOR');
+        return p;
+      }
+      if (!gente[clave]) gente[clave] = self._persona('WA_AUTOR');
+      return gente[clave];
+    }
+    persona('A');
+    persona('B');
+    this._ctx.cumple = gente.A.apodo;
+    this._ctx.coord = doc.coord.apodo;
+    var lista = [gente.B.apodo];
+    this._ctx.lista_regalo = function () {
+      lista.push(self._ctx._autor.apodo);
+      return 'Lista regalo ' + gente.A.apodo + ' 🎁\n' +
+        lista.map(function (n, i) { return (i + 1) + '. ' + n; }).join('\n');
+    };
+    // ¿mismo día o día siguiente?
+    if (doc._dia === undefined || Math.random() < 0.55) {
+      doc._dia = doc._dia === undefined ? 0 : doc._dia + entre(1, 2);
+      doc._reloj = doc._dia * 1440 + HORAS_CHAT[azar(HORAS_CHAT.length)] * 60 + azar(50);
+    } else {
+      doc._reloj += entre(25, 180);
+    }
+    var out = [];
+    tipo.escenas[nombre].forEach(function (e) {
+      var reps = 1;
+      if (e[2]) { var r = e[2].split('-'); reps = entre(+r[0], +(r[1] || r[0])); }
+      for (var i = 0; i < reps; i++) {
+        var p = persona(e[0]);
+        self._ctx._autor = p;
+        var texto = e[1].charAt(0) === '{' ? self._expandir(e[1]) : self._frase(e[1]);
+        if (!texto) continue;
+        doc._reloj += i === 0 && !out.length ? 0 : entre(0, 7);
+        out.push({ autor: p.nombre, direccion: p === doc.coord, minuto: doc._reloj, texto: pulirChat(texto) });
+      }
+    });
+    return out;
+  };
+
+  Motor.prototype._etiquetarDias = function (doc) {
+    var ultimo = Math.floor(doc.mensajes[doc.mensajes.length - 1].minuto / 1440);
+    var hoy = new Date().getDay();
+    doc.mensajes.forEach(function (m) {
+      var d = Math.floor(m.minuto / 1440);
+      var atras = ultimo - d;
+      m.dia = atras === 0 ? 'HOY' : atras === 1 ? 'AYER' : DIAS[(hoy - atras + 70) % 7];
+      var min = m.minuto % 1440;
+      m.hora = Math.floor(min / 60) + ':' + ('0' + (min % 60)).slice(-2);
+    });
+  };
+
+  Motor.prototype._whatsapp = function (tipo, doc) {
+    doc.participantes = entre(34, 58);
+    doc.coord = this._persona('WA_COORD');
+    var otras = Object.keys(tipo.escenas).filter(function (k) { return k !== tipo.escena_fija; });
+    var elegidas = [];
+    while (elegidas.length < 3) {
+      var k = otras[azar(otras.length)];
+      if (elegidas.indexOf(k) === -1 && !(k.indexOf('cumple') === 0 && elegidas.some(function (x) { return x.indexOf('cumple') === 0; }))) elegidas.push(k);
+    }
+    elegidas.splice(azar(3), 0, tipo.escena_fija);
+    var self = this;
+    doc.mensajes = [];
+    elegidas.forEach(function (n) { Array.prototype.push.apply(doc.mensajes, self._escena(n, tipo, doc)); });
+    this._etiquetarDias(doc);
   };
 
   Motor.prototype._mensajes = function (espec, doc) {
@@ -288,8 +373,10 @@
     this._ctx = doc._estado.ctx;
     if (doc.formato === 'bingo') return doc;
     if (doc.formato === 'whatsapp') {
-      var nuevos = this._mensajes(tipo.extension, doc);
+      var otras = Object.keys(tipo.escenas).filter(function (k) { return k !== tipo.escena_fija; });
+      var nuevos = this._escena(otras[azar(otras.length)], tipo, doc);
       Array.prototype.push.apply(doc.mensajes, nuevos);
+      this._etiquetarDias(doc);
       doc.ultimoNuevo = nuevos[0] && nuevos[0].texto;
       doc.extensiones++;
       return doc;
@@ -321,8 +408,12 @@
     var out = [];
     var m = doc.membrete;
     if (doc.formato === 'whatsapp') {
-      out.push('💬 ' + doc.titulo, '');
-      doc.mensajes.forEach(function (x) { out.push('[' + x.hora + '] ' + x.autor + ': ' + x.texto); });
+      out.push('💬 ' + doc.titulo);
+      var diaPrevio = null;
+      doc.mensajes.forEach(function (x) {
+        if (x.dia !== diaPrevio) { out.push('', '— ' + x.dia + ' —'); diaPrevio = x.dia; }
+        out.push('[' + x.hora + '] ' + x.autor + ': ' + Motor.textoPlanoChat(x.texto));
+      });
       return out.join('\n');
     }
     if (doc.formato === 'diapositivas') {
@@ -389,6 +480,17 @@
       diapositivas: doc.diapositivas ? doc.diapositivas.length : 0,
       ideas: 0
     };
+  };
+
+  /* Convierte las marcas de multimedia del chat en texto plano. */
+  Motor.textoPlanoChat = function (t) {
+    return t
+      .replace(/\[sticker:[^\]]*\]/g, '<Sticker omitido>')
+      .replace(/\[foto\]/g, '<Multimedia omitido>')
+      .replace(/\[audio:([^\]]*)\]/g, '<Audio omitido>')
+      .replace(/\[eliminado\]/g, 'Se eliminó este mensaje.')
+      .replace(/\[documento:([^\]]*)\]/g, '$1 (archivo adjunto)')
+      .replace(/\[link:([^\]]*)\]/g, 'https://$1');
   };
 
   Motor.normalizarTema = normalizarTema;

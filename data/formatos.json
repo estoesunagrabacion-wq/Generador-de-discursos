@@ -1,6 +1,5 @@
 {
   "_instrucciones": "Tipos con formato propio: devolución de observación, correo, grupo de WhatsApp, diapositivas y bingo. Funcionan igual que documentos.json: 'tipos' define la estructura y 'simbolos' las frases. Pueden usar cualquier símbolo de lexico.json o documentos.json.",
-
   "tipos": {
     "devolucion": {
       "grupo": "escrito",
@@ -13,15 +12,37 @@
         "Tema de la clase observada: {tema}"
       ],
       "secciones": [
-        { "titulo": "Aspectos observados", "extensible": true, "parrafos": [["DEV_APERTURA", "DEV_OBS", "DEV_OBS", "DEV_OBS?"]] },
-        { "titulo": "Fortalezas", "lista": { "simbolo": "DEV_FORTALEZA", "cantidad": 3 } },
-        { "titulo": "Aspectos a seguir trabajando", "lista": { "simbolo": "DEV_MEJORA", "cantidad": 3 } },
-        { "titulo": "Sugerencias", "parrafos": [["DEV_SUGERENCIA", "DEV_SUGERENCIA", "DEV_CIERRE"]] }
+        {
+          "titulo": "Aspectos observados",
+          "extensible": true,
+          "parrafos": [
+            ["DEV_APERTURA", "DEV_OBS", "DEV_OBS", "DEV_OBS?"]
+          ]
+        },
+        {
+          "titulo": "Fortalezas",
+          "lista": {
+            "simbolo": "DEV_FORTALEZA",
+            "cantidad": 3
+          }
+        },
+        {
+          "titulo": "Aspectos a seguir trabajando",
+          "lista": {
+            "simbolo": "DEV_MEJORA",
+            "cantidad": 3
+          }
+        },
+        {
+          "titulo": "Sugerencias",
+          "parrafos": [
+            ["DEV_SUGERENCIA", "DEV_SUGERENCIA", "DEV_CIERRE"]
+          ]
+        }
       ],
       "extension": ["DEV_OBS", "DEV_OBS", "DEV_OBS"],
       "firma": "Coordinación pedagógica"
     },
-
     "correo": {
       "grupo": "mensaje",
       "formato": "correo",
@@ -42,33 +63,82 @@
       "firma": "Equipo de dirección",
       "pie": "Este correo y sus adjuntos son confidenciales. Si lo recibió por error, igual tiene que entregar lo que se pide."
     },
-
     "whatsapp": {
       "grupo": "mensaje",
       "formato": "whatsapp",
       "nombre": "Grupo de WhatsApp docente",
       "titulo": "{WA_GRUPO}",
-      "mensajes": [
-        ["DIRECCION", "WA_DIR_INICIO"],
-        ["WA_AUTOR", "WA_REACCION"],
-        ["WA_AUTOR", "WA_PREGUNTA"],
-        ["WA_AUTOR", "WA_REACCION?"],
-        ["DIRECCION", "WA_DIR_RESPUESTA"],
-        ["WA_AUTOR", "WA_RESPUESTA"],
-        ["WA_AUTOR", "WA_OFF?"],
-        ["WA_AUTOR", "WA_REACCION"],
-        ["WA_AUTOR", "WA_PREGUNTA"],
-        ["DIRECCION", "WA_DIR_CIERRE"],
-        ["WA_AUTOR", "WA_FINAL"]
-      ],
-      "extension": [
-        ["WA_AUTOR", "WA_PREGUNTA"],
-        ["WA_AUTOR", "WA_OFF"],
-        ["WA_AUTOR", "WA_REACCION"],
-        ["DIRECCION", "WA_DIR_CIERRE"]
-      ]
+      "_nota": "Cada conversación combina una escena de aviso (que usa el tema) con otras escenas al azar. En cada mensaje, el primer elemento es quién lo escribe: COORD (la coordinación), A, B, C (personas fijas dentro de la escena) o WA_AUTOR (cualquiera). Un tercer elemento como \"2-4\" repite el mensaje con distintas personas.",
+      "escena_fija": "aviso",
+      "escenas": {
+        "aviso": [
+          ["COORD", "WA_AVISO"],
+          ["WA_AUTOR", "WA_ACK", "2-4"],
+          ["WA_AUTOR", "WA_PREG_TEMA"],
+          ["COORD", "WA_RESP_COORD"],
+          ["WA_AUTOR", "WA_ACK?"]
+        ],
+        "cumple": [
+          ["B", "WA_CUMPLE_1"],
+          ["WA_AUTOR", "WA_CUMPLE", "3-6"],
+          ["A", "WA_CUMPLE_GRACIAS"]
+        ],
+        "cumple2": [
+          ["B", "WA_CUMPLE_1"],
+          ["WA_AUTOR", "WA_CUMPLE", "2-4"],
+          ["A", "WA_CUMPLE_GRACIAS"]
+        ],
+        "regalo": [
+          ["B", "WA_REGALO_PROPUESTA"],
+          ["WA_AUTOR", "{lista_regalo}", "3-4"],
+          ["WA_AUTOR", "WA_REGALO_PREG?"],
+          ["B", "WA_REGALO_RESP"]
+        ],
+        "recurso": [
+          ["A", "WA_RECURSO"],
+          ["WA_AUTOR", "WA_RECURSO_2?"],
+          ["WA_AUTOR", "WA_RECURSO_RESP"],
+          ["A", "WA_ACK?"]
+        ],
+        "tarde": [
+          ["A", "WA_TARDE"],
+          ["WA_AUTOR", "WA_TARDE_2"],
+          ["A", "WA_ACK?"]
+        ],
+        "cobro": [
+          ["A", "WA_COBRO"],
+          ["WA_AUTOR", "WA_ACK_COBRO", "2-3"],
+          ["WA_AUTOR", "WA_COBRO_DUDA?"],
+          ["WA_AUTOR", "WA_COBRO_RESP?"]
+        ],
+        "link": [
+          ["A", "WA_LINK"],
+          ["WA_AUTOR", "WA_LINK_RESP", "1-2"]
+        ],
+        "error": [
+          ["A", "WA_ERROR"],
+          ["A", "WA_ERROR_2"],
+          ["WA_AUTOR", "WA_ERROR_RESP", "1-2"]
+        ],
+        "notas": [
+          ["COORD", "WA_NOTAS"],
+          ["WA_AUTOR", "WA_NOTAS_PREG"],
+          ["COORD", "WA_NOTAS_RESP"],
+          ["WA_AUTOR", "WA_NOTAS_PREG2?"],
+          ["WA_AUTOR", "WA_ACK"]
+        ],
+        "edificio": [
+          ["A", "WA_EDIFICIO"],
+          ["WA_AUTOR", "WA_EDIF_RESP", "1-2"]
+        ],
+        "asado": [
+          ["A", "WA_ASADO"],
+          ["WA_AUTOR", "WA_ASADO_RESP", "2-4"],
+          ["WA_AUTOR", "WA_ASADO_PREG?"],
+          ["A", "WA_ASADO_CIERRE?"]
+        ]
+      }
     },
-
     "diapositivas": {
       "grupo": "oral",
       "formato": "diapositivas",
@@ -76,7 +146,6 @@
       "titulo": "{DIAPO_PORTADA}",
       "subtitulo": "{DIAPO_SUBTITULO}"
     },
-
     "bingo": {
       "grupo": "juego",
       "formato": "bingo",
@@ -84,7 +153,6 @@
       "titulo": "Bingo de jornada institucional"
     }
   },
-
   "simbolos": {
     "DEV_APERTURA": [
       "En el marco del acompañamiento institucional previsto, se realizó la observación de la clase correspondiente a {TEMA_NP}.",
@@ -92,7 +160,6 @@
       "Se realizó la visita al aula acordada oportunamente, en la que se abordó {tema}.",
       "Agradecemos, en primer lugar, la apertura para compartir la propia práctica en la clase dedicada a {tema}."
     ],
-
     "DEV_OBS": [
       "Se observa un buen clima de trabajo, aunque por momentos el nivel de ruido dificulta la escucha.",
       "La consigna fue presentada de manera oral, lo cual generó algunas dudas que fueron resueltas sobre la marcha.",
@@ -110,7 +177,6 @@
       "Se registran momentos de dispersión que fueron abordados con solvencia.",
       "La propuesta se vincula con {OBJETO}, aunque esa relación podría hacerse más visible para el grupo."
     ],
-
     "DEV_FORTALEZA": [
       "Buen vínculo con el grupo.",
       "Dominio del contenido.",
@@ -123,7 +189,6 @@
       "Compromiso con {OBJETO}.",
       "Escucha atenta de las intervenciones de los estudiantes."
     ],
-
     "DEV_MEJORA": [
       "Revisar las consignas {ENFOQUE}.",
       "Pensar el cierre de la clase.",
@@ -136,7 +201,6 @@
       "Articular con los acuerdos departamentales.",
       "Gestionar los tiempos de la clase."
     ],
-
     "DEV_SUGERENCIA": [
       "Sería interesante pensar en la posibilidad de {VERBO_INF} {OBJETO}.",
       "Se sugiere {ACCION}, en diálogo con el departamento.",
@@ -146,13 +210,7 @@
       "Se recomienda la lectura del material compartido en la última jornada.",
       "Podría pensarse una secuencia que permita {VERBO_INF} {OBJETO} {ENFOQUE}."
     ],
-
-    "DEV_CIERRE": [
-      "Quedamos a disposición para seguir conversando estos aspectos en un próximo encuentro.",
-      "Se acuerda una nueva observación para el próximo trimestre, sin fecha definida.",
-      "Agradecemos la apertura y la disposición para compartir la propia práctica."
-    ],
-
+    "DEV_CIERRE": ["Quedamos a disposición para seguir conversando estos aspectos en un próximo encuentro.", "Se acuerda una nueva observación para el próximo trimestre, sin fecha definida.", "Agradecemos la apertura y la disposición para compartir la propia práctica."],
     "CORREO_ASUNTO": [
       "URGENTE: {tema}",
       "IMPORTANTE – {tema_titulo} – LEER",
@@ -162,16 +220,20 @@
       "Recordatorio (2.º aviso): {tema}",
       "{tema_titulo} (versión corregida)"
     ],
-
-    "CORREO_FECHA": ["domingo, 23:41", "domingo, 22:58", "sábado, 00:12", "viernes, 23:48", "domingo, 21:36", "domingo, 23:59"],
-
+    "CORREO_FECHA": [
+      "domingo, 23:41",
+      "domingo, 22:58",
+      "sábado, 00:12",
+      "viernes, 23:48",
+      "domingo, 21:36",
+      "domingo, 23:59"
+    ],
     "CORREO_SALUDO": [
       "Buenas noches, colegas:",
       "Hola a todos y todas, perdón por el horario:",
       "Estimados docentes:",
       "Queridos colegas, buenas noches:"
     ],
-
     "CORREO_APERTURA": [
       "Les escribo para recordarles que {TEMA_NP} es una prioridad institucional y que, como ya se conversó en reiteradas oportunidades, requiere de nuestro compromiso.",
       "Disculpen el día y el horario, pero me acaba de llegar una comunicación de la Supervisión {TEMA_PP}.",
@@ -179,7 +241,6 @@
       "Como seguramente ya saben por el grupo, surgió una novedad importante {TEMA_PP}.",
       "Reenvío este correo porque me consta que el anterior no fue leído por todos."
     ],
-
     "CORREO_PEDIDO": [
       "Necesitamos que cada docente complete el formulario adjunto con sus aportes sobre {tema}.",
       "Les solicito que envíen, a la brevedad, una breve fundamentación de cómo están trabajando {tema} en sus espacios.",
@@ -187,7 +248,6 @@
       "Les pido que lean con atención el documento adjunto, de cuarenta y tres páginas, y que traigan sus reflexiones.",
       "Necesito que cada uno me envíe una planilla con las acciones realizadas {TEMA_PP}, aunque no se haya realizado ninguna."
     ],
-
     "CORREO_DESARROLLO": [
       "Sé que es un momento del año complicado, pero es un requerimiento que nos llega de arriba.",
       "Recuerden utilizar la plantilla institucional, la nueva, no la del año pasado.",
@@ -200,20 +260,13 @@
       "Les pido que respeten el formato: Arial 12, interlineado 1,5, márgenes de 2,5 cm.",
       "Los que ya lo enviaron, por favor reenvíenlo, porque se borró la carpeta del Drive."
     ],
-
     "CORREO_PLAZO": [
       "El plazo de entrega es mañana a primera hora.",
       "La fecha límite es el lunes a las 8:00, sin excepción.",
       "Necesitaría tenerlo antes del viernes, idealmente el jueves, o mejor mañana.",
       "Tienen tiempo hasta el miércoles, aunque si pueden antes, mejor."
     ],
-
-    "CORREO_CIERRE": [
-      "Gracias, como siempre, por el compromiso. Que descansen (lo que queda del fin de semana).",
-      "Sepan disculpar el horario. Cualquier cosa, me escriben. Saludos cordiales.",
-      "Muchas gracias por todo. Seguimos construyendo juntos."
-    ],
-
+    "CORREO_CIERRE": ["Gracias, como siempre, por el compromiso. Que descansen (lo que queda del fin de semana).", "Sepan disculpar el horario. Cualquier cosa, me escriben. Saludos cordiales.", "Muchas gracias por todo. Seguimos construyendo juntos."],
     "CORREO_ADJUNTO": [
       "documento_final_v3_DEFINITIVO_corregido.docx",
       "planilla_relevamiento (1) (2).xlsx",
@@ -221,7 +274,6 @@
       "formulario.pdf.docx",
       "Copia de Copia de Proyecto.docx"
     ],
-
     "CORREO_PD": [
       "P. D.: Me olvidé de adjuntar el documento; lo mando en otro correo.",
       "P. D.: Por favor, no respondan a todos.",
@@ -229,92 +281,33 @@
       "P. D.: El formulario cierra hoy a las 00:00.",
       "P. D.: Ignoren el correo anterior."
     ],
-
     "WA_GRUPO": [
-      "Docentes {anio} 😊",
-      "Profes Turno Mañana",
-      "Sala de profes (oficial)",
-      "Docentes EES {numero_escuela} 📚",
-      "Claustro – SOLO INFO",
-      "Profes 4.º y 5.º 🍎"
+      "Profes {anio} 🍎",
+      "Sala de profes 📚",
+      "Profes EES {numero_escuela}",
+      "Docentes – SOLO INFO",
+      "Profes TM ☕",
+      "Claustro {anio}"
     ],
-
     "WA_AUTOR": [
-      "Prof. Graciela (Historia)",
-      "Marcelo Matemática",
-      "Lau Inglés",
-      "Caro P. (Biología)",
-      "Prof. Rubén",
-      "Silvi Lengua",
-      "Ale – Preceptoría",
-      "Fer Ed. Física",
-      "Norma Química",
-      "Pablo (ESI)",
-      "Vero Arte 🎨",
-      "Gustavo Geografía"
+      "Marce Historia|Marce",
+      "Andre Inglés|Andre",
+      "Caro Biología|Caro",
+      "Rubén Matemática|Rubén",
+      "Juli Lengua|Juli",
+      "Ale Preceptoría|Ale",
+      "Fer Ed. Física|Fer",
+      "Norma Química|Norma",
+      "Pablo ESI|Pablo",
+      "Mariela Arte 🎨|Mariela",
+      "Gaby Geografía|Gaby",
+      "~ Andrea|Andrea",
+      "Tomi Filosofía|Tomi",
+      "Profe Graciela|Graciela",
+      "Santi Música|Santi",
+      "Mica Tecnología|Mica",
+      "Ceci Psicopedagogía|Ceci"
     ],
-
-    "WA_DIR_INICIO": [
-      "Buenas noches a todos!! Perdón la hora 🙏 Les dejo el documento {TEMA_PP} para que lo lean antes de mañana. Es cortito 📄",
-      "Colegas, buenas noches. Les recuerdo que mañana tenemos que tener listo lo de {tema}. Gracias!! 💪",
-      "Hola a todos! Reenvío lo que mandó supervisión sobre {tema}. Por favor LEER ⚠️",
-      "Buenas noches. Se informa que mañana, en el marco de {TEMA_NP}, los primeros 40 minutos serán de reflexión institucional. Gracias."
-    ],
-
-    "WA_REACCION": ["👍", "Gracias!", "Recibido 👌", "🙏🙏", "Gracias por la info", "👍🏻", "Ok", "Excelente!! 👏👏", "❤️", "Leído ✅"],
-
-    "WA_PREGUNTA": [
-      "Perdón, ¿esto es para todos los cursos o solo para el ciclo básico?",
-      "Alguien sabe si mañana hay clases?",
-      "¿Hay que entregarlo impreso o por mail?",
-      "Disculpen, ¿cuál es el documento? No me abre",
-      "No me llegó el mail 😕",
-      "¿Esto es lo mismo que lo de la jornada pasada?",
-      "Perdón, me perdí. ¿Qué hay que hacer?",
-      "¿Cuántas carillas tiene que tener?",
-      "¿El formulario es el de Google o el de papel?",
-      "¿Los que estamos de licencia también?"
-    ],
-
-    "WA_DIR_RESPUESTA": [
-      "Está todo en el mail 😊",
-      "Es para todos. Lean el documento, ahí está explicado",
-      "Sí, impreso y por mail. Y subido al Drive.",
-      "Lo vuelvo a mandar ⬇️ 📄 documento_{tema_archivo}_final_v2.pdf",
-      "Como se habló en la reunión 🙃",
-      "Mañana lo vemos personalmente"
-    ],
-
-    "WA_RESPUESTA": [
-      "Yo tampoco entendí",
-      "Gracias, ahora sí",
-      "Sigo sin poder abrirlo 😅",
-      "Ahí me llegó, gracias!",
-      "Yo lo entregué la semana pasada, ¿hay que hacerlo de nuevo?",
-      "Sumo: ¿se puede hacer en pareja pedagógica?",
-      "Perfecto 👍",
-      "¿Pero el de la semana pasada o este?"
-    ],
-
-    "WA_OFF": [
-      "Perdón, era para otro grupo 🙈",
-      "Feliz cumple Norma!!! 🎂🎉",
-      "Alguien se olvidó un paraguas negro en la sala de profes ☂️",
-      "Se vende torta para el viaje de egresados, $2000 la porción 🍰",
-      "[Mensaje eliminado]",
-      "🎤 Audio de 4:37",
-      "¿Alguien que me cubra el jueves a tercera hora? 🙏"
-    ],
-
-    "WA_DIR_CIERRE": [
-      "Por favor, este grupo es solo para información institucional 🙏",
-      "Gracias a todos. Mañana lo charlamos en la reunión. Que descansen!",
-      "Les pido que las consultas sean por privado así no saturamos el grupo 🙏",
-      "Recuerden: lo de {tema} es para mañana. Gracias!!"
-    ],
-
-    "WA_FINAL": ["👍", "Gracias!!", "Buenas noches 😴", "🙏", "[Mensaje eliminado]", "Perdón, ¿entonces mañana hay clases?"],
-
     "DIAPO_PORTADA": [
       "{tema_titulo}: desafíos y oportunidades",
       "Repensar {tema}",
@@ -323,14 +316,12 @@
       "{tema_titulo}: tensiones, sentidos y posibilidades",
       "¿Qué hacemos con {tema}?"
     ],
-
     "DIAPO_SUBTITULO": [
       "Encuentro 1 · Trayecto de formación situada",
       "Jornada institucional · Módulo 3",
       "Capacitación docente en servicio · Versión 2.1",
       "Ciclo de actualización pedagógica · Encuentro 2 (de 8)"
     ],
-
     "DIAPO_TITULO": [
       "Punto de partida",
       "Algunas coordenadas",
@@ -343,7 +334,6 @@
       "Algunas certezas (provisorias)",
       "El estado de la cuestión"
     ],
-
     "DIAPO_VINETA": [
       "{CONCEPTO} como punto de partida",
       "{OBJETO}: tensiones y desafíos",
@@ -369,13 +359,7 @@
       "Lo vincular",
       "{ENFOQUE}"
     ],
-
-    "DIAPO_EJE": [
-      "Eje 1: {CONCEPTO}",
-      "Eje 2: {OBJETO}",
-      "Eje 3: {CONCEPTO} (transversal)"
-    ],
-
+    "DIAPO_EJE": ["Eje 1: {CONCEPTO}", "Eje 2: {OBJETO}", "Eje 3: {CONCEPTO} (transversal)"],
     "DIAPO_ACTIVIDAD": [
       "En pequeños grupos, conversen: ¿qué lugar ocupa {tema} en su escuela? (15 minutos)",
       "Escriban en un pósit una palabra que asocien con {tema}. Péguenla en el afiche.",
@@ -383,21 +367,291 @@
       "Armen una nube de palabras con el celular. (Si no funciona el wifi, en papel.)",
       "Recuperen una situación de su práctica vinculada con {tema} y analícenla a la luz de lo trabajado."
     ],
-
     "BINGO": [
-      "Resignificar", "En clave de", "Trayectorias", "Dispositivo", "«No hay recetas»", "Habitar la escuela",
-      "Poner en tensión", "Situado", "Construcción colectiva", "Corresponsabilidad", "Mirada integral",
-      "Desnaturalizar", "Andamiaje", "Sujeto de derecho", "Transversal", "Problematizar", "Interpelar",
-      "Atravesado por", "Lo vincular", "Acompañar", "Video disparador", "Afiche", "Pósit", "Plenario",
-      "Trabajo en grupos", "Alguien pregunta por el sueldo", "Se corta el wifi", "El proyector no anda",
-      "«Esto ya lo hicimos el año pasado»", "Lectura de un documento en voz alta", "Medialunas",
-      "Alguien llega tarde", "«No es para sumar trabajo»", "Mención a la pandemia", "Cita de un autor que nadie leyó",
-      "«¿Se escucha atrás?»", "«Juntos podemos»", "«Esto lo retomamos después»", "Se termina sin conclusiones",
-      "Encuesta de satisfacción", "Alguien corrige pruebas mientras tanto", "«Desde el paradigma de…»", "ESI",
-      "NAP", "Inclusión", "Territorio", "Lógica del déficit", "Comunidad educativa", "Pareja pedagógica",
-      "Hoja de ruta", "Acuerdos institucionales", "Clima institucional", "Deconstruir", "Potenciar", "Habilitar",
-      "Oportunidad", "Desafío", "«Lo dejo picando»", "Dinámica rompehielos", "Alguien pide el PowerPoint",
-      "«Como dijimos en la reunión»", "Se extiende más de lo previsto", "Música de fondo en el video", "Escucha activa"
-    ]
+      "Resignificar",
+      "En clave de",
+      "Trayectorias",
+      "Dispositivo",
+      "«No hay recetas»",
+      "Habitar la escuela",
+      "Poner en tensión",
+      "Situado",
+      "Construcción colectiva",
+      "Corresponsabilidad",
+      "Mirada integral",
+      "Desnaturalizar",
+      "Andamiaje",
+      "Sujeto de derecho",
+      "Transversal",
+      "Problematizar",
+      "Interpelar",
+      "Atravesado por",
+      "Lo vincular",
+      "Acompañar",
+      "Video disparador",
+      "Afiche",
+      "Pósit",
+      "Plenario",
+      "Trabajo en grupos",
+      "Alguien pregunta por el sueldo",
+      "Se corta el wifi",
+      "El proyector no anda",
+      "«Esto ya lo hicimos el año pasado»",
+      "Lectura de un documento en voz alta",
+      "Medialunas",
+      "Alguien llega tarde",
+      "«No es para sumar trabajo»",
+      "Mención a la pandemia",
+      "Cita de un autor que nadie leyó",
+      "«¿Se escucha atrás?»",
+      "«Juntos podemos»",
+      "«Esto lo retomamos después»",
+      "Se termina sin conclusiones",
+      "Encuesta de satisfacción",
+      "Alguien corrige pruebas mientras tanto",
+      "«Desde el paradigma de…»",
+      "ESI",
+      "NAP",
+      "Inclusión",
+      "Territorio",
+      "Lógica del déficit",
+      "Comunidad educativa",
+      "Pareja pedagógica",
+      "Hoja de ruta",
+      "Acuerdos institucionales",
+      "Clima institucional",
+      "Deconstruir",
+      "Potenciar",
+      "Habilitar",
+      "Oportunidad",
+      "Desafío",
+      "«Lo dejo picando»",
+      "Dinámica rompehielos",
+      "Alguien pide el PowerPoint",
+      "«Como dijimos en la reunión»",
+      "Se extiende más de lo previsto",
+      "Música de fondo en el video",
+      "Escucha activa"
+    ],
+    "WA_COORD": [
+      "Coordinación Sofi|Sofi",
+      "Coordi Pato|Pato",
+      "Dirección|la dire",
+      "Inés Coordinación|Inés"
+    ],
+    "WA_AVISO": [
+      "Buenos días profes! Les recuerdo que esta semana trabajamos {tema} con todos los cursos. Está todo en el mail 🙌🏼",
+      "Buenas tardes profes de *{CURSO_WA}*. Por favor, lean con atención el mail que envié sobre {tema}. Quedo a disposición. Muchas gracias.",
+      "Profes, buen día. Les comparto el documento sobre {tema} que mandó Supervisión 👇🏽 [documento:{tema_archivo}_final.pdf]",
+      "Hola a todos/as, les quería avisar que el jueves, durante el segundo módulo (tercera y cuarta hora), habrá una actividad sobre {tema}. ¡Gracias!",
+      "Profes, *importante*: mañana a las 9 tenemos EMI para conversar sobre {tema}. El link está en el mail 👆🏻",
+      "Hola profes! Recién enviamos un mail recordando lo de {tema} y el cronograma adjunto 🤗"
+    ],
+    "CURSO_WA": [
+      "1er año",
+      "2do año",
+      "3er año",
+      "4to año",
+      "5to año",
+      "ciclo básico",
+      "ciclo superior"
+    ],
+    "WA_ACK": [
+      "👍🏻",
+      "👍🏼",
+      "👍🏽",
+      "👍",
+      "Gracias!",
+      "Gracias por avisar",
+      "Ok",
+      "Dale",
+      "Genial, gracias!",
+      "👌🏼",
+      "Gracias!!!",
+      "Oki",
+      "Perfecto 👍🏻",
+      "👏🏻👏🏻👏🏻",
+      "Idem",
+      "Gracias, {coord}!",
+      "Gracias por avisar!! 🙏🏼"
+    ],
+    "WA_PREG_TEMA": [
+      "Perdón, ¿lo de {tema} es para todos los cursos o solo para el ciclo superior?",
+      "¿Esto reemplaza la clase o es aparte?",
+      "Pregunta: lo de {tema}, ¿se evalúa? ¿Con nota o con nodos?",
+      "No me llegó el mail 😕",
+      "¿En qué módulo era? No recuerdo cómo quedó",
+      "Me meto aunque no tengo ese curso este año: ¿lo de {tema} va al libro de temas?",
+      "Yo el jueves no estoy, ¿les dejo actividad a los chicos?",
+      "¿Hay que mandar algo antes o lo vemos en la reunión?",
+      "Perdón, el mail dice otra fecha. ¿Cuál vale?"
+    ],
+    "WA_RESP_COORD": [
+      "Está todo en el mail 🙌🏼",
+      "Es para todos los cursos. Cualquier duda me escriben por privado 🙏🏼",
+      "Sí, va al libro de temas 🙏🏼",
+      "Lo vemos en la EMI, profes 😊",
+      "Te lo reenvío ahora!",
+      "Con nodos, como siempre. Solo pongan X en los que SÍ",
+      "Vale la del mail, perdón la confusión 🙈"
+    ],
+    "WA_CUMPLE_1": [
+      "Feliz cumple {cumple}!!! 🎂🎉 Que lo pases hermoso!",
+      "Muy feliz cumple, {cumple}!!! 🥳🥳🥳",
+      "Hoy cumple {cumple}!!! Feliz cumple!!! 🎈",
+      "Muy feliz día {cumple}!!! Que se cumplan todos tus deseos 🎂"
+    ],
+    "WA_CUMPLE": [
+      "Feliz cumple!!!",
+      "Feliz cumple {cumple}!! 🥰",
+      "Muy feliz cumple!!! Que lo disfrutes mucho 🎉",
+      "Feliz cumple! Un abrazo enorme 🤗",
+      "Feliz feliz cumple {cumple}!!! ❤️",
+      "Feliz cumple, crack! 💪🏼",
+      "Que los cumplas muy feliz!!! 🎂",
+      "[sticker:🎂]",
+      "[sticker:🥳]",
+      "Felicidades {cumple}!!! 🎊",
+      "Feliz cumple!! Beso grande 😘",
+      "Feliz cumple!!! 🥰🥰🥰",
+      "Feliz cumple {cumple}! Que pases un lindo día"
+    ],
+    "WA_CUMPLE_GRACIAS": [
+      "Gracias a todos por los saludos!!! 🥰🥰🥰",
+      "Gracias profes!!! Muchas gracias!! 😍",
+      "Ayyy gracias!!! Me hicieron el día ❤️",
+      "Recién veo todo 🤣 ¡Gracias a todos!",
+      "Gracias x los saludos!!!! 🤗"
+    ],
+    "WA_REGALO_PROPUESTA": ["Profes, ¿le hacemos un regalo a {cumple}, que se va de licencia? Armo lista 👇🏽", "Para el regalo de despedida de {cumple}: copien la lista y agreguen su nombre 🙏🏼", "¿Juntamos para el regalo de {cumple}? Propongo un voucher de librería 📚 Lista abajo 👇🏽"],
+    "WA_REGALO_PREG": [
+      "¿A quién le transfiero?",
+      "¿Se puede en efectivo?",
+      "¿Qué le regalamos al final?",
+      "Yo me sumo pero el viernes, que cobro 🙈",
+      "¿Cuánto es por persona?"
+    ],
+    "WA_REGALO_RESP": ["Al alias que puse arriba 🙌🏼", "En efectivo me lo dan en sala de profes", "Gracias a todos!! Ya casi estamos 🎁"],
+    "WA_RECURSO": [
+      "Hola, necesito una compu para el último módulo por favor 🙏🏼",
+      "Buenas, ¿alguien tiene la llave del laboratorio?",
+      "¿Alguien vio un cuaderno grande de tapa negra, posiblemente en tercero?",
+      "Se encontró una campera azul en el aula de 2do. Está en preceptoría 🧥",
+      "¿Quién se llevó el alargue del proyector? 🙃",
+      "¿Alguien tiene un adaptador HDMI que me preste?",
+      "Profes, quedó un termo en sala de profes. ¿De quién es?"
+    ],
+    "WA_RECURSO_2": ["Buenas, yo también necesito una compu para las primeras dos horas", "Yo también lo estoy buscando", "Me sumo al pedido 🙋🏽‍♀️"],
+    "WA_RECURSO_RESP": [
+      "Ya te la reservo!",
+      "Lo tiene preceptoría",
+      "Era mío, perdón 🙈 Mañana lo devuelvo",
+      "Hablá con {coord}",
+      "Yo lo dejé en el armario de arriba",
+      "Creo que quedó en el aula de 4to"
+    ],
+    "WA_TARDE": [
+      "Profes, voy a llegar unos minutos tarde, me había dejado la SUBE en casa 🤦🏼‍♀️",
+      "Quería avisar que voy un poco retrasada 😰😰",
+      "Estoy en un subte detenido hace 20 minutos 🙃",
+      "Avísenles a los de 1ro que llego 10 minutos tarde, porfa 🙏🏼",
+      "Todavía no termina la reunión de la otra escuela. Apenas termina, salgo"
+    ],
+    "WA_TARDE_2": [
+      "Yo también, el colectivo no pasa nunca 😩",
+      "Tranqui, le aviso a preceptoría",
+      "Ya les avisé 👍🏼",
+      "Los de 1ro te esperan felices 😂"
+    ],
+    "WA_COBRO": [
+      "Buen día... está depositado 👏🏻",
+      "Cobramos.",
+      "Ya está el aguinaldo 🙌🏼",
+      "Profes, ¿ya cobraron?"
+    ],
+    "WA_ACK_COBRO": [
+      "👏🏻👏🏻👏🏻",
+      "😍",
+      "👍🏻",
+      "Gracias por avisar!!",
+      "A mí todavía no 😕",
+      "Recién lo vi!",
+      "🙌🏼🙌🏼"
+    ],
+    "WA_COBRO_DUDA": ["¿Alguien entiende el recibo? Me descontaron algo que no sé qué es", "¿Ya está el aumento o es el mes que viene?", "¿El recibo dónde se baja ahora?"],
+    "WA_COBRO_RESP": ["Es el mes que viene, creo", "Está en la página nueva, con la clave de siempre", "Yo tampoco entiendo nada 🤷🏽‍♀️"],
+    "WA_LINK": [
+      "Profes, les comparto esta nota que me pareció interesante para pensar {tema} 👇🏽 [link:{LINK_FALSO}]",
+      "No me acuerdo si ya había circulado esto 👆🏽 [link:{LINK_FALSO}]",
+      "Disculpen que envíe por acá, pero el sábado toca mi coro en el centro cultural. ¡Están invitados! 🎶",
+      "Para ponerle un poco de humor a todo esto 🙈 [foto]",
+      "Les comparto un podcast sobre {tema} que armamos con unos colegas 🎧 [link:{LINK_FALSO}]"
+    ],
+    "LINK_FALSO": ["www.diarioeducativo.com.ar/{tema_archivo}", "youtu.be/reflexion-docente", "www.revistadocente.ar/notas/{tema_archivo}"],
+    "WA_LINK_RESP": [
+      "Gracias por compartir!",
+      "Buenísimo, gracias 👏🏻",
+      "Qué bueno lo que compartiste!",
+      "Lo leo a la noche",
+      "❤️",
+      "Gracias por la invitación!"
+    ],
+    "WA_ERROR": [
+      "[eliminado]",
+      "Feliz cumple ma!!! ❤️",
+      "Llevá pan cuando vuelvas",
+      "Mañana a las 9 en lo de Pato 🍕",
+      "[audio:4:37]"
+    ],
+    "WA_ERROR_2": ["Perdón, era para otro grupo 🙈", "Uy, perdón profes 🤦🏻‍♀️", "Ignoren jajaja"],
+    "WA_ERROR_RESP": [
+      "Jajajaja",
+      "🤣🤣🤣",
+      "Te creemos 😂",
+      "Saludos a tu mamá 😂",
+      "Ya es tarde, lo vimos todos"
+    ],
+    "WA_NOTAS": ["Profes, recuerden cargar las notas en la planilla antes del viernes. Si no, no llegamos a imprimir los boletines 🙏🏼", "Profes de *{CURSO_WA}*: falta completar los nodos en el drive. Vamos que se puede!!! 💪🏼", "Aprovecho para recordarles que únicamente 5to año se califica con números."],
+    "WA_NOTAS_PREG": [
+      "¿Se puede promediar o no?",
+      "Perdón, ¿la nota del segundo cuatrimestre es de todo el año?",
+      "No me abre la planilla, ¿me dan acceso?",
+      "¿El «en proceso» se recupera en diciembre o en febrero?",
+      "Yo todavía no terminé de corregir, ¿hay prórroga?"
+    ],
+    "WA_NOTAS_RESP": [
+      "No se promedia. Está en el mail 🙌🏼",
+      "Ya te di acceso!",
+      "Se recupera a la vuelta de las vacaciones, como el año pasado",
+      "Hasta el lunes a primera hora, no más 🙏🏼"
+    ],
+    "WA_NOTAS_PREG2": ["Pero entonces un aplazo en el primero y un aprobado en el segundo, ¿aprueba?", "Yo lo tengo en otra planilla, ¿sirve?", "¿Y los que no vinieron nunca?"],
+    "WA_EDIFICIO": [
+      "Profes, el ascensor se rompió de nuevo, esta vez conmigo adentro. Ampliaremos.",
+      "No hay agua en el baño de arriba",
+      "Se cortó el wifi en todo el segundo piso 😩",
+      "Hace un frío en el aula de 3ro que no se puede estar 🥶",
+      "El proyector de 4to no prende. ¿Alguien sabe el truco?"
+    ],
+    "WA_EDIF_RESP": [
+      "Ya avisé a mantenimiento",
+      "Hay que apretar el botón dos veces y esperar",
+      "Clásico 🙃",
+      "🤣🤣🤣",
+      "Yo di clase con campera"
+    ],
+    "WA_ASADO": ["Profes, ¿organizamos el asado de fin de año? 🍖", "¿Hacemos algo para despedir el trimestre? Propongo viernes después de clase", "Para mí estaría bueno juntarnos 🥂"],
+    "WA_ASADO_RESP": [
+      "Me sumo!!",
+      "Yo llevo ensalada 🥗",
+      "Siii",
+      "Yo puedo después de las 19",
+      "Voy!!",
+      "Yo llevo el postre",
+      "El viernes no puedo 😭",
+      "Me sumo a lo que digan"
+    ],
+    "WA_ASADO_PREG": ["¿Cuánto ponemos?", "¿En lo de quién?", "¿Pueden venir parejas?"],
+    "WA_ASADO_CIERRE": ["Armo encuesta 📊", "Les paso dirección por privado", "Bueno, lo hablamos el lunes en sala de profes"]
   }
 }

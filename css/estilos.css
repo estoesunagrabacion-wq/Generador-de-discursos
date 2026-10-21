@@ -441,7 +441,18 @@ main { max-width: 760px; margin: 0 auto; padding: 16px; }
 .wa-msj.wa-dir { background: #f4fff1; }
 .wa-autor { font-weight: 600; font-size: .8rem; margin-bottom: 1px; }
 .wa-texto { white-space: pre-wrap; padding-right: 44px; }
-.wa-texto.eliminado { color: #888; font-style: italic; }
+.wa-texto .eliminado { color: #888; font-style: italic; }
+.wa-sticker { background: transparent !important; box-shadow: none !important; padding: 0 0 14px; }
+.sticker { font-size: 4rem; line-height: 1; }
+.wa-sticker .wa-hora { background: rgba(0,0,0,.25); color: #fff; border-radius: 6px; padding: 0 4px; bottom: 0; right: 0; }
+.wa-foto { background: #cfd8dc; color: #455a64; border-radius: 6px; width: 200px; max-width: 100%; aspect-ratio: 4 / 3; display: grid; place-items: center; margin: 2px 0 4px; }
+.wa-audio { display: flex; align-items: center; gap: 8px; color: #54656f; min-width: 180px; }
+.wa-audio .onda { letter-spacing: -1px; color: #8696a0; }
+.wa-doc { display: flex; gap: 8px; align-items: center; background: #f5f6f6; border-radius: 6px; padding: 6px 8px; margin: 4px 0; }
+.wa-doc b { display: block; font-size: .8rem; word-break: break-all; }
+.wa-doc span { font-size: .7rem; color: #777; }
+.icono-doc { background: #e53935; color: #fff !important; font-weight: 700; font-size: .62rem !important; border-radius: 3px; padding: 6px 4px; }
+.wa-link { color: #027eb5; text-decoration: underline; word-break: break-all; display: block; }
 .wa-hora { position: absolute; right: 8px; bottom: 4px; font-size: .66rem; color: #999; }
 .wa-msj.nuevo { animation: resalta 1.6s ease-out; }
 .wa-pie { background: #f0f0f0; padding: 10px; text-align: center; font-size: .78rem; color: #777; }

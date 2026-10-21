@@ -358,19 +358,23 @@
     cab.appendChild(info);
     hoja.appendChild(cab);
     var chat = el('div', 'wa-chat');
-    chat.appendChild(el('div', 'wa-fecha', 'HOY'));
-    chat.appendChild(el('div', 'wa-aviso', '🔒 Los mensajes están cifrados de extremo a extremo. Lamentablemente, no los mensajes de la dirección.'));
-    var anterior = null;
+    chat.appendChild(el('div', 'wa-aviso', '🔒 Los mensajes están cifrados de extremo a extremo. Lamentablemente, los de la coordinación también llegan.'));
+    var anterior = null, diaPrevio = null;
     doc.mensajes.forEach(function (m) {
-      var b = el('div', 'wa-msj' + (m.direccion ? ' wa-dir' : '') + (anterior === m.autor ? ' seguido' : ''));
-      if (anterior !== m.autor) {
+      if (m.dia !== diaPrevio) {
+        chat.appendChild(el('div', 'wa-fecha', m.dia));
+        diaPrevio = m.dia;
+        anterior = null;
+      }
+      var sticker = /^\[sticker:(.+)\]$/.exec(m.texto);
+      var b = el('div', 'wa-msj' + (m.direccion ? ' wa-dir' : '') + (anterior === m.autor ? ' seguido' : '') + (sticker ? ' wa-sticker' : ''));
+      if (anterior !== m.autor && !sticker) {
         var a = el('div', 'wa-autor', m.autor);
         a.style.color = m.direccion ? '#075e54' : colorDe(m.autor);
         b.appendChild(a);
       }
-      var t = el('div', 'wa-texto', m.texto);
-      if (/^\[Mensaje eliminado\]$/.test(m.texto)) t.className += ' eliminado';
-      b.appendChild(t);
+      if (sticker) b.appendChild(el('div', 'sticker', sticker[1]));
+      else b.appendChild(textoChat(m.texto));
       b.appendChild(el('span', 'wa-hora', m.hora));
       if (m.texto === doc.ultimoNuevo) b.classList.add('nuevo');
       chat.appendChild(b);
@@ -380,6 +384,48 @@
     var pie = el('div', 'wa-pie');
     pie.appendChild(el('span', 'wa-entrada', 'Solo los administradores pueden enviar mensajes'));
     hoja.appendChild(pie);
+  }
+
+
+  // Formato de WhatsApp: *negrita*, _cursiva_ y marcas de multimedia.
+  function textoChat(texto) {
+    var cont = el('div', 'wa-texto');
+    var partes = texto.split(/(\[(?:foto|eliminado|audio:[^\]]*|documento:[^\]]*|link:[^\]]*)\])/);
+    partes.forEach(function (p) {
+      if (!p) return;
+      var m;
+      if (p === '[foto]') { cont.appendChild(el('div', 'wa-foto', '📷 Foto')); return; }
+      if (p === '[eliminado]') { cont.appendChild(el('span', 'eliminado', '🚫 Se eliminó este mensaje.')); return; }
+      if ((m = /^\[audio:(.*)\]$/.exec(p))) {
+        var au = el('div', 'wa-audio');
+        au.appendChild(el('span', null, '▶'));
+        au.appendChild(el('span', 'onda', '▁▃▅▂▆▃▁▄▆▂▅▃▁▂▄▃▅▁'));
+        au.appendChild(el('span', null, m[1]));
+        cont.appendChild(au);
+        return;
+      }
+      if ((m = /^\[documento:(.*)\]$/.exec(p))) {
+        var dd = el('div', 'wa-doc');
+        dd.appendChild(el('span', 'icono-doc', 'PDF'));
+        var nn = el('div');
+        nn.appendChild(el('b', null, m[1]));
+        nn.appendChild(el('span', null, (1 + Math.floor(Math.random() * 40)) + ' páginas · PDF'));
+        dd.appendChild(nn);
+        cont.appendChild(dd);
+        return;
+      }
+      if ((m = /^\[link:(.*)\]$/.exec(p))) {
+        cont.appendChild(el('span', 'wa-link', 'https://' + m[1]));
+        return;
+      }
+      p.split(/(\*[^*\n]+\*|_[^_\n]+_)/).forEach(function (q) {
+        if (!q) return;
+        if (/^\*.*\*$/.test(q)) cont.appendChild(el('b', null, q.slice(1, -1)));
+        else if (/^_.*_$/.test(q)) cont.appendChild(el('i', null, q.slice(1, -1)));
+        else cont.appendChild(document.createTextNode(q));
+      });
+    });
+    return cont;
   }
 
   /* ---------- diapositivas ---------- */
