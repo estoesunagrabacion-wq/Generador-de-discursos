@@ -41,9 +41,9 @@
     });
   }
 
-  Promise.all(['lexico', 'documentos', 'membrete', 'temas'].map(cargar))
+  Promise.all(['lexico', 'documentos', 'formatos', 'membrete', 'temas'].map(cargar))
     .then(function (d) {
-      motor = new window.Motor({ lexico: d[0], documentos: d[1], membrete: d[2], temas: d[3].temas });
+      motor = new window.Motor({ lexico: d[0], documentos: d[1], formatos: d[2], membrete: d[3], temas: d[4].temas });
       iniciar();
     })
     .catch(function () {
@@ -69,6 +69,7 @@
     $('btn-extender').addEventListener('click', extender);
     $('btn-copiar').addEventListener('click', copiar);
     $('btn-compartir').addEventListener('click', compartir);
+    $('btn-imagen').addEventListener('click', imagen);
 
     generar(false, true);
   }
@@ -76,7 +77,7 @@
   function pintarTipos() {
     var cont = $('tipos');
     cont.textContent = '';
-    var grupos = { escrito: 'Documentos', oral: 'Discursos' };
+    var grupos = { escrito: 'Documentos', oral: 'Discursos', mensaje: 'Mensajes', juego: 'Juegos' };
     var filas = {};
     Object.keys(grupos).forEach(function (g) {
       var bloque = el('div', 'grupo-tipos');
@@ -96,7 +97,7 @@
         pintarTipos();
         generar();
       });
-      filas[motor.tipos[id].grupo === 'oral' ? 'oral' : 'escrito'].appendChild(b);
+      (filas[motor.tipos[id].grupo] || filas.escrito).appendChild(b);
     });
   }
 
@@ -109,6 +110,7 @@
     doc = motor.documento(tipoActual, tema);
     pintar();
     $('acciones').hidden = false;
+    $('btn-extender').disabled = doc.formato === 'bingo';
     if (!inicial) {
       var y = $('salida').getBoundingClientRect().top + window.scrollY - 70;
       window.scrollTo({ top: y, behavior: 'smooth' });
@@ -120,7 +122,11 @@
     motor.extender(doc);
     pintar(true);
     var e = doc.extensiones;
-    if (doc.oral) {
+    if (doc.formato === 'whatsapp') {
+      aviso('Nuevos mensajes en el grupo.');
+    } else if (doc.formato === 'diapositivas') {
+      aviso('Se agregó una diapositiva. Sigue sin haber verbos.');
+    } else if (doc.oral) {
       aviso(e === 1 ? 'El orador pidió un minuto más.' : 'El orador sigue. Ya van ' + motor.estadisticas(doc).minutos + ' minutos.');
     } else {
       aviso(e === 1 ? 'Se agregó un párrafo. La idea sigue siendo la misma.' : 'Párrafo n.º ' + e + ' agregado. La idea sigue siendo la misma.');
@@ -136,8 +142,11 @@
     if (!esExtension) hoja.classList.add('entra');
 
     var m = doc.membrete;
+    hoja.className = 'hoja formato-' + doc.formato + (esExtension ? '' : ' entra');
     hoja.classList.toggle('oral', !!doc.oral);
-    if (doc.oral) { pintarOral(hoja); pintarEstadisticas(); return; }
+    var especial = { oral: pintarOral, correo: pintarCorreo, whatsapp: pintarWhatsapp,
+      diapositivas: pintarDiapositivas, bingo: pintarBingo }[doc.formato];
+    if (especial) { especial(hoja); pintarEstadisticas(); return; }
     var mem = el('div', 'membrete');
     mem.appendChild(escudo());
     var lin = el('div', 'lineas');
@@ -235,10 +244,17 @@
     var est = motor.estadisticas(doc);
     var e = $('estadisticas');
     e.textContent = '';
-    var medida = doc.oral
-      ? 'duración estimada: ' + est.minutos + (est.minutos === 1 ? ' minuto' : ' minutos')
-      : est.carillas + (est.carillas === 1 ? ' carilla' : ' carillas');
-    e.appendChild(document.createTextNode(est.palabras + ' palabras · ' + medida + ' · Ideas concretas: '));
+    if (doc.formato === 'bingo') {
+      e.appendChild(document.createTextNode('25 casilleros · Probabilidad de completarlo en una jornada: '));
+      e.appendChild(el('b', null, 'muy alta'));
+      return;
+    }
+    var medida;
+    if (doc.formato === 'whatsapp') medida = est.mensajes + ' mensajes';
+    else if (doc.formato === 'diapositivas') medida = est.diapositivas + ' diapositivas';
+    else if (doc.oral) medida = est.palabras + ' palabras · duración estimada: ' + est.minutos + (est.minutos === 1 ? ' minuto' : ' minutos');
+    else medida = est.palabras + ' palabras · ' + est.carillas + (est.carillas === 1 ? ' carilla' : ' carillas');
+    e.appendChild(document.createTextNode(medida + ' · Ideas concretas: '));
     e.appendChild(el('b', null, '0'));
   }
 
@@ -271,6 +287,220 @@
       else nodo.appendChild(document.createTextNode(trozo));
     });
     return nodo;
+  }
+
+
+  /* ---------- correo ---------- */
+  function pintarCorreo(hoja) {
+    var c = doc.correo;
+    var barra = el('div', 'correo-barra');
+    barra.appendChild(el('span', null, '← Bandeja de entrada'));
+    barra.appendChild(el('span', 'correo-iconos', '🗑  ⋮'));
+    hoja.appendChild(barra);
+    var asunto = el('h2', 'correo-asunto', doc.titulo);
+    asunto.appendChild(el('span', 'etiqueta-correo', 'Importante'));
+    hoja.appendChild(asunto);
+    var cab = el('div', 'correo-cabecera');
+    cab.appendChild(el('div', 'avatar', 'D'));
+    var datos = el('div', 'correo-datos');
+    var linea = el('div');
+    linea.appendChild(el('b', null, c.de));
+    linea.appendChild(el('span', 'correo-fecha', c.fecha));
+    datos.appendChild(linea);
+    datos.appendChild(el('div', 'correo-para', 'para ' + c.para + ', CC: ' + c.cc));
+    cab.appendChild(datos);
+    hoja.appendChild(cab);
+    var cuerpo = el('div', 'correo-cuerpo');
+    if (doc.saludo) cuerpo.appendChild(el('p', null, doc.saludo));
+    doc.secciones.forEach(function (s) {
+      (s.parrafos || []).forEach(function (p) {
+        var n = el('p', null, p);
+        if (p === doc.ultimoNuevo) n.classList.add('nuevo');
+        cuerpo.appendChild(n);
+      });
+    });
+    var firma = el('div', 'correo-firma');
+    firma.appendChild(el('div', null, '--'));
+    firma.appendChild(el('div', null, doc.firma));
+    firma.appendChild(el('div', null, doc.membrete.escuela));
+    firma.appendChild(el('div', 'lema-firma', '«' + doc.membrete.lema + '»'));
+    firma.appendChild(el('div', 'enviado', 'Enviado desde mi celular. Disculpe la brevedad.'));
+    cuerpo.appendChild(firma);
+    if (c.pd) cuerpo.appendChild(el('p', 'correo-pd', c.pd));
+    hoja.appendChild(cuerpo);
+    if (c.adjunto) {
+      var adj = el('div', 'adjunto');
+      adj.appendChild(el('span', 'clip', '📎'));
+      var nom = el('div');
+      nom.appendChild(el('b', null, c.adjunto));
+      nom.appendChild(el('span', null, ['18 KB', '2,4 MB', '0 KB', '48 MB'][Math.floor(Math.random() * 4)]));
+      adj.appendChild(nom);
+      hoja.appendChild(adj);
+    }
+    hoja.appendChild(el('p', 'pie-doc', doc.membrete.pie));
+  }
+
+  /* ---------- grupo de WhatsApp ---------- */
+  var COLORES_WA = ['#c2185b', '#1565c0', '#2e7d32', '#ef6c00', '#6a1b9a', '#00838f', '#ad1457', '#5d4037', '#283593', '#9e9d24'];
+  function colorDe(nombre) {
+    var h = 0;
+    for (var i = 0; i < nombre.length; i++) h = (h * 31 + nombre.charCodeAt(i)) >>> 0;
+    return COLORES_WA[h % COLORES_WA.length];
+  }
+
+  function pintarWhatsapp(hoja) {
+    var cab = el('div', 'wa-cabecera');
+    cab.appendChild(el('span', 'wa-volver', '←'));
+    cab.appendChild(el('div', 'wa-avatar', '🍎'));
+    var info = el('div', 'wa-info');
+    info.appendChild(el('b', null, doc.titulo));
+    info.appendChild(el('span', null, doc.participantes + ' participantes · Solo los administradores pueden cambiar la descripción'));
+    cab.appendChild(info);
+    hoja.appendChild(cab);
+    var chat = el('div', 'wa-chat');
+    chat.appendChild(el('div', 'wa-fecha', 'HOY'));
+    chat.appendChild(el('div', 'wa-aviso', '🔒 Los mensajes están cifrados de extremo a extremo. Lamentablemente, no los mensajes de la dirección.'));
+    var anterior = null;
+    doc.mensajes.forEach(function (m) {
+      var b = el('div', 'wa-msj' + (m.direccion ? ' wa-dir' : '') + (anterior === m.autor ? ' seguido' : ''));
+      if (anterior !== m.autor) {
+        var a = el('div', 'wa-autor', m.autor);
+        a.style.color = m.direccion ? '#075e54' : colorDe(m.autor);
+        b.appendChild(a);
+      }
+      var t = el('div', 'wa-texto', m.texto);
+      if (/^\[Mensaje eliminado\]$/.test(m.texto)) t.className += ' eliminado';
+      b.appendChild(t);
+      b.appendChild(el('span', 'wa-hora', m.hora));
+      if (m.texto === doc.ultimoNuevo) b.classList.add('nuevo');
+      chat.appendChild(b);
+      anterior = m.autor;
+    });
+    hoja.appendChild(chat);
+    var pie = el('div', 'wa-pie');
+    pie.appendChild(el('span', 'wa-entrada', 'Solo los administradores pueden enviar mensajes'));
+    hoja.appendChild(pie);
+  }
+
+  /* ---------- diapositivas ---------- */
+  function pintarDiapositivas(hoja) {
+    var total = doc.diapositivas.length;
+    doc.diapositivas.forEach(function (d, i) {
+      var sl = el('section', 'diapo' + (d.tipo === 'portada' ? ' portada' : ''));
+      if (d.titulo === doc.ultimoNuevo && i > 0 && d.tipo !== 'portada') sl.classList.add('nuevo');
+      sl.appendChild(el('h3', 'diapo-titulo', d.titulo));
+      if (d.subtitulo) sl.appendChild(el('p', 'diapo-sub', d.subtitulo));
+      if (d.vinetas) {
+        var ul = el('ul');
+        d.vinetas.forEach(function (v) { ul.appendChild(el('li', null, v)); });
+        sl.appendChild(ul);
+      }
+      if (d.nube) {
+        var nube = el('div', 'nube');
+        d.nube.forEach(function (w, j) {
+          var s = el('span', null, w);
+          s.style.fontSize = (0.8 + ((j * 7) % 5) * 0.22) + 'em';
+          s.style.opacity = (0.6 + ((j * 3) % 4) * 0.12).toFixed(2);
+          nube.appendChild(s);
+        });
+        sl.appendChild(nube);
+      }
+      if (d.destacado) sl.appendChild(el('p', 'diapo-destacado', d.destacado));
+      var pie = el('div', 'diapo-pie');
+      pie.appendChild(el('span', null, 'Trayecto de formación situada'));
+      pie.appendChild(el('span', null, (i + 1) + ' / ' + total));
+      sl.appendChild(pie);
+      hoja.appendChild(sl);
+    });
+  }
+
+  /* ---------- bingo ---------- */
+  function pintarBingo(hoja) {
+    var cab = el('div', 'bingo-cabecera');
+    cab.appendChild(el('h2', null, doc.titulo));
+    cab.appendChild(el('p', null, 'Eje de la jornada: ' + doc.tema));
+    cab.appendChild(el('p', 'bingo-num', 'Cartón n.º ' + doc.numero));
+    hoja.appendChild(cab);
+    var letras = el('div', 'bingo-letras');
+    'BINGO'.split('').forEach(function (l) { letras.appendChild(el('span', null, l)); });
+    hoja.appendChild(letras);
+    var grilla = el('div', 'bingo-grilla');
+    var marcadas = doc.bingo.map(function (c, i) { return i === 12; });
+    var cantado = false;
+    doc.bingo.forEach(function (texto, i) {
+      var c = el('button', 'bingo-celda' + (i === 12 ? ' libre marcada' : ''), texto);
+      c.type = 'button';
+      c.setAttribute('aria-pressed', String(i === 12));
+      if (i !== 12) {
+        c.addEventListener('click', function () {
+          marcadas[i] = !marcadas[i];
+          c.classList.toggle('marcada', marcadas[i]);
+          c.setAttribute('aria-pressed', String(marcadas[i]));
+          if (!cantado && hayLinea(marcadas)) {
+            cantado = true;
+            aviso('¡Bingo! Cántelo con discreción: estamos en jornada.');
+          }
+        });
+      }
+      grilla.appendChild(c);
+    });
+    hoja.appendChild(grilla);
+    hoja.appendChild(el('p', 'bingo-reglas', 'Toque cada casillero cuando lo escuche o lo vea. Al completar una línea (horizontal, vertical o diagonal), cante «¡Bingo!» en voz baja. El premio se definirá oportunamente.'));
+    hoja.appendChild(el('p', 'pie-doc', 'Cada cartón es único. Ningún documento oficial avala este juego.'));
+  }
+
+  function hayLinea(m) {
+    var lineas = [];
+    for (var i = 0; i < 5; i++) {
+      lineas.push([0, 1, 2, 3, 4].map(function (j) { return i * 5 + j; }));
+      lineas.push([0, 1, 2, 3, 4].map(function (j) { return j * 5 + i; }));
+    }
+    lineas.push([0, 6, 12, 18, 24], [4, 8, 12, 16, 20]);
+    return lineas.some(function (l) { return l.every(function (k) { return m[k]; }); });
+  }
+
+  /* ---------- imagen ---------- */
+  function cargarHtml2canvas() {
+    if (window.html2canvas) return Promise.resolve(window.html2canvas);
+    return new Promise(function (ok, mal) {
+      var s = document.createElement('script');
+      s.src = 'js/vendor/html2canvas.min.js';
+      s.onload = function () { ok(window.html2canvas); };
+      s.onerror = mal;
+      document.head.appendChild(s);
+    });
+  }
+
+  function imagen() {
+    if (!doc) return;
+    aviso('Preparando la imagen…');
+    var hoja = $('documento');
+    cargarHtml2canvas().then(function (h2c) {
+      hoja.classList.add('capturando');
+      return h2c(hoja, { scale: 2, backgroundColor: null, logging: false });
+    }).then(function (canvas) {
+      hoja.classList.remove('capturando');
+      canvas.toBlob(function (blob) {
+        var nombre = (doc.tipoNombre + ' ' + doc.tema).toLowerCase().normalize('NFD')
+          .replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.png';
+        var archivo = null;
+        try { archivo = new File([blob], nombre, { type: 'image/png' }); } catch (e) { archivo = null; }
+        if (archivo && navigator.canShare && navigator.canShare({ files: [archivo] })) {
+          navigator.share({ files: [archivo], title: doc.titulo }).catch(function () { /* cancelado */ });
+        } else {
+          var a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = nombre;
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+          aviso('Imagen descargada.');
+        }
+      }, 'image/png');
+    }).catch(function () {
+      hoja.classList.remove('capturando');
+      aviso('No se pudo generar la imagen.');
+    });
   }
 
   /* ---------- adornos ---------- */

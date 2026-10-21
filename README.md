@@ -13,12 +13,25 @@ Documentos escritos, con membrete, sellos y firma:
 - Acta de reunión
 - Circular a familias (con talón para devolver firmado)
 - Convocatoria a jornada institucional
+- Devolución de observación de clase
 
 Discursos orales, presentados como versión taquigráfica, con acotaciones del tipo «(Aplausos.)»:
 
 - Palabras del rector/a en un acto
 - Exposición de especialista en una capacitación
 - Declaraciones de funcionario/a ante la prensa
+- Diapositivas de capacitación (viñetas sin verbos, nube de palabras, actividad con pósits)
+
+Mensajes:
+
+- Correo de la dirección, enviado un domingo a la noche
+- Grupo de WhatsApp docente
+
+Juegos:
+
+- Bingo de jornada institucional: un cartón distinto cada vez, con casilleros que se marcan tocándolos.
+
+Cualquier texto se puede descargar como imagen (o compartir directamente desde el celular) con el botón «Imagen».
 
 ## Cómo se usa
 
@@ -32,6 +45,7 @@ Todo el texto está en la carpeta `data/`, separado del código:
 | --- | --- |
 | `data/lexico.json` | Frases y piezas compartidas: marcos del tema, verbos vacíos, enfoques, conectores, afirmaciones, propuestas, cierres, notas al pie. |
 | `data/documentos.json` | La estructura de cada tipo de texto y sus frases propias. Los discursos usan `"grupo": "oral"`. |
+| `data/formatos.json` | Los tipos con formato propio: devolución, correo, WhatsApp, diapositivas y bingo (la lista `BINGO` tiene las expresiones del cartón). |
 | `data/membrete.json` | Organismos, direcciones, lemas del año y pie de página. |
 | `data/temas.json` | Temas que se usan al azar. |
 
@@ -51,11 +65,10 @@ Tres cuidados para que las frases encajen:
 
 ## Estructura técnica
 
-Sitio estático (HTML, CSS y JavaScript sin dependencias), publicado con GitHub Pages. El motor está en `js/motor.js` y la interfaz en `js/app.js`. El *service worker* (`sw.js`) guarda todo para uso sin conexión y busca cambios en segundo plano, así que una corrección en las frases aparece en la segunda visita.
+Sitio estático (HTML, CSS y JavaScript; la única biblioteca externa es html2canvas, incluida en `js/vendor/`, para la exportación como imagen), publicado con GitHub Pages. El motor está en `js/motor.js` y la interfaz en `js/app.js`. El *service worker* (`sw.js`) guarda todo para uso sin conexión y busca cambios en segundo plano, así que una corrección en las frases aparece en la segunda visita.
 
 Para probarlo localmente: `python3 -m http.server` en la carpeta del proyecto y abrir `http://localhost:8000`.
 
 ## Pendiente
 
-- Lectura en voz alta de los documentos.
-- Descarga del documento como imagen.
+- Lectura en voz alta de los discursos.

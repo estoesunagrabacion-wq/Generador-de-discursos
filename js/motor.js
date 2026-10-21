@@ -61,8 +61,9 @@
     var lexico = sinMetadatos(datos.lexico);
     var propios = sinMetadatos(datos.documentos.simbolos);
     var membrete = sinMetadatos(datos.membrete);
-    this.reglas = Object.assign({}, lexico, propios, membrete);
-    this.tipos = datos.documentos.tipos;
+    var formatos = datos.formatos || { tipos: {}, simbolos: {} };
+    this.reglas = Object.assign({}, lexico, propios, sinMetadatos(formatos.simbolos), membrete);
+    this.tipos = Object.assign({}, datos.documentos.tipos, formatos.tipos);
     this.temasEjemplo = datos.temas || [];
   }
 
@@ -115,6 +116,8 @@
     return {
       tema: doc.tema,
       tema_titulo: mayusculaInicial(doc.tema),
+      tema_archivo: doc.tema.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, ''),
       anio: String(hoy.getFullYear()),
       fecha: hoy.getDate() + ' de ' + MESES[hoy.getMonth()] + ' de ' + hoy.getFullYear(),
       dia: String(hoy.getDate()),
@@ -160,7 +163,8 @@
       lugarFecha: 'Buenos Aires, ' + this._ctx.fecha,
       pie: this._expandir('{PIE}')
     };
-    doc.oral = tipo.grupo === 'oral';
+    doc.formato = tipo.formato || (tipo.grupo === 'oral' ? 'oral' : 'documento');
+    doc.oral = doc.formato === 'oral';
     if (doc.oral) {
       doc.evento = this._expandir(tipo.evento);
       doc.orador = this._expandir(tipo.orador);
@@ -175,7 +179,7 @@
     });
     doc.saludo = tipo.saludo ? pulir(this._expandir(tipo.saludo)) : '';
 
-    tipo.secciones.forEach(function (sec) {
+    (tipo.secciones || []).forEach(function (sec) {
       var s = { titulo: sec.titulo || '', extensible: !!sec.extensible };
       if (sec.parrafos) s.parrafos = sec.parrafos.map(function (p) { return self._parrafo(p); });
       if (sec.lista) {
@@ -188,6 +192,32 @@
 
     doc.firma = !tipo.firma ? '' : (this.reglas[tipo.firma] ? this._expandir('{' + tipo.firma + '}') : tipo.firma);
     doc.talon = !!tipo.talon;
+    if (doc.formato !== 'documento' && doc.formato !== 'oral') doc.membrete.pie = tipo.pie || '';
+    if (doc.formato === 'correo') {
+      doc.correo = {
+        de: 'Dirección – ' + doc.membrete.escuela,
+        para: 'Docentes (lista completa)',
+        cc: 'Supervisión; Secretaría; Coordinaciones; Preceptoría',
+        fecha: this._expandir('{CORREO_FECHA}'),
+        adjunto: Math.random() < 0.7 ? this._expandir('{CORREO_ADJUNTO}') : '',
+        pd: Math.random() < 0.75 ? pulir(this._expandir('{CORREO_PD}')) : ''
+      };
+    }
+    if (doc.formato === 'whatsapp') {
+      doc.participantes = entre(28, 61);
+      doc._reloj = entre(22 * 60 + 35, 22 * 60 + 52);
+      doc.mensajes = this._mensajes(tipo.mensajes, doc);
+    }
+    if (doc.formato === 'diapositivas') {
+      doc.subtitulo = this._expandir(tipo.subtitulo);
+      doc.diapositivas = this._diapositivas(doc);
+    }
+    if (doc.formato === 'bingo') {
+      var casillas = [];
+      for (var b = 0; b < 24; b++) casillas.push(this._elegir('BINGO'));
+      casillas.splice(12, 0, 'LIBRE ☕');
+      doc.bingo = casillas;
+    }
     this._estado = { usados: this._usados, ctx: this._ctx };
     doc._estado = this._estado;
     return doc;
@@ -204,11 +234,73 @@
     return filas;
   };
 
+  Motor.prototype._mensajes = function (espec, doc) {
+    var self = this;
+    var out = [];
+    espec.forEach(function (par) {
+      var texto = self._frase(par[1]);
+      if (!texto) return;
+      doc._reloj += entre(0, 6);
+      var m = doc._reloj % (24 * 60);
+      var esDir = par[0] === 'DIRECCION';
+      out.push({
+        autor: esDir ? 'Dirección 🏫' : self._elegir(par[0]),
+        direccion: esDir,
+        hora: Math.floor(m / 60) + ':' + ('0' + (m % 60)).slice(-2),
+        texto: pulir(texto)
+      });
+    });
+    return out;
+  };
+
+  function sinArticulo(s) {
+    return mayusculaInicial(s.replace(/^(la|el|lo|los|las) /, ''));
+  }
+
+  Motor.prototype._diapositiva = function () {
+    var v = [];
+    for (var i = 0; i < 3 + azar(2); i++) v.push(pulir(this._expandir('{DIAPO_VINETA}')));
+    return { titulo: this._expandir('{DIAPO_TITULO}'), vinetas: v };
+  };
+
+  Motor.prototype._diapositivas = function (doc) {
+    var self = this;
+    var nube = [];
+    for (var i = 0; i < 8; i++) nube.push(sinArticulo(this._elegir('CONCEPTO')));
+    var preguntas = [];
+    for (var j = 0; j < 3; j++) preguntas.push(pulir(this._expandir('{ESP_PREGUNTA}')));
+    return [
+      { tipo: 'portada', titulo: doc.titulo, subtitulo: doc.subtitulo },
+      this._diapositiva(),
+      { titulo: pulir('¿De qué hablamos cuando hablamos de ' + doc.tema + '?'), nube: nube },
+      this._diapositiva(),
+      { titulo: 'Ejes de trabajo', vinetas: this.reglas.DIAPO_EJE.map(function (e) { return pulir(self._expandir(e)); }) },
+      { titulo: 'Actividad', destacado: pulir(this._expandir('{DIAPO_ACTIVIDAD}')) },
+      { titulo: 'Para seguir pensando', vinetas: preguntas },
+      { tipo: 'portada', titulo: '¡Gracias!', subtitulo: 'Preguntas · Intercambio · Bibliografía (próximamente)' }
+    ];
+  };
+
   /* Agrega un párrafo más a la sección extensible, antes del cierre. */
   Motor.prototype.extender = function (doc) {
     var tipo = this.tipos[doc.tipoId];
     this._usados = doc._estado.usados;
     this._ctx = doc._estado.ctx;
+    if (doc.formato === 'bingo') return doc;
+    if (doc.formato === 'whatsapp') {
+      var nuevos = this._mensajes(tipo.extension, doc);
+      Array.prototype.push.apply(doc.mensajes, nuevos);
+      doc.ultimoNuevo = nuevos[0] && nuevos[0].texto;
+      doc.extensiones++;
+      return doc;
+    }
+    if (doc.formato === 'diapositivas') {
+      var d = this._diapositiva();
+      doc.diapositivas.splice(doc.diapositivas.length - 3, 0, d);
+      doc.ultimoNuevo = d.titulo;
+      doc.extensiones++;
+      return doc;
+    }
     var sec = doc.secciones.filter(function (s) { return s.extensible; })[0];
     if (!sec) return doc;
     var nuevo = this._parrafo(tipo.extension);
@@ -228,6 +320,37 @@
   Motor.prototype.texto = function (doc) {
     var out = [];
     var m = doc.membrete;
+    if (doc.formato === 'whatsapp') {
+      out.push('💬 ' + doc.titulo, '');
+      doc.mensajes.forEach(function (x) { out.push('[' + x.hora + '] ' + x.autor + ': ' + x.texto); });
+      return out.join('\n');
+    }
+    if (doc.formato === 'diapositivas') {
+      doc.diapositivas.forEach(function (d, i) {
+        out.push('— Diapositiva ' + (i + 1) + ' —', d.titulo.toUpperCase());
+        if (d.subtitulo) out.push(d.subtitulo);
+        (d.vinetas || []).forEach(function (v) { out.push('• ' + v); });
+        if (d.nube) out.push(d.nube.join(' · '));
+        if (d.destacado) out.push(d.destacado);
+        out.push('');
+      });
+      return out.join('\n').trim();
+    }
+    if (doc.formato === 'bingo') {
+      out.push(doc.titulo.toUpperCase(), 'Eje: ' + doc.tema, '');
+      for (var f = 0; f < 5; f++) out.push(doc.bingo.slice(f * 5, f * 5 + 5).join(' | '));
+      return out.join('\n');
+    }
+    if (doc.formato === 'correo') {
+      var c = doc.correo;
+      out.push('De: ' + c.de, 'Para: ' + c.para, 'CC: ' + c.cc, 'Fecha: ' + c.fecha, 'Asunto: ' + doc.titulo, '');
+      if (doc.saludo) out.push(doc.saludo, '');
+      doc.secciones.forEach(function (s) { (s.parrafos || []).forEach(function (p) { out.push(p, ''); }); });
+      out.push(doc.firma);
+      if (c.pd) out.push('', c.pd);
+      if (c.adjunto) out.push('', '📎 ' + c.adjunto);
+      return out.join('\n').trim();
+    }
     if (doc.oral) {
       out.push('VERSIÓN TAQUIGRÁFICA', doc.evento, 'Hace uso de la palabra: ' + doc.orador, m.lugarFecha, '');
       if (doc.saludo) out.push(doc.saludo, '');
@@ -262,6 +385,8 @@
       palabras: palabras,
       carillas: Math.max(1, Math.ceil(palabras / 380)),
       minutos: Math.max(1, Math.round(palabras / 130)),
+      mensajes: doc.mensajes ? doc.mensajes.length : 0,
+      diapositivas: doc.diapositivas ? doc.diapositivas.length : 0,
       ideas: 0
     };
   };

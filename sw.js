@@ -1,9 +1,9 @@
 /* Funciona sin conexión. Sirve primero lo guardado y actualiza en segundo
    plano, así los cambios al banco de frases aparecen en la siguiente visita. */
-var CACHE = 'discursos-v3';
+var CACHE = 'discursos-v4';
 var ARCHIVOS = [
   './', 'index.html', 'css/estilos.css', 'js/motor.js', 'js/app.js',
-  'data/lexico.json', 'data/documentos.json', 'data/membrete.json', 'data/temas.json',
+  'data/lexico.json', 'data/documentos.json', 'data/formatos.json', 'js/vendor/html2canvas.min.js', 'data/membrete.json', 'data/temas.json',
   'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'
 ];
 
