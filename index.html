@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Generador de discursos</title>
+  <meta name="description" content="Generador de discurso pedagógico-burocrático. Usted propone un tema; la institución lo problematiza.">
+  <meta name="theme-color" content="#1d2a44">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Discursos">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header class="barra">
+    <div class="barra-in">
+      <div class="marca">
+        <img src="icons/icon.svg" alt="" width="36" height="36">
+        <div>
+          <h1>Generador de discursos</h1>
+          <p class="subtitulo">Pedagógico-burocráticos · Versión 1.0<span class="largo">, en el marco de la normativa vigente</span></p>
+        </div>
+      </div>
+      <button id="btn-instalar" class="btn-chico" hidden>Instalar</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="formulario" aria-label="Solicitud de documento">
+      <label for="tema" class="etiqueta">Temática a abordar</label>
+      <div class="fila-tema">
+        <input id="tema" type="text" autocomplete="off" enterkeyhint="go"
+               placeholder="Por ejemplo: el uso del celular en el aula">
+        <button id="btn-azar" class="btn-icono" type="button" title="Tema al azar" aria-label="Tema al azar">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.5" fill="currentColor"/></svg>
+        </button>
+      </div>
+      <p class="ayuda">Conviene escribirlo con artículo: «la convivencia», «los recreos».</p>
+
+      <span class="etiqueta">Tipo de documento</span>
+      <div id="tipos" class="tipos" role="radiogroup" aria-label="Tipo de documento"></div>
+
+      <button id="btn-generar" class="btn-principal" type="button">Fundamentar</button>
+    </section>
+
+    <section id="salida" class="salida" aria-live="polite">
+      <article id="documento" class="hoja"></article>
+      <p id="estadisticas" class="estadisticas"></p>
+    </section>
+  </main>
+
+  <nav id="acciones" class="acciones" aria-label="Acciones sobre el documento" hidden>
+    <button id="btn-otra" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Otra versión</span>
+    </button>
+    <button id="btn-extender" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM15 3v4h4M12 11v7M8.5 14.5h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Extender</span>
+    </button>
+    <button id="btn-copiar" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      <span>Copiar</span>
+    </button>
+    <button id="btn-compartir" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Compartir</span>
+    </button>
+  </nav>
+
+  <div id="aviso" class="aviso" role="status" hidden></div>
+
+  <footer class="pie">
+    <p>Parodia. Ningún documento real fue dañado en la elaboración de esta herramienta.</p>
+  </footer>
+
+  <script src="js/motor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "_instrucciones": "Datos del membrete y del pie de los documentos. Todo es ficticio.",
+
+  "ORGANISMO": [
+    "Ministerio de Educación",
+    "Secretaría de Gestión Educativa",
+    "Subsecretaría de Políticas Pedagógicas"
+  ],
+
+  "DIRECCION": [
+    "Dirección General de Planeamiento de Trayectorias",
+    "Dirección de Políticas de Acompañamiento Integral",
+    "Dirección de Innovación Pedagógica Situada",
+    "Coordinación General de Coordinaciones",
+    "Dirección de Gestión de la Complejidad Educativa",
+    "Dirección de Transversalidad Curricular",
+    "Gerencia Operativa de Acuerdos en Construcción",
+    "Dirección de Evaluación de la Evaluación"
+  ],
+
+  "ESCUELA": [
+    "Escuela de Educación Secundaria N.º {numero_escuela}",
+    "Escuela Media N.º {numero_escuela}",
+    "Instituto de Enseñanza N.º {numero_escuela}"
+  ],
+
+  "LEMA": [
+    "Año de la resignificación de las trayectorias",
+    "Año de la escuela que habilita",
+    "Año de los acuerdos en construcción",
+    "Año de la transversalidad situada",
+    "Año de la mirada integral",
+    "Año del diálogo interinstitucional",
+    "Año de la planificación de la planificación",
+    "Año del dispositivo"
+  ],
+
+  "PIE": [
+    "Documento generado automáticamente. Carece de validez administrativa y, en rigor, de contenido.",
+    "Este documento fue elaborado en el marco de un proceso colectivo de generación aleatoria.",
+    "Cualquier parecido con documentos reales no es mera coincidencia."
+  ]
+}

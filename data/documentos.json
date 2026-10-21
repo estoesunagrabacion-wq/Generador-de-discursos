@@ -1,0 +1,357 @@
+{
+  "_instrucciones": "Estructura de cada tipo de documento y frases propias de cada uno. En 'parrafos', cada párrafo es una lista de símbolos (de este archivo o de lexico.json). Un símbolo terminado en '?' aparece solo a veces. 'extension' es el párrafo que se agrega con el botón «Extender».",
+
+  "tipos": {
+    "planificacion": {
+      "nombre": "Fundamentación de proyecto",
+      "titulo": "Proyecto: {tema_titulo}",
+      "encabezado": [
+        "Espacio curricular: {ESPACIO}",
+        "Ciclo lectivo: {anio}"
+      ],
+      "secciones": [
+        {
+          "titulo": "Fundamentación",
+          "extensible": true,
+          "parrafos": [
+            ["APERTURA", "DESARROLLO", "TEORIA", "DESARROLLO?"],
+            ["DESARROLLO", "AFIRMACION_LARGA", "DESARROLLO?"]
+          ]
+        },
+        { "titulo": "Propósitos", "lista": { "simbolo": "PROPOSITO", "cantidad": 3 } },
+        {
+          "titulo": "Encuadre metodológico",
+          "parrafos": [["PROPUESTA", "DESARROLLO", "PROPUESTA", "CIERRE"]]
+        }
+      ],
+      "extension": ["DESARROLLO", "TEORIA", "DESARROLLO", "AFIRMACION_LARGA", "DESARROLLO"],
+      "firma": "CARGO"
+    },
+
+    "informe": {
+      "nombre": "Informe de trayectoria",
+      "titulo": "Informe de trayectoria escolar",
+      "encabezado": [
+        "Estudiante: ____________________",
+        "Curso: {CURSO}",
+        "Eje de seguimiento: {tema}",
+        "Valoración: {VALORACION}"
+      ],
+      "secciones": [
+        {
+          "titulo": "Observaciones",
+          "extensible": true,
+          "parrafos": [
+            ["INF_APERTURA", "INF_DESARROLLO", "INF_DESARROLLO", "DESARROLLO?"],
+            ["INF_DESARROLLO", "INF_DESARROLLO", "INF_CIERRE"]
+          ]
+        }
+      ],
+      "extension": ["INF_DESARROLLO", "DESARROLLO", "INF_DESARROLLO", "INF_DESARROLLO"],
+      "firma": "CARGO_DOCENTE"
+    },
+
+    "acta": {
+      "nombre": "Acta de reunión",
+      "titulo": "Acta n.º {numero}",
+      "encabezado": [
+        "Reunión de: {REUNION}",
+        "Orden del día: {tema}"
+      ],
+      "secciones": [
+        {
+          "titulo": "",
+          "extensible": true,
+          "parrafos": [
+            ["ACTA_APERTURA", "ACTA_DESARROLLO", "ACTA_DESARROLLO", "ACTA_DESARROLLO"],
+            ["ACTA_DESARROLLO", "ACTA_DESARROLLO", "ACTA_DESARROLLO?", "ACTA_CIERRE"]
+          ]
+        }
+      ],
+      "extension": ["ACTA_DESARROLLO", "ACTA_DESARROLLO", "ACTA_DESARROLLO", "ACTA_DESARROLLO"],
+      "firma": "FIRMAS_ACTA"
+    },
+
+    "circular": {
+      "nombre": "Circular a familias",
+      "titulo": "Circular n.º {numero}",
+      "encabezado": [
+        "Asunto: {tema_titulo}"
+      ],
+      "saludo": "Estimadas familias:",
+      "secciones": [
+        {
+          "titulo": "",
+          "extensible": true,
+          "parrafos": [
+            ["FAM_APERTURA", "FAM_DESARROLLO", "FAM_DESARROLLO"],
+            ["FAM_DESARROLLO", "FAM_DESARROLLO", "FAM_CIERRE"]
+          ]
+        }
+      ],
+      "extension": ["FAM_DESARROLLO", "FAM_DESARROLLO", "FAM_DESARROLLO"],
+      "firma": "Equipo de conducción",
+      "talon": true
+    },
+
+    "jornada": {
+      "nombre": "Convocatoria a jornada",
+      "titulo": "Jornada institucional",
+      "encabezado": [
+        "Eje: {tema_titulo}",
+        "Destinatarios: {DESTINATARIOS}",
+        "Modalidad: {MODALIDAD}"
+      ],
+      "secciones": [
+        {
+          "titulo": "Presentación",
+          "extensible": true,
+          "parrafos": [
+            ["JOR_APERTURA", "DESARROLLO", "TEORIA", "DESARROLLO?"]
+          ]
+        },
+        { "titulo": "Objetivos", "lista": { "simbolo": "PROPOSITO", "cantidad": 3 } },
+        { "titulo": "Agenda de trabajo", "agenda": true },
+        {
+          "titulo": "",
+          "parrafos": [["JOR_CIERRE"]]
+        }
+      ],
+      "extension": ["DESARROLLO", "AFIRMACION_LARGA", "TEORIA", "DESARROLLO"],
+      "firma": "CARGO"
+    }
+  },
+
+  "simbolos": {
+    "APERTURA": [
+      "En el marco de {NORMATIVA}, la presente propuesta se orienta a {VERBO_INF} {TEMA_NP} {ENFOQUE}.",
+      "Pensar {TEMA_NP} en {ESCENARIO} supone, ante todo, {VERBO_INF} {OBJETO}.",
+      "{TEMA_NP} constituye hoy uno de los principales desafíos que interpelan a {SUJETOS}.",
+      "En {ESCENARIO}, {TEMA_NP} se presenta como un campo de problemas que nos convoca a {VERBO_INF} {OBJETO}.",
+      "Abordar {TEMA_NP} implica reconocer, en primer lugar, que no existen respuestas únicas ni definitivas.",
+      "La presente propuesta surge de la necesidad de {VERBO_INF} {TEMA_NP} {ENFOQUE}.",
+      "Lejos de constituir un tema acotado, {TEMA_NP} interpela de manera transversal a {SUJETOS}.",
+      "Resulta impostergable, en {ESCENARIO}, {VERBO_INF} {TEMA_NP}.",
+      "Hablar de {TEMA_NP} es, en definitiva, hablar de {OBJETO}.",
+      "Desde hace algunos años, {TEMA_NP} ha ido ganando centralidad en la agenda educativa, en {ESCENARIO}.",
+      "No es posible pensar {TEMA_NP} por fuera de {ESCENARIO}.",
+      "En consonancia con {NORMATIVA}, el presente proyecto se propone {VERBO_INF} {TEMA_NP}.",
+      "Toda reflexión {TEMA_PP} exige situarse en {ESCENARIO}."
+    ],
+
+    "AFIRMACION_LARGA": [
+      "Esto supone {VERBO_INF} {OBJETO}, pero también {VERBO_INF} {OBJETO}, en el entendimiento de que {AFIRMACION}.",
+      "No se trata, por cierto, de una tarea sencilla: implica {VERBO_INF} {OBJETO} y, al mismo tiempo, reconocer que {AFIRMACION}.",
+      "Si, como venimos sosteniendo, {AFIRMACION}, se vuelve necesario {VERBO_INF} {OBJETO} {ENFOQUE}.",
+      "Dicho en otros términos: {AFIRMACION}, y es precisamente allí donde la escuela tiene algo para decir.",
+      "Es en este punto donde {TEMA_REF} adquiere toda su densidad, en tanto obliga a {VERBO_INF} {OBJETO} {ENFOQUE}."
+    ],
+
+    "ESPACIO": [
+      "Prácticas del Lenguaje",
+      "Construcción de Ciudadanía",
+      "Proyecto Transversal Institucional",
+      "Tutoría",
+      "Espacio de Definición Institucional",
+      "Educación Sexual Integral (transversal)",
+      "Taller de Orientación"
+    ],
+
+    "CURSO": ["1.º A", "2.º B", "3.º A", "3.º B", "4.º A", "5.º B", "1.º C", "2.º A"],
+
+    "VALORACION": [
+      "En proceso",
+      "En proceso avanzado",
+      "Logrado en proceso",
+      "Proceso en construcción",
+      "Avanza con acompañamiento",
+      "En vías de logro",
+      "Proceso iniciado"
+    ],
+
+    "INF_APERTURA": [
+      "Durante el presente período, el/la estudiante ha transitado un recorrido singular {TEMA_PP}, evidenciando avances en algunos aspectos y desafíos en otros.",
+      "Se observa que el/la estudiante se encuentra en proceso de {VERBO_INF} {OBJETO}, lo cual será acompañado {ENFOQUE}.",
+      "En relación con su trayectoria, cabe señalar que el/la estudiante ha logrado, con altibajos, vincularse con las propuestas planteadas {TEMA_PP}.",
+      "El/la estudiante transita el presente ciclo lectivo atravesando un proceso que merece ser leído en clave de trayectoria."
+    ],
+
+    "INF_DESARROLLO": [
+      "Su participación en las propuestas áulicas ha sido variable, en función de múltiples factores que exceden lo estrictamente pedagógico.",
+      "Se valoran especialmente sus intentos por apropiarse de los saberes trabajados.",
+      "Sería deseable que pudiera profundizar su compromiso con la tarea, en un clima de confianza y respeto mutuo.",
+      "Su trayectoria da cuenta de un proceso que aún se encuentra en construcción.",
+      "Se sugiere continuar fortaleciendo su autonomía en la resolución de consignas.",
+      "En ocasiones, se observa cierta dificultad para sostener los tiempos de trabajo propuestos, aspecto que será abordado de manera conjunta.",
+      "Ha logrado, en términos generales, vincularse con los contenidos desde un lugar propio.",
+      "Muestra avances significativos en relación con su punto de partida, aunque persisten algunos aspectos a seguir trabajando.",
+      "Se evidencia un mayor compromiso cuando las propuestas resultan significativas para sus intereses.",
+      "Resulta necesario seguir trabajando la organización de sus materiales y producciones.",
+      "Su vínculo con el grupo de pares se encuentra en un proceso de consolidación.",
+      "Se registran entregas parciales que dan cuenta de un recorrido aún no cerrado.",
+      "Cabe destacar su disposición al diálogo cuando se habilitan espacios de escucha.",
+      "Las producciones entregadas permiten inferir un proceso de apropiación incipiente."
+    ],
+
+    "INF_CIERRE": [
+      "Se sugiere a la familia acompañar este proceso desde el hogar, en articulación con la escuela.",
+      "Se continuará acompañando su trayectoria desde una mirada integral y situada.",
+      "La valoración consignada no debe leerse como un juicio definitivo, sino como una instancia más de un proceso en construcción.",
+      "Se acordarán, oportunamente, estrategias de acompañamiento con el equipo de orientación."
+    ],
+
+    "REUNION": [
+      "Departamento de {DEPTO}",
+      "Consejo Consultivo",
+      "Equipo docente del ciclo orientado",
+      "Equipo de conducción y coordinaciones",
+      "Plenario docente"
+    ],
+
+    "DEPTO": [
+      "Lengua y Literatura",
+      "Ciencias Sociales",
+      "Ciencias Exactas",
+      "Educación Artística",
+      "Formación Ética y Ciudadana",
+      "Ciencias Naturales",
+      "Lenguas Extranjeras"
+    ],
+
+    "LUGAR": [
+      "la sala de profesores",
+      "el SUM de la institución",
+      "el aula 4, dado que el SUM se encuentra ocupado",
+      "la biblioteca",
+      "la sala de reuniones virtual habilitada a tal efecto",
+      "el laboratorio, por razones de espacio"
+    ],
+
+    "ACTA_APERTURA": [
+      "Siendo las {hora} horas del día {fecha}, se reúnen en {LUGAR} los docentes cuyas firmas constan al pie, con el objeto de abordar {TEMA_NP}.",
+      "En la Ciudad Autónoma de Buenos Aires, a los {dia} días del mes de {mes}, siendo las {hora} horas, se reúnen en {LUGAR} los integrantes del equipo con el fin de tratar {TEMA_NP}."
+    ],
+
+    "ACTA_DESARROLLO": [
+      "Se da lectura al acta anterior, la cual es aprobada sin observaciones.",
+      "Toma la palabra la coordinación, quien plantea la necesidad de {VERBO_INF} {OBJETO}.",
+      "Se produce un fecundo intercambio de miradas en torno a {TEMA_REF}.",
+      "Varios docentes coinciden en señalar la complejidad de {TEMA_REF}, sin que se arribe a una conclusión definitiva.",
+      "Se acuerda continuar trabajando la temática en una próxima reunión.",
+      "Se deja constancia de la preocupación manifestada por algunos colegas respecto de los tiempos institucionales disponibles.",
+      "Se propone {ACCION}, propuesta que es recibida con interés por los presentes.",
+      "Un docente solicita que conste en actas su desacuerdo parcial, el cual queda debidamente consignado.",
+      "Se señala, asimismo, la importancia de {VERBO_INF} {OBJETO} {ENFOQUE}.",
+      "Se recuerda la necesidad de entregar las planificaciones en tiempo y forma.",
+      "La coordinación sugiere {VERBO_INF} {OBJETO}, moción que se acepta por consenso.",
+      "Se plantea la conveniencia de {ACCION}, quedando pendiente su definición.",
+      "Algunos docentes manifiestan que {AFIRMACION}, lo cual genera un breve debate.",
+      "Se resuelve conformar una comisión para elaborar una propuesta, cuya composición se definirá más adelante.",
+      "Se acuerda elevar lo conversado al equipo de conducción para su consideración.",
+      "Se destaca el compromiso de los presentes y la riqueza de los aportes realizados."
+    ],
+
+    "ACTA_CIERRE": [
+      "Sin más temas que tratar, siendo las {hora_fin} horas, se da por finalizada la reunión, firmando los presentes de conformidad.",
+      "No habiendo más asuntos que tratar, se levanta la sesión a las {hora_fin} horas, acordándose retomar la temática en un próximo encuentro."
+    ],
+
+    "FAM_APERTURA": [
+      "Nos dirigimos a ustedes a fin de compartir algunas reflexiones {TEMA_PP}, tema que nos ocupa y nos preocupa como institución.",
+      "Por medio de la presente, queremos comunicarles que la escuela se encuentra trabajando {TEMA_PP} {ENFOQUE}.",
+      "Como es de su conocimiento, {TEMA_NP} constituye una preocupación compartida por toda la comunidad educativa.",
+      "Les escribimos para informarles que, en el marco de {NORMATIVA}, la institución ha decidido profundizar el trabajo {TEMA_PP}."
+    ],
+
+    "FAM_DESARROLLO": [
+      "Entendemos que la escuela y las familias compartimos la responsabilidad de acompañar a nuestros chicos y chicas en este proceso.",
+      "Por ello, consideramos fundamental fortalecer el vínculo entre la escuela y el hogar.",
+      "Les solicitamos, en la medida de sus posibilidades, acompañar desde casa las propuestas que se trabajan en el aula.",
+      "Estamos convencidos de que solo a través del diálogo será posible {VERBO_INF} {OBJETO}.",
+      "En los próximos días se informará, por los canales habituales, la modalidad de trabajo prevista.",
+      "La escuela continuará generando espacios de encuentro y de escucha.",
+      "Para cualquier consulta, pueden acercarse a la institución en el horario habitual, previa solicitud de turno.",
+      "Sabemos que {TEMA_REF} no se resuelve de un día para el otro, sino que requiere un trabajo sostenido.",
+      "Es nuestra intención que esta temática sea abordada {ENFOQUE}.",
+      "Próximamente convocaremos a una reunión informativa, cuya fecha será comunicada oportunamente.",
+      "Les recordamos la importancia de leer periódicamente las comunicaciones institucionales.",
+      "Consideramos que {AFIRMACION}."
+    ],
+
+    "FAM_CIERRE": [
+      "Agradecemos, como siempre, el acompañamiento y el compromiso de cada una de las familias.",
+      "Sin otro particular, las saludamos con la cordialidad de siempre.",
+      "Contamos, como siempre, con su valiosa colaboración."
+    ],
+
+    "DESTINATARIOS": [
+      "equipos docentes de todos los turnos",
+      "personal docente y no docente",
+      "docentes del ciclo básico y orientado",
+      "toda la comunidad educativa"
+    ],
+
+    "MODALIDAD": [
+      "presencial, con suspensión de actividades",
+      "presencial, en el SUM",
+      "híbrida",
+      "presencial, con trabajo en grupos"
+    ],
+
+    "JOR_APERTURA": [
+      "La presente jornada se propone como un espacio de reflexión colectiva {TEMA_PP}.",
+      "Convocamos a los equipos docentes a detenerse, una vez más, a pensar {TEMA_NP} en {ESCENARIO}.",
+      "En esta oportunidad, la jornada institucional estará dedicada a {VERBO_INF} {TEMA_NP} {ENFOQUE}.",
+      "Esta jornada busca generar un tiempo y un espacio para {VERBO_INF} {TEMA_NP}."
+    ],
+
+    "JOR_CIERRE": [
+      "Se solicita a cada grupo designar un relator o relatora y traer el material de lectura previamente enviado.",
+      "Se recuerda que la asistencia es obligatoria y que el registro de lo trabajado será elevado a la Supervisión.",
+      "Se ruega puntualidad. Habrá café."
+    ],
+
+    "AGENDA_INICIO": [
+      "Acreditación y desayuno",
+      "Bienvenida a cargo del equipo de conducción",
+      "Dinámica de presentación",
+      "Lectura de la normativa que enmarca la jornada"
+    ],
+
+    "AGENDA_MEDIO": [
+      "Visualización de un video disparador",
+      "Lectura compartida de un texto breve",
+      "Trabajo en grupos a partir de consignas",
+      "Elaboración de afiches",
+      "Análisis de casos",
+      "Intercambio en pequeños grupos",
+      "Relevamiento de experiencias previas"
+    ],
+
+    "AGENDA_FIN": [
+      "Puesta en común",
+      "Recorrido por los afiches producidos",
+      "Registro fotográfico de los afiches",
+      "Plenario y elaboración de conclusiones",
+      "Cierre y evaluación de la jornada",
+      "Completamiento de la encuesta de satisfacción"
+    ],
+
+    "CARGO": [
+      "Coordinación pedagógica",
+      "Equipo de conducción",
+      "Secretaría académica",
+      "Dirección de nivel",
+      "Asesoría pedagógica",
+      "Coordinación de proyectos institucionales"
+    ],
+
+    "CARGO_DOCENTE": [
+      "Docente a cargo",
+      "Tutor/a del curso",
+      "Docente responsable del espacio"
+    ],
+
+    "FIRMAS_ACTA": ["Firmas de los presentes"]
+  }
+}
