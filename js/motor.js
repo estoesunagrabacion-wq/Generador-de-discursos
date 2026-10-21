@@ -47,6 +47,7 @@
     var s = texto
       .replace(/\s+/g, ' ')
       .replace(/\s+([,.;:?!])/g, '$1')
+      .replace(/([?!])\./g, '$1')
       .replace(/(?<![\p{L}])([Dd])e el(?![\p{L}])/gu, function (m, d) { return d + 'el'; })
       .replace(/(?<![\p{L}])([Aa]) el(?![\p{L}])/gu, function (m, a) { return a + 'l'; })
       .trim();
@@ -145,7 +146,9 @@
       secciones: [],
       extensiones: 0
     };
-    this._usados = {};
+    // La memoria de variantes usadas se conserva entre documentos: el motor
+    // recorre todas las variantes de un símbolo antes de repetir alguna.
+    this._usados = this._usados || {};
     this._ctx = this._contexto(doc);
     var self = this;
 

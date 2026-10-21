@@ -1,6 +1,5 @@
 {
   "_instrucciones": "Estructura de cada tipo de documento y frases propias de cada uno. En 'parrafos', cada párrafo es una lista de símbolos (de este archivo o de lexico.json). Un símbolo terminado en '?' aparece solo a veces. 'extension' es el párrafo que se agrega con el botón «Extender».",
-
   "tipos": {
     "planificacion": {
       "grupo": "escrito",
@@ -19,16 +18,23 @@
             ["DESARROLLO", "AFIRMACION_LARGA", "DESARROLLO?"]
           ]
         },
-        { "titulo": "Propósitos", "lista": { "simbolo": "PROPOSITO", "cantidad": 3 } },
+        {
+          "titulo": "Propósitos",
+          "lista": {
+            "simbolo": "PROPOSITO",
+            "cantidad": 3
+          }
+        },
         {
           "titulo": "Encuadre metodológico",
-          "parrafos": [["PROPUESTA", "DESARROLLO", "PROPUESTA", "CIERRE"]]
+          "parrafos": [
+            ["PROPUESTA", "DESARROLLO", "PROPUESTA", "CIERRE"]
+          ]
         }
       ],
       "extension": ["DESARROLLO", "TEORIA", "DESARROLLO", "AFIRMACION_LARGA", "DESARROLLO"],
       "firma": "CARGO"
     },
-
     "informe": {
       "nombre": "Informe de trayectoria",
       "titulo": "Informe de trayectoria escolar",
@@ -51,7 +57,6 @@
       "extension": ["INF_DESARROLLO", "DESARROLLO", "INF_DESARROLLO", "INF_DESARROLLO"],
       "firma": "CARGO_DOCENTE"
     },
-
     "acta": {
       "nombre": "Acta de reunión",
       "titulo": "Acta n.º {numero}",
@@ -72,7 +77,6 @@
       "extension": ["ACTA_DESARROLLO", "ACTA_DESARROLLO", "ACTA_DESARROLLO", "ACTA_DESARROLLO"],
       "firma": "FIRMAS_ACTA"
     },
-
     "circular": {
       "nombre": "Circular a familias",
       "titulo": "Circular n.º {numero}",
@@ -94,7 +98,6 @@
       "firma": "Equipo de conducción",
       "talon": true
     },
-
     "jornada": {
       "nombre": "Convocatoria a jornada",
       "titulo": "Jornada institucional",
@@ -111,17 +114,27 @@
             ["JOR_APERTURA", "DESARROLLO", "TEORIA", "DESARROLLO?"]
           ]
         },
-        { "titulo": "Objetivos", "lista": { "simbolo": "PROPOSITO", "cantidad": 3 } },
-        { "titulo": "Agenda de trabajo", "agenda": true },
+        {
+          "titulo": "Objetivos",
+          "lista": {
+            "simbolo": "PROPOSITO",
+            "cantidad": 3
+          }
+        },
+        {
+          "titulo": "Agenda de trabajo",
+          "agenda": true
+        },
         {
           "titulo": "",
-          "parrafos": [["JOR_CIERRE"]]
+          "parrafos": [
+            ["JOR_CIERRE"]
+          ]
         }
       ],
       "extension": ["DESARROLLO", "AFIRMACION_LARGA", "TEORIA", "DESARROLLO"],
       "firma": "CARGO"
     },
-
     "rector": {
       "grupo": "oral",
       "nombre": "Palabras del rector/a",
@@ -132,16 +145,15 @@
         {
           "extensible": true,
           "parrafos": [
-            ["RECTOR_APERTURA", "RECTOR_DESARROLLO", "ACOT_ACTO?"],
-            ["RECTOR_DESARROLLO", "RECTOR_DESARROLLO", "RECTOR_DESARROLLO", "ACOT_ACTO?"],
-            ["RECTOR_DESARROLLO", "RECTOR_DESARROLLO", "RECTOR_CIERRE", "ACOT_ACTO_FINAL"]
+            ["RECTOR_APERTURA", "RECTOR_MOVIDA", "ACOT_ACTO?"],
+            ["RECTOR_MOVIDA", "RECTOR_MOVIDA", "RECTOR_MOVIDA", "ACOT_ACTO?"],
+            ["RECTOR_MOVIDA", "RECTOR_MOVIDA", "RECTOR_CIERRE", "ACOT_ACTO_FINAL"]
           ]
         }
       ],
-      "extension": ["RECTOR_DESARROLLO", "RECTOR_DESARROLLO", "ACOT_ACTO?", "RECTOR_DESARROLLO"],
+      "extension": ["RECTOR_MOVIDA", "RECTOR_MOVIDA", "ACOT_ACTO?", "RECTOR_MOVIDA"],
       "pie": "Versión taquigráfica no corregida por el orador."
     },
-
     "especialista": {
       "grupo": "oral",
       "nombre": "Exposición de especialista",
@@ -152,17 +164,16 @@
         {
           "extensible": true,
           "parrafos": [
-            ["ESP_APERTURA", "ESP_DESARROLLO", "ESP_DESARROLLO"],
-            ["ESP_DESARROLLO", "ESP_DESARROLLO", "ACOT_ESP?", "ESP_DESARROLLO", "ESP_DESARROLLO"],
-            ["ESP_DESARROLLO", "ESP_DESARROLLO", "ESP_DESARROLLO?", "ACOT_ESP?"],
+            ["ESP_APERTURA", "ESP_MOVIDA", "ESP_MOVIDA"],
+            ["ESP_MOVIDA", "ESP_MOVIDA", "ACOT_ESP?", "ESP_MOVIDA", "ESP_MOVIDA?"],
+            ["ESP_MOVIDA", "ESP_MOVIDA", "ESP_MOVIDA", "ACOT_ESP?"],
             ["ESP_CIERRE", "ESP_CIERRE_FINAL", "ACOT_APLAUSOS"]
           ]
         }
       ],
-      "extension": ["ESP_DESARROLLO", "ESP_DESARROLLO", "ACOT_ESP?", "ESP_DESARROLLO", "ESP_DESARROLLO"],
+      "extension": ["ESP_MOVIDA", "ESP_MOVIDA", "ACOT_ESP?", "ESP_MOVIDA", "ESP_MOVIDA"],
       "pie": "Desgrabación del encuentro. No revisada por la persona expositora."
     },
-
     "funcionario": {
       "grupo": "oral",
       "nombre": "Declaraciones de funcionario/a",
@@ -173,18 +184,17 @@
         {
           "extensible": true,
           "parrafos": [
-            ["FUN_APERTURA", "FUN_DESARROLLO", "FUN_DESARROLLO"],
-            ["FUN_DESARROLLO", "FUN_DESARROLLO", "FUN_DESARROLLO", "ACOT_FUN?"],
+            ["FUN_APERTURA", "FUN_MOVIDA", "FUN_MOVIDA"],
+            ["FUN_MOVIDA", "FUN_MOVIDA", "FUN_MOVIDA", "ACOT_FUN?"],
             ["FUN_PREGUNTA", "FUN_PREGUNTA?"],
-            ["FUN_DESARROLLO", "FUN_CIERRE", "ACOT_FUN_FINAL"]
+            ["FUN_MOVIDA", "FUN_CIERRE", "ACOT_FUN_FINAL"]
           ]
         }
       ],
-      "extension": ["FUN_DESARROLLO", "FUN_DESARROLLO", "FUN_PREGUNTA", "FUN_DESARROLLO"],
+      "extension": ["FUN_MOVIDA", "FUN_MOVIDA", "FUN_PREGUNTA", "FUN_MOVIDA"],
       "pie": "Transcripción de prensa. Las cifras mencionadas serán dadas a conocer oportunamente."
     }
   },
-
   "simbolos": {
     "EVENTO_RECTOR": [
       "Acto de inicio del ciclo lectivo",
@@ -195,14 +205,15 @@
       "Inauguración de la muestra anual",
       "Acto por el Día del Estudiante"
     ],
-
     "VOC_RECTOR": [
       "Buenos días a todos y a todas. Señora supervisora, querido equipo docente, familias y, fundamentalmente, chicos y chicas:",
       "Buenas tardes. Autoridades presentes, colegas, auxiliares, familias, estudiantes:",
       "Bueno, buenos días. Gracias a todos por estar acá. ¿Se escucha atrás? Bien:",
-      "Buenas noches a todos. Queridas familias, queridos colegas, queridos egresados y egresadas:"
+      "Buenas noches a todos. Queridas familias, queridos colegas, queridos egresados y egresadas:",
+      "Buenos días. Antes que nada, les pido un aplauso para los chicos que prepararon el acto.",
+      "Bueno, buenas tardes. Voy a ser breve, lo prometo:",
+      "Buenos días, querida comunidad:"
     ],
-
     "RECTOR_APERTURA": [
       "Quiero empezar agradeciendo a todos los que hicieron posible este momento, que no es un momento más, sino un momento muy especial para nuestra escuela.",
       "Cuando me propusieron decir unas palabras {TEMA_PP}, pensé mucho qué decir, porque es un tema que nos atraviesa a todos.",
@@ -210,37 +221,12 @@
       "Me pidieron que sea breve, así que voy a intentar serlo, aunque ustedes saben que eso a mí me cuesta un poco. (Risas.) Quiero decir unas palabras {TEMA_PP}.",
       "No traje nada escrito, porque prefiero hablar desde el corazón. Y lo que quiero compartir con ustedes tiene que ver con {TEMA_NP}."
     ],
-
-    "RECTOR_DESARROLLO": [
-      "Siempre digo que la escuela es mucho más que un edificio: es la gente que la habita todos los días.",
-      "Cuando pensamos en {TEMA_REF}, no podemos dejar de pensar en {OBJETO}.",
-      "Y esto no es algo que se logra de un día para el otro, sino con el esfuerzo de todos.",
-      "Sabemos que no es fácil, ¿no? Sabemos que hay dificultades. Pero también sabemos que juntos podemos.",
-      "Esta escuela tiene una historia, y esa historia la escribimos entre todos.",
-      "Yo les quiero decir a los chicos y chicas que esta escuela es de ustedes.",
-      "Las familias son parte fundamental de este proyecto, y eso hay que decirlo.",
-      "Quiero hacer un reconocimiento especial al equipo docente, que pone todos los días el cuerpo y el corazón.",
-      "Porque, en definitiva, de eso se trata: de {VERBO_INF} {OBJETO}, de acompañarnos, de estar.",
-      "No quiero dejar de mencionar a los auxiliares, que muchas veces no se ven pero son los que sostienen la escuela.",
-      "Tenemos muchos desafíos por delante, y {TEMA_REF} es, sin duda, uno de ellos.",
-      "Este año nos propusimos {VERBO_INF} {OBJETO}, y creo que, de a poco, lo estamos logrando.",
-      "Les pido a todos que sigamos apostando a la escuela como lugar de encuentro.",
-      "Como decía un viejo maestro que tuve, la escuela se hace todos los días.",
-      "Hay algo que quiero compartir con ustedes, y es que {AFIRMACION}.",
-      "Yo sé que a veces cuesta, que el día a día nos gana. Pero cuando uno ve a los chicos así, todo tiene sentido.",
-      "Y acá quiero ser muy claro: {TEMA_REF} no es un problema de unos pocos, es de todos.",
-      "Me emociona, la verdad, ver a tantas familias acompañando.",
-      "Educar es un acto de amor, y también, por qué no decirlo, un acto de esperanza.",
-      "Ustedes, chicos, son el presente; no el futuro, el presente."
-    ],
-
     "RECTOR_CIERRE": [
       "Así que nada, simplemente agradecerles a todos y desearles un muy buen año. Muchas gracias.",
       "No los entretengo más. Muchas gracias a todos y a todas.",
       "Termino como empecé: agradeciendo. Muchas gracias.",
       "Me quedo con eso, con la idea de que juntos podemos. Gracias, de verdad."
     ],
-
     "ACOT_ACTO": [
       "(Aplausos.)",
       "(Risas.)",
@@ -250,13 +236,11 @@
       "(Murmullos.)",
       "(Llora un bebé.)"
     ],
-
     "ACOT_ACTO_FINAL": [
       "(Aplausos prolongados.)",
       "(Aplausos. Suena la marcha de salida.)",
       "(Aplausos. Alguien pide una foto grupal.)"
     ],
-
     "EVENTO_ESP": [
       "Jornada de capacitación docente",
       "Conversatorio «Pensar la escuela hoy»",
@@ -265,66 +249,329 @@
       "Panel «Desafíos de la educación en el siglo XXI»",
       "Congreso de innovación educativa, mesa 7"
     ],
-
     "ORADOR_ESP": [
       "Especialista invitado/a",
       "Lic. en Ciencias de la Educación (invitado/a)",
       "Capacitador/a del programa",
       "Coordinador/a del trayecto formativo"
     ],
-
     "VOC_ESP": [
       "Bueno, buenas tardes a todas y a todos. Primero, agradecer la invitación; para mí es siempre un placer estar acá.",
       "Hola, ¿se escucha? ¿Me ven la pantalla? Bien. Buenas tardes, y gracias por el espacio.",
-      "Buen día. Antes que nada, quiero agradecer a quienes organizaron este encuentro, y a ustedes por estar un sábado a la mañana."
+      "Buen día. Antes que nada, quiero agradecer a quienes organizaron este encuentro, y a ustedes por estar un sábado a la mañana.",
+      "Buenas tardes. Gracias a todos por venir, y gracias a la escuela por abrirnos las puertas.",
+      "Bueno, ¿arrancamos? Esperamos un minutito a que se terminen de conectar… Bien. Buenas tardes a todas y a todos.",
+      "Muy buenas tardes. Primero que nada, un agradecimiento enorme a quienes hicieron posible este encuentro.",
+      "Buenas tardes. Voy a hablar sentada, si me permiten, porque así me siento más en confianza con ustedes.",
+      "Buenas noches. Sé que vienen de una jornada larga, así que voy a tratar de no aburrirlos."
     ],
-
     "ESP_APERTURA": [
       "Yo quería empezar con una pregunta, que es la pregunta que va a atravesar todo este encuentro: ¿qué entendemos cuando hablamos de {tema}?",
       "Me pidieron que hablara de {TEMA_NP}, y lo primero que quiero decir es que no vengo a traer recetas.",
       "Voy a tratar de compartir algunas ideas {TEMA_PP}, más como preguntas que como respuestas.",
-      "Quisiera arrancar problematizando un poco el título mismo de esta exposición, que habla de {tema}."
+      "Quisiera arrancar problematizando un poco el título mismo de esta exposición, que habla de {tema}.",
+      "Cuando me invitaron a hablar de {tema}, lo primero que pensé fue en {CONCEPTO}.",
+      "El título de esta charla es «{tema_titulo}», pero yo le agregaría un signo de pregunta.",
+      "Les confieso que dudé mucho antes de aceptar esta invitación, porque {tema} es un tema que me interpela muchísimo.",
+      "Antes de arrancar, les propongo que pensemos qué imágenes nos vienen a la cabeza cuando escuchamos «{tema}».",
+      "Voy a organizar esta exposición en tres partes, aunque probablemente termine hablando de otra cosa. (Risas.) Empiezo por {TEMA_NP}.",
+      "Hoy no vengo a hablar de {tema}, o sí, pero no de la manera en que se suele hablar de {tema}.",
+      "Quiero empezar por una escena que seguramente todos conocen, porque tiene que ver con {TEMA_NP}."
     ],
-
-    "ESP_DESARROLLO": [
-      "Y acá me parece que hay algo interesante para pensar.",
-      "Lo que nos dicen las investigaciones es que {AFIRMACION}.",
-      "Y esto no es menor.",
-      "Porque —y acá me voy a permitir una pequeña provocación— {AFIRMACION}.",
-      "No hay recetas. Lo que hay son preguntas, y las preguntas son, en sí mismas, una forma de saber.",
-      "Pienso, por ejemplo, en… bueno, en tantas situaciones que ustedes conocen mucho mejor que yo.",
-      "Si me permiten la palabra, diría que se trata de {VERBO_INF} {OBJETO}.",
-      "Esto lo vamos a retomar en el segundo encuentro.",
-      "Hay un autor que dice algo muy lindo sobre esto, que ahora no recuerdo textualmente, pero que va en esta línea.",
+    "ESP_MOVIDA": [
+      "{ESP_ARRANQUE} {ESP_IDEA}{ESP_COLA}.",
+      "{ESP_ARRANQUE} {ESP_IDEA}{ESP_COLA}.",
+      "{ESP_ARRANQUE} {ESP_IDEA}{ESP_COLA}.",
+      "{ESP_ARRANQUE} {ESP_IDEA}{ESP_COLA}.",
+      "{ESP_PREGUNTA} {ESP_TRAS_PREGUNTA}",
+      "{ESP_PREGUNTA} {ESP_TRAS_PREGUNTA}",
+      "{ESP_ANECDOTA}",
+      "{ESP_CITA}",
+      "{ESP_DISTINCION}",
+      "{ESP_REFORMULACION}",
+      "Y acá me voy a permitir una pequeña provocación: {ESP_PROVOCACION}.",
+      "{ESP_PUBLICO}",
+      "{ESP_META}",
+      "{ESP_INVESTIGACION}"
+    ],
+    "ESP_ARRANQUE": [
+      "Fíjense que",
+      "Digamos que",
+      "Yo diría que",
+      "Me parece que",
+      "Lo que quiero decir es que",
+      "Y acá aparece algo interesante, que es que",
+      "Lo interesante es que",
+      "Insisto en esto:",
+      "Creo, sinceramente, que",
+      "Hay que decirlo:",
+      "Sin ánimo de polemizar, creo que",
+      "Y esto lo digo con mucho cuidado:",
+      "Lo que vemos en las escuelas es que",
+      "Uno podría pensar que no, pero",
+      "Me animaría a decir que",
+      "Lo que pasa es que",
+      "Bueno, la cuestión es que",
+      "En definitiva,",
+      "Y acá hay una clave:",
+      "Para decirlo rápido,",
+      "Ahora bien,",
+      "Yo siempre digo que",
+      "Lo que aparece con fuerza es que"
+    ],
+    "ESP_COLA": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ", ¿no?",
+      ", ¿no?",
+      ", digamos",
+      ", por decirlo de algún modo",
+      ", si se quiere",
+      ", y esto es clave",
+      ", ¿se entiende?",
+      ", y eso hay que decirlo",
+      ", y esto no es menor"
+    ],
+    "ESP_IDEA": [
+      "{CONCEPTO} es una categoría que nos permite {VERBO_INF} {OBJETO}",
+      "{TEMA_REF} tiene mucho que ver con {CONCEPTO}",
+      "no podemos pensar {OBJETO} sin pensar {CONCEPTO}",
+      "la escuela funciona como {METAFORA}",
+      "lo que está en juego no es {OBJETO}, sino {CONCEPTO}",
+      "hay que {VERBO_INF} {OBJETO} antes de {VERBO_INF} {OBJETO}",
+      "estamos frente a un cambio de época, y {tema} es apenas un síntoma",
+      "el problema no es {tema}: el problema es cómo lo miramos",
+      "{tema} nos obliga a {VERBO_INF} {OBJETO}",
+      "{CONCEPTO} aparece como una clave de lectura para {VERBO_INF} {OBJETO}",
+      "lo que hacemos en el aula siempre dice algo sobre {CONCEPTO}",
+      "hay una dimensión de {CONCEPTO} que muchas veces no estamos mirando",
+      "las prácticas cambian mucho más lento que los discursos sobre las prácticas",
+      "cada vez que hablamos de {tema}, en realidad estamos hablando de {CONCEPTO}",
+      "lo urgente no nos deja ver lo importante",
+      "{OBJETO} y {CONCEPTO} son, en el fondo, dos caras de la misma moneda",
+      "la pregunta por {tema} es, en el fondo, una pregunta por {CONCEPTO}",
+      "nadie aprende en soledad",
+      "{SUJETOS} ya no son los mismos, pero la escuela sigue organizada como hace cien años",
+      "hay que correrse de la lógica del déficit y pensar en términos de potencia",
+      "en el fondo, lo que está en discusión es qué escuela queremos",
+      "sin {CONCEPTO} no hay aprendizaje posible",
+      "{tema} no se resuelve con más normativa, sino con más {CONCEPTO_SIN}",
+      "la escuela tiene que poder alojar {CONCEPTO}",
+      "lo que pensábamos sobre {OBJETO}, en este contexto, adquiere otro sentido",
+      "no se trata de tener razón, sino de abrir conversación",
+      "pensar {TEMA_REF} {ENFOQUE} cambia completamente la pregunta",
+      "{CONCEPTO} no se enseña: se habilita",
+      "todo lo que hacemos en la escuela es, de algún modo, una forma de {CONCEPTO_SIN}"
+    ],
+    "CONCEPTO": [
+      "la experiencia",
+      "el deseo",
+      "la hospitalidad",
+      "la alteridad",
+      "lo común",
+      "la potencia",
+      "la autoridad pedagógica",
+      "el encuentro",
+      "la escucha",
+      "la contingencia",
+      "el umbral",
+      "la pregunta",
+      "el lazo",
+      "la confianza",
+      "la transmisión",
+      "el cuidado",
+      "la singularidad",
+      "la presencia",
+      "el acontecimiento",
+      "la ternura",
+      "la incomodidad",
+      "el vínculo",
+      "la mirada",
+      "la palabra",
+      "el tiempo",
+      "lo inesperado",
+      "la frontera",
+      "la pertenencia",
+      "el reconocimiento",
+      "la opacidad",
+      "la demora",
+      "el asombro",
+      "la intemperie",
+      "la fragilidad"
+    ],
+    "CONCEPTO_SIN": [
+      "escucha",
+      "confianza",
+      "cuidado",
+      "presencia",
+      "encuentro",
+      "pregunta",
+      "hospitalidad",
+      "ternura",
+      "reconocimiento",
+      "conversación",
+      "deseo",
+      "tiempo"
+    ],
+    "METAFORA": [
+      "una caja de herramientas",
+      "un territorio en disputa",
+      "un espacio de umbral",
+      "una trama",
+      "un tejido que hay que remendar todos los días",
+      "una brújula más que un mapa",
+      "un puente",
+      "un laboratorio",
+      "una casa con muchas puertas",
+      "un dispositivo de pasaje",
+      "una conversación que nunca termina",
+      "una orquesta sin partitura",
+      "un lugar de refugio",
+      "una plaza pública",
+      "un mapa que se dibuja mientras se camina"
+    ],
+    "ESP_PREGUNTA": [
+      "¿Desde dónde miramos {TEMA_REF}?",
+      "¿Qué lugar le damos a {CONCEPTO} cuando pensamos {OBJETO}?",
+      "¿Es posible {VERBO_INF} {OBJETO} sin {VERBO_INF} {OBJETO}?",
+      "¿De qué hablamos cuando hablamos de {tema}?",
+      "¿Para qué {VERBO_INF} {OBJETO}?",
+      "¿Y si {tema} no fuera el problema, sino una oportunidad?",
+      "¿Quién decide qué cuenta como {CONCEPTO_SIN} en la escuela?",
+      "¿Qué nos pasa a nosotros, como docentes, con {tema}?",
+      "¿Cuánto de {CONCEPTO} hay en nuestras planificaciones?",
+      "¿Qué escuela estamos imaginando cuando pensamos en {tema}?"
+    ],
+    "ESP_TRAS_PREGUNTA": [
+      "Lo dejo picando.",
+      "No tengo la respuesta, pero me parece importante hacerse la pregunta.",
+      "Pregunta que, como verán, no voy a responder. (Risas.)",
+      "Ahí hay algo.",
+      "Piénsenlo.",
+      "Y la respuesta, como siempre, es: depende.",
+      "Volvamos sobre esto más adelante.",
+      "Dejo planteada la pregunta, porque no tiene una única respuesta.",
+      "Es una pregunta incómoda, y está bien que lo sea."
+    ],
+    "ESP_ANECDOTA": [
+      "El otro día, en una escuela de {LUGAR_ANEC}, una docente me decía: «{FRASE_DOCENTE}». Y me quedé pensando en eso.",
+      "Me acuerdo de un chico, en {LUGAR_ANEC}, que me preguntó: «¿Y esto para qué sirve?». Y creo que ahí está todo.",
+      "Una vez, trabajando con un equipo de {LUGAR_ANEC}, nos pasó algo muy interesante que tiene que ver con {CONCEPTO}; no voy a entrar en detalles, pero ustedes se lo imaginan.",
+      "Cuando yo daba clases —porque yo también estuve en el aula, eh— me pasaba algo parecido con {tema}.",
+      "Una directora de {LUGAR_ANEC} me contaba que lo que más le costaba era {VERBO_INF} {OBJETO}. Y es así.",
+      "Pienso, por ejemplo, en… bueno, en tantas situaciones que ustedes conocen mucho mejor que yo."
+    ],
+    "LUGAR_ANEC": [
+      "el conurbano",
+      "una ciudad del interior",
+      "la Patagonia",
+      "un pueblo de la provincia",
+      "Rosario",
+      "Mendoza",
+      "una escuela rural",
+      "un barrio de la zona sur",
+      "Tucumán",
+      "Bahía Blanca"
+    ],
+    "FRASE_DOCENTE": [
+      "Yo no estudié para esto",
+      "Nadie nos preparó para {tema}",
+      "Los chicos ya no son los mismos",
+      "Yo hago lo que puedo con lo que tengo",
+      "Esto en el profesorado no te lo enseñan",
+      "¿Y quién nos cuida a nosotros?",
+      "Antes era distinto",
+      "Ya no sé qué más probar"
+    ],
+    "ESP_CITA": [
+      "Hay un autor —{AUTOR_VAGO}— que habla de {CONCEPTO}, y me parece una idea muy potente para pensar {tema}.",
+      "Como decía alguien, y no me acuerdo quién, «{SENTENCIA}».",
+      "Hay una frase que a mí me gusta mucho, y que dice más o menos así: «{SENTENCIA}». Algo así.",
+      "Hay un autor que dice algo muy lindo sobre esto, que ahora no recuerdo textualmente, pero que va en esta línea."
+    ],
+    "AUTOR_VAGO": [
+      "creo que es francés",
+      "ahora no me sale el nombre",
+      "que seguramente muchos de ustedes leyeron",
+      "un pedagogo brasileño muy conocido",
+      "una filósofa que trabajó mucho estos temas",
+      "que cito siempre, y que les voy a pasar en la bibliografía",
+      "que ahora está muy de moda"
+    ],
+    "SENTENCIA": [
+      "enseñar es un acto de fe",
+      "la escuela es el lugar donde pasan cosas",
+      "educar es siempre empezar de nuevo",
+      "el que pregunta ya está aprendiendo",
+      "no hay aprendizaje sin incomodidad",
+      "enseñar es dar lo que no se tiene",
+      "el aula es un lugar de encuentro con lo desconocido"
+    ],
+    "ESP_DISTINCION": [
       "Fíjense que no es lo mismo {VERBO_INF} {OBJETO} que {VERBO_INF} {OBJETO}.",
-      "Ahí hay una tensión que me parece productiva sostener, ¿no?",
-      "Dejo planteada la pregunta, porque creo que no tiene una única respuesta.",
-      "Y ustedes me dirán: «Bueno, pero en la práctica, ¿cómo se hace?». Y es una gran pregunta.",
-      "Es decir, {AFIRMACION}.",
-      "Digamos que el desafío es {VERBO_INF} {OBJETO} {ENFOQUE}.",
-      "Si pasamos a la próxima diapositiva… no, esa no, la otra. Ahí está.",
-      "Esto se ve muy claramente cuando analizamos {OBJETO}.",
-      "Hay que correrse de la lógica del déficit y pensar en términos de potencia.",
-      "En el fondo, lo que está en discusión es qué escuela queremos.",
-      "Y cuando digo {tema}, no estoy hablando solamente de {tema}: estoy hablando de {OBJETO}.",
-      "Me interesa detenerme en este punto, porque creo que es clave.",
-      "Ustedes que están en el aula todos los días lo saben mejor que nadie.",
-      "Pensemos {TEMA_REF} no como un problema, sino como una oportunidad.",
-      "Ahora bien, ¿desde dónde miramos {TEMA_REF}? Porque la mirada no es neutral."
+      "Una cosa es {CONCEPTO} y otra cosa muy distinta es {CONCEPTO}.",
+      "No es lo mismo hablar de {CONCEPTO} que hablar de {CONCEPTO}; y esa diferencia, que parece sutil, es enorme.",
+      "Hay que distinguir entre {tema} como problema y {tema} como síntoma."
     ],
-
+    "ESP_REFORMULACION": [
+      "Es decir, {AFIRMACION}.",
+      "Dicho de otro modo: {ESP_IDEA}.",
+      "Lo voy a decir de otra manera, para que se entienda: {ESP_IDEA}.",
+      "Lo resumo en una idea: {CONCEPTO}.",
+      "O sea, y para que quede claro: {ESP_IDEA}."
+    ],
+    "ESP_PROVOCACION": [
+      "quizás {tema} no sea un problema",
+      "a lo mejor el problema no son los chicos, somos nosotros",
+      "tal vez haya que dejar de planificar tanto",
+      "capaz que la escuela no tiene que dar respuestas, sino abrir preguntas",
+      "quizás haya que desaprender {OBJETO}",
+      "a lo mejor {CONCEPTO} es más importante que los contenidos",
+      "{AFIRMACION}"
+    ],
+    "ESP_PUBLICO": [
+      "Ustedes que están en el aula todos los días lo saben mejor que nadie.",
+      "Levanten la mano los que alguna vez sintieron que {tema} los superó. (Varias manos.) Bueno, ahí está.",
+      "Seguramente a muchos de ustedes les pasó.",
+      "No sé si a ustedes les pasa, pero yo cada vez que pienso en {tema} me pregunto por {CONCEPTO}.",
+      "Y ustedes me dirán: «Bueno, pero en la práctica, ¿cómo se hace?». Y es una gran pregunta.",
+      "Les propongo un pequeño ejercicio: piensen en {OBJETO} de su escuela. ¿Ya está? Bien. Guárdenlo, que después volvemos.",
+      "Veo caras de que esto les resuena."
+    ],
+    "ESP_META": [
+      "Si pasamos a la próxima diapositiva… no, esa no, la otra. Ahí está.",
+      "Esto lo vamos a retomar en el segundo encuentro.",
+      "No me quiero ir del tema, pero esto es importante.",
+      "Hago un paréntesis que después cierro.",
+      "Voy rápido con esto porque si no, no llegamos.",
+      "En la diapositiva lo tienen resumido; no lo voy a leer, pero básicamente dice que {ESP_IDEA}.",
+      "Me interesa detenerme en este punto, porque creo que es clave."
+    ],
+    "ESP_INVESTIGACION": [
+      "Lo que nos dicen las investigaciones es que {ESP_IDEA}.",
+      "Hay estudios —después les paso las referencias— que muestran que {ESP_IDEA}.",
+      "Los datos son contundentes, aunque hoy no los traje.",
+      "Según un relevamiento reciente, que todavía no se publicó, {ESP_IDEA}.",
+      "En un proyecto que estamos llevando adelante con un equipo de la universidad vemos que {ESP_IDEA}."
+    ],
     "ESP_CIERRE": [
       "Bueno, me parece que voy a ir cerrando acá, porque veo que me están haciendo señas con el tiempo.",
       "Más que conclusiones, me gustaría dejar abiertas algunas preguntas para seguir pensando juntos.",
-      "Voy redondeando, porque si no nos quedamos sin tiempo para el intercambio, que es lo más rico."
+      "Voy redondeando, porque si no nos quedamos sin tiempo para el intercambio, que es lo más rico.",
+      "Si de esta charla se llevan una sola idea, que sea esta: {ESP_IDEA}.",
+      "Me quedan muchas cosas por decir, pero las dejo para el próximo encuentro.",
+      "Quiero cerrar volviendo a la pregunta del principio, que sigue abierta, y está bien que siga abierta."
     ],
-
     "ESP_CIERRE_FINAL": [
       "Les dejo la bibliografía en la última diapositiva, y quedo a disposición para las preguntas. Muchas gracias por la escucha.",
       "Gracias por la escucha y por la paciencia. La presentación la van a recibir por correo.",
-      "Muchas gracias. Y como siempre digo: no se trata de llegar a respuestas, sino de hacernos mejores preguntas."
+      "Muchas gracias. Y como siempre digo: no se trata de llegar a respuestas, sino de hacernos mejores preguntas.",
+      "Gracias, de verdad. Me llevo mucho de este encuentro.",
+      "Muchas gracias. Ahora sí, los escucho."
     ],
-
     "ACOT_ESP": [
       "(Pasa la diapositiva.)",
       "(Se acopla el micrófono.)",
@@ -334,9 +581,10 @@
       "(Se congela la imagen unos segundos.)",
       "(Varias personas toman fotos de la pantalla.)"
     ],
-
-    "ACOT_APLAUSOS": ["(Aplausos.)", "(Aplausos. Se abre la ronda de preguntas, que no llega a realizarse por falta de tiempo.)"],
-
+    "ACOT_APLAUSOS": [
+      "(Aplausos.)",
+      "(Aplausos. Se abre la ronda de preguntas, que no llega a realizarse por falta de tiempo.)"
+    ],
     "EVENTO_FUN": [
       "Conferencia de prensa",
       "Lanzamiento de un nuevo programa educativo",
@@ -345,66 +593,41 @@
       "Entrevista radial",
       "Firma de un convenio interjurisdiccional"
     ],
-
     "VOC_FUN": [
       "Buenos días a todos. Gracias por acompañarnos.",
       "Muchas gracias. Bueno, antes que nada, un saludo a todos los que nos están escuchando.",
-      "Buenas tardes. Quiero agradecer la presencia de los medios y de toda la comunidad educativa."
+      "Buenas tardes. Quiero agradecer la presencia de los medios y de toda la comunidad educativa.",
+      "Buen día. Vamos a ser breves, porque tenemos la agenda muy cargada.",
+      "Gracias. Bueno, primero que nada, un agradecimiento a las autoridades de la escuela que nos reciben."
     ],
-
     "FUN_APERTURA": [
       "Quiero decirles que desde el Ministerio venimos trabajando fuertemente {TEMA_PP}.",
       "{TEMA_NP} es, para esta gestión, una prioridad absoluta.",
       "Estamos convencidos de que {TEMA_NP} tiene que ser una política de Estado.",
       "Hoy venimos a presentar una herramienta concreta {TEMA_PP}, que es fruto de un trabajo de muchos meses."
     ],
-
-    "FUN_DESARROLLO": [
-      "Esta gestión asumió desde el primer día el compromiso de {VERBO_INF} {OBJETO}.",
-      "Y quiero ser muy claro en esto: no es un gasto, es una inversión.",
-      "Los números lo demuestran, y los vamos a dar a conocer oportunamente.",
-      "Vamos a seguir trabajando de manera articulada con todos los actores del sistema.",
-      "Estamos hablando de una inversión histórica, sin precedentes.",
-      "En los próximos meses vamos a avanzar con {ACCION}.",
-      "Esto no es una medida aislada, sino que forma parte de un plan integral.",
-      "Hemos escuchado a los docentes, a las familias, a los estudiantes, y esto es el resultado de esa escucha.",
-      "Tenemos una hoja de ruta clara, con objetivos medibles y plazos concretos.",
-      "Sabemos que hay mucho por hacer, pero también sabemos hacia dónde vamos.",
-      "No vamos a mirar para otro lado.",
-      "Y esto lo digo con total honestidad: {AFIRMACION}.",
-      "Lo que estamos haciendo es poner a la escuela en el centro de la agenda.",
-      "Estamos trabajando codo a codo con las jurisdicciones, de cara a {VERBO_INF} {OBJETO}.",
-      "Es un tema que no admite especulaciones de ningún tipo.",
-      "¿Hay problemas? Sí, claro que hay problemas. Pero estamos trabajando para resolverlos.",
-      "Esto se va a ver reflejado, sin duda, en la calidad de los aprendizajes.",
-      "Ya tenemos un equipo técnico abocado a {ACCION}.",
-      "Es un cambio de paradigma, y los cambios de paradigma llevan tiempo.",
-      "Lo vamos a hacer con responsabilidad, con gradualidad y, sobre todo, con diálogo.",
-      "Nuestro objetivo es muy claro: {VERBO_INF} {OBJETO}."
-    ],
-
     "FUN_PREGUNTA": [
       "(Un periodista pregunta por los plazos.) Eso lo vamos a estar comunicando en los próximos días.",
       "(Un periodista pregunta por el presupuesto.) Es una muy buena pregunta, y lo que te puedo decir es que el compromiso está.",
       "(Un periodista pregunta si hubo consulta con los gremios docentes.) Nosotros dialogamos con todos, siempre.",
       "(Un periodista insiste.) Ya respondí esa pregunta.",
       "(Un periodista pregunta cuántas escuelas alcanza la medida.) Todas las que sea necesario, no te quepa duda.",
-      "(Un periodista pregunta qué cambia concretamente.) Cambia todo. Cambia la mirada."
+      "(Un periodista pregunta qué cambia concretamente.) Cambia todo. Cambia la mirada.",
+      "(Un periodista pregunta si hay plata para esto.) El financiamiento está garantizado; los detalles los va a informar el área correspondiente.",
+      "(Un periodista pregunta por las críticas de los docentes.) Respetamos todas las opiniones, y seguimos dialogando.",
+      "(Un periodista pregunta por qué ahora.) Porque es el momento. Y porque no se podía esperar más."
     ],
-
     "FUN_CIERRE": [
       "Así que estamos muy contentos y vamos a seguir trabajando. Muchas gracias.",
       "Muchas gracias a todos, y seguimos trabajando.",
       "Seguimos. Gracias."
     ],
-
     "ACOT_FUN": [
       "(Flashes.)",
       "(Se acerca un asesor y le dice algo al oído.)",
       "(Suena un celular.)",
       "(Asiente el resto de la comitiva.)"
     ],
-
     "ACOT_FUN_FINAL": [
       "(Aplausos de los presentes.)",
       "(Se retira sin responder más preguntas.)",
@@ -425,7 +648,6 @@
       "En consonancia con {NORMATIVA}, el presente proyecto se propone {VERBO_INF} {TEMA_NP}.",
       "Toda reflexión {TEMA_PP} exige situarse en {ESCENARIO}."
     ],
-
     "AFIRMACION_LARGA": [
       "Esto supone {VERBO_INF} {OBJETO}, pero también {VERBO_INF} {OBJETO}, en el entendimiento de que {AFIRMACION}.",
       "No se trata, por cierto, de una tarea sencilla: implica {VERBO_INF} {OBJETO} y, al mismo tiempo, reconocer que {AFIRMACION}.",
@@ -433,7 +655,6 @@
       "Dicho en otros términos: {AFIRMACION}, y es precisamente allí donde la escuela tiene algo para decir.",
       "Es en este punto donde {TEMA_REF} adquiere toda su densidad, en tanto obliga a {VERBO_INF} {OBJETO} {ENFOQUE}."
     ],
-
     "ESPACIO": [
       "Prácticas del Lenguaje",
       "Construcción de Ciudadanía",
@@ -443,9 +664,16 @@
       "Educación Sexual Integral (transversal)",
       "Taller de Orientación"
     ],
-
-    "CURSO": ["1.º A", "2.º B", "3.º A", "3.º B", "4.º A", "5.º B", "1.º C", "2.º A"],
-
+    "CURSO": [
+      "1.º A",
+      "2.º B",
+      "3.º A",
+      "3.º B",
+      "4.º A",
+      "5.º B",
+      "1.º C",
+      "2.º A"
+    ],
     "VALORACION": [
       "En proceso",
       "En proceso avanzado",
@@ -455,14 +683,12 @@
       "En vías de logro",
       "Proceso iniciado"
     ],
-
     "INF_APERTURA": [
       "Durante el presente período, el/la estudiante ha transitado un recorrido singular {TEMA_PP}, evidenciando avances en algunos aspectos y desafíos en otros.",
       "Se observa que el/la estudiante se encuentra en proceso de {VERBO_INF} {OBJETO}, lo cual será acompañado {ENFOQUE}.",
       "En relación con su trayectoria, cabe señalar que el/la estudiante ha logrado, con altibajos, vincularse con las propuestas planteadas {TEMA_PP}.",
       "El/la estudiante transita el presente ciclo lectivo atravesando un proceso que merece ser leído en clave de trayectoria."
     ],
-
     "INF_DESARROLLO": [
       "Su participación en las propuestas áulicas ha sido variable, en función de múltiples factores que exceden lo estrictamente pedagógico.",
       "Se valoran especialmente sus intentos por apropiarse de los saberes trabajados.",
@@ -479,14 +705,12 @@
       "Cabe destacar su disposición al diálogo cuando se habilitan espacios de escucha.",
       "Las producciones entregadas permiten inferir un proceso de apropiación incipiente."
     ],
-
     "INF_CIERRE": [
       "Se sugiere a la familia acompañar este proceso desde el hogar, en articulación con la escuela.",
       "Se continuará acompañando su trayectoria desde una mirada integral y situada.",
       "La valoración consignada no debe leerse como un juicio definitivo, sino como una instancia más de un proceso en construcción.",
       "Se acordarán, oportunamente, estrategias de acompañamiento con el equipo de orientación."
     ],
-
     "REUNION": [
       "Departamento de {DEPTO}",
       "Consejo Consultivo",
@@ -494,7 +718,6 @@
       "Equipo de conducción y coordinaciones",
       "Plenario docente"
     ],
-
     "DEPTO": [
       "Lengua y Literatura",
       "Ciencias Sociales",
@@ -504,7 +727,6 @@
       "Ciencias Naturales",
       "Lenguas Extranjeras"
     ],
-
     "LUGAR": [
       "la sala de profesores",
       "el SUM de la institución",
@@ -513,12 +735,10 @@
       "la sala de reuniones virtual habilitada a tal efecto",
       "el laboratorio, por razones de espacio"
     ],
-
     "ACTA_APERTURA": [
       "Siendo las {hora} horas del día {fecha}, se reúnen en {LUGAR} los docentes cuyas firmas constan al pie, con el objeto de abordar {TEMA_NP}.",
       "En la Ciudad Autónoma de Buenos Aires, a los {dia} días del mes de {mes}, siendo las {hora} horas, se reúnen en {LUGAR} los integrantes del equipo con el fin de tratar {TEMA_NP}."
     ],
-
     "ACTA_DESARROLLO": [
       "Se da lectura al acta anterior, la cual es aprobada sin observaciones.",
       "Toma la palabra la coordinación, quien plantea la necesidad de {VERBO_INF} {OBJETO}.",
@@ -537,19 +757,16 @@
       "Se acuerda elevar lo conversado al equipo de conducción para su consideración.",
       "Se destaca el compromiso de los presentes y la riqueza de los aportes realizados."
     ],
-
     "ACTA_CIERRE": [
       "Sin más temas que tratar, siendo las {hora_fin} horas, se da por finalizada la reunión, firmando los presentes de conformidad.",
       "No habiendo más asuntos que tratar, se levanta la sesión a las {hora_fin} horas, acordándose retomar la temática en un próximo encuentro."
     ],
-
     "FAM_APERTURA": [
       "Nos dirigimos a ustedes a fin de compartir algunas reflexiones {TEMA_PP}, tema que nos ocupa y nos preocupa como institución.",
       "Por medio de la presente, queremos comunicarles que la escuela se encuentra trabajando {TEMA_PP} {ENFOQUE}.",
       "Como es de su conocimiento, {TEMA_NP} constituye una preocupación compartida por toda la comunidad educativa.",
       "Les escribimos para informarles que, en el marco de {NORMATIVA}, la institución ha decidido profundizar el trabajo {TEMA_PP}."
     ],
-
     "FAM_DESARROLLO": [
       "Entendemos que la escuela y las familias compartimos la responsabilidad de acompañar a nuestros chicos y chicas en este proceso.",
       "Por ello, consideramos fundamental fortalecer el vínculo entre la escuela y el hogar.",
@@ -564,47 +781,40 @@
       "Les recordamos la importancia de leer periódicamente las comunicaciones institucionales.",
       "Consideramos que {AFIRMACION}."
     ],
-
     "FAM_CIERRE": [
       "Agradecemos, como siempre, el acompañamiento y el compromiso de cada una de las familias.",
       "Sin otro particular, las saludamos con la cordialidad de siempre.",
       "Contamos, como siempre, con su valiosa colaboración."
     ],
-
     "DESTINATARIOS": [
       "equipos docentes de todos los turnos",
       "personal docente y no docente",
       "docentes del ciclo básico y orientado",
       "toda la comunidad educativa"
     ],
-
     "MODALIDAD": [
       "presencial, con suspensión de actividades",
       "presencial, en el SUM",
       "híbrida",
       "presencial, con trabajo en grupos"
     ],
-
     "JOR_APERTURA": [
       "La presente jornada se propone como un espacio de reflexión colectiva {TEMA_PP}.",
       "Convocamos a los equipos docentes a detenerse, una vez más, a pensar {TEMA_NP} en {ESCENARIO}.",
       "En esta oportunidad, la jornada institucional estará dedicada a {VERBO_INF} {TEMA_NP} {ENFOQUE}.",
       "Esta jornada busca generar un tiempo y un espacio para {VERBO_INF} {TEMA_NP}."
     ],
-
     "JOR_CIERRE": [
       "Se solicita a cada grupo designar un relator o relatora y traer el material de lectura previamente enviado.",
       "Se recuerda que la asistencia es obligatoria y que el registro de lo trabajado será elevado a la Supervisión.",
       "Se ruega puntualidad. Habrá café."
     ],
-
     "AGENDA_INICIO": [
       "Acreditación y desayuno",
       "Bienvenida a cargo del equipo de conducción",
       "Dinámica de presentación",
       "Lectura de la normativa que enmarca la jornada"
     ],
-
     "AGENDA_MEDIO": [
       "Visualización de un video disparador",
       "Lectura compartida de un texto breve",
@@ -614,7 +824,6 @@
       "Intercambio en pequeños grupos",
       "Relevamiento de experiencias previas"
     ],
-
     "AGENDA_FIN": [
       "Puesta en común",
       "Recorrido por los afiches producidos",
@@ -623,7 +832,6 @@
       "Cierre y evaluación de la jornada",
       "Completamiento de la encuesta de satisfacción"
     ],
-
     "CARGO": [
       "Coordinación pedagógica",
       "Equipo de conducción",
@@ -632,13 +840,241 @@
       "Asesoría pedagógica",
       "Coordinación de proyectos institucionales"
     ],
-
     "CARGO_DOCENTE": [
       "Docente a cargo",
       "Tutor/a del curso",
       "Docente responsable del espacio"
     ],
-
-    "FIRMAS_ACTA": ["Firmas de los presentes"]
+    "FIRMAS_ACTA": [
+      "Firmas de los presentes"
+    ],
+    "RECTOR_MOVIDA": [
+      "{RECTOR_ARRANQUE} {RECTOR_IDEA}{ESP_COLA}.",
+      "{RECTOR_ARRANQUE} {RECTOR_IDEA}{ESP_COLA}.",
+      "{RECTOR_ARRANQUE} {RECTOR_IDEA}{ESP_COLA}.",
+      "{RECTOR_FIJA}",
+      "{RECTOR_FIJA}",
+      "{RECTOR_AGRADECE}",
+      "{RECTOR_AGRADECE}",
+      "{RECTOR_RECUERDO}",
+      "{RECTOR_CHICOS}",
+      "Esta escuela es {METAFORA_ESC}, y eso no lo cambia nadie.",
+      "Cuando pensamos en {TEMA_REF}, no podemos dejar de pensar en {OBJETO}.",
+      "Este año nos propusimos {VERBO_INF} {OBJETO}, y creo que, de a poco, lo estamos logrando.",
+      "Tenemos muchos desafíos por delante, y {TEMA_REF} es, sin duda, uno de ellos.",
+      "Si algo nos enseñó {tema} es que {RECTOR_IDEA}."
+    ],
+    "RECTOR_ARRANQUE": [
+      "Siempre digo que",
+      "Yo creo que",
+      "Quiero decirles que",
+      "Y acá quiero ser muy claro:",
+      "Les confieso que",
+      "Lo que aprendí en todos estos años es que",
+      "Hay algo que quiero compartir con ustedes, y es que",
+      "Estoy convencido de que",
+      "No me canso de repetir que",
+      "Como siempre les digo a los chicos,",
+      "Yo sé que a veces cuesta, pero",
+      "Mi abuela decía que"
+    ],
+    "RECTOR_IDEA": [
+      "la escuela es mucho más que un edificio: es la gente que la habita todos los días",
+      "esto no se logra de un día para el otro, sino con el esfuerzo de todos",
+      "juntos podemos",
+      "esta escuela tiene una historia, y esa historia la escribimos entre todos",
+      "educar es un acto de amor y, por qué no decirlo, un acto de esperanza",
+      "{VALORES} no se enseñan en un pizarrón: se enseñan con el ejemplo",
+      "{tema} no es un problema de unos pocos, es de todos",
+      "cuando uno ve a los chicos así, todo tiene sentido",
+      "lo más importante no se mide en notas",
+      "la escuela se hace todos los días, en cada aula, en cada pasillo",
+      "cada chico que entra por esa puerta es una responsabilidad enorme",
+      "no hay escuela sin comunidad",
+      "los cambios llevan tiempo, pero llegan",
+      "{AFIRMACION}"
+    ],
+    "VALORES": [
+      "el respeto, la solidaridad y el compromiso",
+      "la empatía y la escucha",
+      "el esfuerzo y la perseverancia",
+      "la honestidad y el compañerismo",
+      "la responsabilidad y el cuidado del otro"
+    ],
+    "METAFORA_ESC": [
+      "una gran familia",
+      "un segundo hogar",
+      "un barco en el que vamos todos juntos",
+      "una casa de puertas abiertas",
+      "un lugar de encuentro",
+      "un árbol que da frutos todos los años",
+      "un faro"
+    ],
+    "RECTOR_FIJA": [
+      "Sabemos que no es fácil, ¿no? Sabemos que hay dificultades. Pero también sabemos que juntos podemos.",
+      "Me emociona, la verdad, ver a tantas familias acompañando.",
+      "Ustedes, chicos, son el presente; no el futuro, el presente.",
+      "Les pido a todos que sigamos apostando a la escuela como lugar de encuentro.",
+      "Y no me quiero olvidar de nadie, aunque seguramente me voy a olvidar de alguien.",
+      "Disculpen, me emocioné un poco. (Aplausos.)",
+      "No es un año fácil, pero ¿cuándo fue fácil?",
+      "Esto es lo que nos hace distintos como institución."
+    ],
+    "RECTOR_AGRADECE": [
+      "Quiero hacer un reconocimiento especial {AGRADECIDOS}, que {RAZON_AGRADECE}.",
+      "No quiero dejar de mencionar {AGRADECIDOS}, que {RAZON_AGRADECE}.",
+      "Un agradecimiento enorme {AGRADECIDOS}. (Aplausos.)",
+      "Gracias {AGRADECIDOS}, porque sin ustedes esto no sería posible."
+    ],
+    "AGRADECIDOS": [
+      "al equipo docente",
+      "a los auxiliares",
+      "a la cooperadora",
+      "al centro de estudiantes",
+      "a la profe de música, que armó todo esto en tiempo récord",
+      "a las familias",
+      "al equipo de orientación",
+      "a la secretaría, que siempre está en todo",
+      "a los preceptores",
+      "al personal de cocina"
+    ],
+    "RAZON_AGRADECE": [
+      "pone todos los días el cuerpo y el corazón",
+      "muchas veces no se ve pero sostiene la escuela",
+      "está siempre, aun cuando las condiciones no acompañan",
+      "hace mucho más de lo que le corresponde",
+      "trabajó muchísimo para que hoy estemos acá"
+    ],
+    "RECTOR_RECUERDO": [
+      "Yo entré a esta escuela hace {ANIOS} años como {ROL_ANTES}, y nunca imaginé que algún día iba a estar parado acá.",
+      "Me acuerdo de mi primer día en esta escuela: estaba muy nervioso, y una colega me dijo «tranquilo, acá nos cuidamos entre todos». Nunca me lo olvidé.",
+      "Cuando yo era estudiante, la escuela era muy distinta; pero hay cosas que no cambian.",
+      "Hace unos años, un exalumno me escribió para decirme que la escuela le había cambiado la vida. Eso es lo que hacemos acá."
+    ],
+    "ANIOS": [
+      "veinte",
+      "quince",
+      "casi treinta",
+      "doce",
+      "dieciocho"
+    ],
+    "ROL_ANTES": [
+      "preceptor",
+      "profesor suplente",
+      "maestro de grado",
+      "estudiante",
+      "profesor de Historia"
+    ],
+    "RECTOR_CHICOS": [
+      "Yo les quiero decir a los chicos y chicas que esta escuela es de ustedes.",
+      "Chicos: aprovechen este tiempo, porque pasa muy rápido. Créanme.",
+      "A los chicos les digo: no tengan miedo de equivocarse, que para eso está la escuela.",
+      "Y a los de quinto, que se van: los vamos a extrañar, aunque no lo crean. (Risas.)"
+    ],
+    "FUN_MOVIDA": [
+      "{FUN_ARRANQUE} {FUN_IDEA}.",
+      "{FUN_ARRANQUE} {FUN_IDEA}.",
+      "{FUN_ARRANQUE} {FUN_IDEA}.",
+      "{FUN_PROMESA}",
+      "{FUN_PROMESA}",
+      "Y quiero ser muy claro en esto: {FUN_CONTRASTE}.",
+      "{FUN_CIFRA}",
+      "{FUN_CIFRA}",
+      "{FUN_FIJA}",
+      "{FUN_FIJA}",
+      "En los próximos meses vamos a avanzar con {ACCION}.",
+      "Ya tenemos un equipo técnico abocado a {ACCION}.",
+      "Estamos trabajando codo a codo con las jurisdicciones, de cara a {VERBO_INF} {OBJETO}."
+    ],
+    "FUN_ARRANQUE": [
+      "Quiero ser muy claro:",
+      "Lo digo con total honestidad:",
+      "Les quiero decir que",
+      "Estamos convencidos de que",
+      "Nadie puede negar que",
+      "Lo que estamos haciendo, en definitiva, es mostrar que",
+      "Hay que decirlo con todas las letras:",
+      "Desde el primer día dijimos que",
+      "Los hechos demuestran que",
+      "Nosotros creemos firmemente que"
+    ],
+    "FUN_IDEA": [
+      "{tema} tiene que ser una política de Estado",
+      "la educación es la principal herramienta de transformación que tenemos",
+      "{PROGRAMA} va a {VERBO_FUN} {OBJETO}",
+      "esta gestión puso a la escuela en el centro de la agenda",
+      "no vamos a mirar para otro lado",
+      "las decisiones se toman escuchando a todos los actores",
+      "hay mucho por hacer, pero sabemos hacia dónde vamos",
+      "{tema} no admite especulaciones de ningún tipo",
+      "es un cambio de paradigma, y los cambios de paradigma llevan tiempo",
+      "esto se va a ver reflejado en la calidad de los aprendizajes",
+      "{AFIRMACION}"
+    ],
+    "PROGRAMA": [
+      "el nuevo plan",
+      "esta iniciativa",
+      "el programa que hoy lanzamos",
+      "esta política",
+      "la propuesta que presentamos",
+      "el plan integral"
+    ],
+    "VERBO_FUN": [
+      "fortalecer",
+      "jerarquizar",
+      "garantizar",
+      "profundizar",
+      "ampliar",
+      "relanzar",
+      "modernizar",
+      "consolidar",
+      "potenciar"
+    ],
+    "PLAZO": [
+      "en los próximos días",
+      "a la brevedad",
+      "en una primera etapa",
+      "de manera progresiva",
+      "antes de fin de año, si las condiciones lo permiten",
+      "en el corto y mediano plazo",
+      "oportunamente"
+    ],
+    "FUN_PROMESA": [
+      "Vamos a {VERBO_FUN} {OBJETO} {PLAZO}.",
+      "{PROGRAMA} se va a implementar {PLAZO}, con gradualidad y con diálogo.",
+      "Vamos a {VERBO_FUN} {OBJETO}, y lo vamos a hacer con responsabilidad.",
+      "Lo que hoy anunciamos va a llegar a todas las escuelas {PLAZO}."
+    ],
+    "FUN_CONTRASTE": [
+      "no es un gasto, es una inversión",
+      "no es un parche, es una solución de fondo",
+      "no es una promesa, es un compromiso",
+      "no es un anuncio, es una realidad",
+      "no es un punto de llegada, es un punto de partida",
+      "no es una medida aislada, es parte de un plan integral"
+    ],
+    "FUN_CIFRA": [
+      "Estamos hablando de una inversión histórica, sin precedentes.",
+      "Los números lo demuestran, y los vamos a dar a conocer oportunamente.",
+      "Estamos hablando de miles de {BENEFICIARIOS} en todo el territorio.",
+      "Es la inversión más importante de los últimos años en {tema}.",
+      "Tenemos una hoja de ruta clara, con objetivos medibles y plazos concretos.",
+      "Hablamos de un incremento muy significativo, que en breve vamos a poder precisar."
+    ],
+    "BENEFICIARIOS": [
+      "estudiantes",
+      "docentes",
+      "familias",
+      "escuelas",
+      "chicos y chicas"
+    ],
+    "FUN_FIJA": [
+      "Hemos escuchado a los docentes, a las familias, a los estudiantes, y esto es el resultado de esa escucha.",
+      "¿Hay problemas? Sí, claro que hay problemas. Pero estamos trabajando para resolverlos.",
+      "Vamos a seguir trabajando de manera articulada con todos los actores del sistema.",
+      "Esto es fruto de un trabajo silencioso de muchos meses.",
+      "Y esto no lo digo yo: lo dicen los especialistas.",
+      "Lo que se hizo en otras gestiones lo dejo para que lo analicen ustedes."
+    ]
   }
 }
