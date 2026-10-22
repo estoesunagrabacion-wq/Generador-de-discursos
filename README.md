@@ -27,9 +27,10 @@ Mensajes:
 - Correo de la dirección, enviado un domingo a la noche
 - Grupo de WhatsApp docente
 
-Juegos:
+Extras:
 
 - Bingo de jornada institucional: un cartón distinto cada vez, con casilleros que se marcan tocándolos.
+- Diccionario de la jerga pedagógica: una página de diccionario con entradas al azar (y una para el tema que se escriba).
 
 Cualquier texto se puede descargar como imagen (o compartir directamente desde el celular) con el botón «Imagen».
 
@@ -45,7 +46,7 @@ Todo el texto está en la carpeta `data/`, separado del código:
 | --- | --- |
 | `data/lexico.json` | Frases y piezas compartidas: marcos del tema, verbos vacíos, enfoques, conectores, afirmaciones, propuestas, cierres, notas al pie. |
 | `data/documentos.json` | La estructura de cada tipo de texto y sus frases propias. Los discursos usan `"grupo": "oral"`. |
-| `data/formatos.json` | Los tipos con formato propio: devolución, correo, WhatsApp, diapositivas y bingo (la lista `BINGO` tiene las expresiones del cartón). |
+| `data/formatos.json` | Los tipos con formato propio: devolución, correo, WhatsApp, diapositivas, bingo (la lista `BINGO` tiene las expresiones del cartón) y diccionario (la lista `diccionario` tiene las entradas, cada una con `lema`, `cat`, `acepciones` y, si se quiere, `ejemplo` y `ver`). |
 | `data/membrete.json` | Organismos, direcciones, lemas del año y pie de página. |
 | `data/temas.json` | Temas que se usan al azar. |
 

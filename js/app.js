@@ -77,7 +77,7 @@
   function pintarTipos() {
     var cont = $('tipos');
     cont.textContent = '';
-    var grupos = { escrito: 'Documentos', oral: 'Discursos', mensaje: 'Mensajes', juego: 'Juegos' };
+    var grupos = { escrito: 'Documentos', oral: 'Discursos', mensaje: 'Mensajes', juego: 'Extras' };
     var filas = {};
     Object.keys(grupos).forEach(function (g) {
       var bloque = el('div', 'grupo-tipos');
@@ -124,6 +124,8 @@
     var e = doc.extensiones;
     if (doc.formato === 'whatsapp') {
       aviso('Nuevos mensajes en el grupo.');
+    } else if (doc.formato === 'diccionario') {
+      aviso('Se agregaron entradas. Ninguna define nada.');
     } else if (doc.formato === 'diapositivas') {
       aviso('Se agregó una diapositiva. Sigue sin haber verbos.');
     } else if (doc.oral) {
@@ -145,7 +147,7 @@
     hoja.className = 'hoja formato-' + doc.formato + (esExtension ? '' : ' entra');
     hoja.classList.toggle('oral', !!doc.oral);
     var especial = { oral: pintarOral, correo: pintarCorreo, whatsapp: pintarWhatsapp,
-      diapositivas: pintarDiapositivas, bingo: pintarBingo }[doc.formato];
+      diapositivas: pintarDiapositivas, bingo: pintarBingo, diccionario: pintarDiccionario }[doc.formato];
     if (especial) { especial(hoja); pintarEstadisticas(); return; }
     var mem = el('div', 'membrete');
     mem.appendChild(escudo());
@@ -252,6 +254,7 @@
     var medida;
     if (doc.formato === 'whatsapp') medida = est.mensajes + ' mensajes';
     else if (doc.formato === 'diapositivas') medida = est.diapositivas + ' diapositivas';
+    else if (doc.formato === 'diccionario') medida = est.entradas + ' entradas';
     else if (doc.oral) medida = est.palabras + ' palabras · duración estimada: ' + est.minutos + (est.minutos === 1 ? ' minuto' : ' minutos');
     else medida = est.palabras + ' palabras · ' + est.carillas + (est.carillas === 1 ? ' carilla' : ' carillas');
     e.appendChild(document.createTextNode(medida + ' · Ideas concretas: '));
@@ -458,6 +461,57 @@
       sl.appendChild(pie);
       hoja.appendChild(sl);
     });
+  }
+
+
+  /* ---------- diccionario ---------- */
+  function pintarDiccionario(hoja) {
+    var ents = doc.entradas;
+    var guia = el('div', 'dic-guia');
+    guia.appendChild(el('span', null, ents[0].lema.split(/[ ,(]/)[0]));
+    guia.appendChild(el('span', 'dic-pag', String(100 + Math.floor(Math.random() * 800))));
+    guia.appendChild(el('span', null, ents[ents.length - 1].lema.split(/[ ,(]/)[0]));
+    hoja.appendChild(guia);
+    var cab = el('div', 'dic-cabecera');
+    cab.appendChild(el('h2', null, doc.titulo));
+    cab.appendChild(el('p', null, doc.subtitulo));
+    hoja.appendChild(cab);
+    var cuerpo = el('div', 'dic-cuerpo');
+    var nuevos = doc.ultimoNuevo || [];
+    ents.forEach(function (e) {
+      var p = el('p', 'dic-entrada' + (e.propia ? ' propia' : '') + (nuevos.indexOf && nuevos.indexOf(e.lema) !== -1 ? ' nuevo' : ''));
+      p.appendChild(el('b', 'lema', e.lema));
+      p.appendChild(document.createTextNode(', '));
+      p.appendChild(el('i', 'cat', e.cat));
+      e.acepciones.forEach(function (a, i) {
+        p.appendChild(document.createTextNode(' '));
+        if (e.acepciones.length > 1) p.appendChild(el('b', 'num', (i + 1) + '.'));
+        var m = /^([A-Z][a-zá-ú]{1,5}\.) (.*)$/.exec(a);
+        if (m) {
+          p.appendChild(document.createTextNode(' '));
+          p.appendChild(el('i', 'marca', m[1]));
+          p.appendChild(document.createTextNode(' ' + m[2]));
+        } else {
+          p.appendChild(document.createTextNode(' ' + a));
+        }
+      });
+      if (e.ejemplo) {
+        p.appendChild(document.createTextNode(' '));
+        p.appendChild(el('i', 'ejemplo', 'Ej.: «' + e.ejemplo.replace(/\.$/, '') + '».'));
+      }
+      if (e.ver) {
+        p.appendChild(document.createTextNode(' '));
+        p.appendChild(el('span', 'ver', 'V. '));
+        e.ver.forEach(function (v, i) {
+          p.appendChild(el('span', 'remision', v));
+          if (i < e.ver.length - 1) p.appendChild(document.createTextNode(', '));
+        });
+        p.appendChild(document.createTextNode('.'));
+      }
+      cuerpo.appendChild(p);
+    });
+    hoja.appendChild(cuerpo);
+    hoja.appendChild(el('p', 'pie-doc', 'Las definiciones de este diccionario se encuentran en revisión permanente.'));
   }
 
   /* ---------- bingo ---------- */

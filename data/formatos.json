@@ -151,6 +151,13 @@
       "formato": "bingo",
       "nombre": "Bingo de jornada",
       "titulo": "Bingo de jornada institucional"
+    },
+    "diccionario": {
+      "grupo": "juego",
+      "formato": "diccionario",
+      "nombre": "Diccionario de la jerga",
+      "titulo": "Diccionario de la jerga pedagógica",
+      "subtitulo": "{anio}, corregida y aumentada (en proceso)"
     }
   },
   "simbolos": {
@@ -652,6 +659,388 @@
       "Me sumo a lo que digan"
     ],
     "WA_ASADO_PREG": ["¿Cuánto ponemos?", "¿En lo de quién?", "¿Pueden venir parejas?"],
-    "WA_ASADO_CIERRE": ["Armo encuesta 📊", "Les paso dirección por privado", "Bueno, lo hablamos el lunes en sala de profes"]
-  }
+    "WA_ASADO_CIERRE": ["Armo encuesta 📊", "Les paso dirección por privado", "Bueno, lo hablamos el lunes en sala de profes"],
+    "DIC_TEMA": [
+      "Objeto de la próxima jornada institucional.",
+      "Aquello sobre lo cual se envía un documento de cuarenta y tres páginas un domingo a la noche.",
+      "Problemática que atraviesa a los sujetos.",
+      "Tema que, según la coordinación, está todo en el mail.",
+      "Cuestión que requiere ser abordada desde una mirada integral.",
+      "Lo que se problematiza cuando ya no queda nada por problematizar.",
+      "Eje transversal del año próximo."
+    ]
+  },
+  "diccionario": [
+    {
+      "lema": "abordaje",
+      "cat": "sust. m.",
+      "acepciones": ["Acción de abordar un tema sin llegar a tocarlo.", "Náut. Maniobra para acercarse a otra embarcación. En educación, la embarcación nunca llega."],
+      "ejemplo": "Se propone un abordaje integral de la problemática.",
+      "ver": [
+        "integral"
+      ]
+    },
+    {
+      "lema": "acompañar",
+      "cat": "v. tr.",
+      "acepciones": ["Estar al lado de un estudiante mientras desaprueba.", "Verbo comodín que reemplaza a cualquier otro verbo de acción pedagógica."],
+      "ejemplo": "Vamos a acompañar su trayectoria.",
+      "ver": [
+        "trayectoria"
+      ]
+    },
+    {
+      "lema": "afiche",
+      "cat": "sust. m.",
+      "acepciones": [
+        "Soporte en el que se registran las conclusiones de una jornada para no volver a mirarlas nunca más."
+      ],
+      "ejemplo": "Al finalizar, cada grupo pegará su afiche en el SUM.",
+      "ver": [
+        "plenario"
+      ]
+    },
+    {
+      "lema": "andamiaje",
+      "cat": "sust. m.",
+      "acepciones": ["Estructura provisoria que sostiene al alumno hasta que termina el año.", "Cualquier cosa que el docente haga en clase, siempre que en la planificación se llame así."]
+    },
+    {
+      "lema": "articular",
+      "cat": "v. tr.",
+      "acepciones": ["Unir mediante una reunión dos cosas que no tenían nada que ver.", "Pronunciar con claridad. Acepción en desuso en las jornadas."]
+    },
+    {
+      "lema": "atravesar",
+      "cat": "v. tr.",
+      "acepciones": [
+        "Lo que hacen las problemáticas con los sujetos. Todo atraviesa a todos, y nadie sale ileso."
+      ],
+      "ejemplo": "Una escuela atravesada por múltiples demandas."
+    },
+    {
+      "lema": "clave (en clave de)",
+      "cat": "loc. prep.",
+      "acepciones": ["Fórmula que convierte cualquier sustantivo en un enfoque.", "Mús. Signo que indica cómo leer una partitura. En educación, indica cómo no leer el documento."],
+      "ejemplo": "Repensar el recreo en clave de cuidado."
+    },
+    {
+      "lema": "complejizar",
+      "cat": "v. tr.",
+      "acepciones": [
+        "Volver más complicado algo que ya lo era, con la sensación de haber avanzado."
+      ],
+      "ver": [
+        "problematizar"
+      ]
+    },
+    {
+      "lema": "construcción colectiva",
+      "cat": "loc. sust. f.",
+      "acepciones": [
+        "Documento que redacta una persona y firman todos."
+      ]
+    },
+    {
+      "lema": "corresponsabilidad",
+      "cat": "sust. f.",
+      "acepciones": [
+        "Responsabilidad que, al repartirse entre todos, termina siendo de nadie."
+      ]
+    },
+    {
+      "lema": "corrernos (de un lugar)",
+      "cat": "loc. verb.",
+      "acepciones": [
+        "Cambiar de opinión sin levantarse de la silla."
+      ],
+      "ejemplo": "Hay que corrernos del lugar de la queja."
+    },
+    {
+      "lema": "desafío",
+      "cat": "sust. m.",
+      "acepciones": [
+        "Problema al que se le hizo un cambio de imagen."
+      ],
+      "ejemplo": "La convivencia es hoy nuestro principal desafío.",
+      "ver": [
+        "oportunidad"
+      ]
+    },
+    {
+      "lema": "desde",
+      "cat": "prep.",
+      "acepciones": [
+        "Partícula que precede a cualquier enfoque: desde una perspectiva, desde una mirada, desde un lugar."
+      ],
+      "ejemplo": "Yo lo pienso desde otro lugar."
+    },
+    {
+      "lema": "desnaturalizar",
+      "cat": "v. tr.",
+      "acepciones": [
+        "Mirar como extraño algo que se hace exactamente igual desde 1884."
+      ]
+    },
+    {
+      "lema": "dispositivo",
+      "cat": "sust. m.",
+      "acepciones": ["Cualquier cosa.", "Cualquier cosa, pero con fundamentación."],
+      "ejemplo": "El recreo como dispositivo pedagógico."
+    },
+    {
+      "lema": "EMI",
+      "cat": "sigla.",
+      "acepciones": [
+        "Espacio de mejora institucional. Reunión en la que la institución mejora durante dos horas, una vez por mes (aprox.)."
+      ]
+    },
+    {
+      "lema": "encuentro",
+      "cat": "sust. m.",
+      "acepciones": [
+        "Reunión, pero con afecto."
+      ],
+      "ejemplo": "Primer encuentro del trayecto formativo."
+    },
+    {
+      "lema": "espacio",
+      "cat": "sust. m.",
+      "acepciones": ["Materia, asignatura.", "Lugar que se habilita.", "Lo que falta en la sala de profes."],
+      "ver": [
+        "habilitar"
+      ]
+    },
+    {
+      "lema": "habilitar",
+      "cat": "v. tr.",
+      "acepciones": [
+        "Permitir, pero desde una perspectiva crítica. Se habilitan la palabra, los espacios, las preguntas y los tiempos; rara vez los baños."
+      ]
+    },
+    {
+      "lema": "habitar",
+      "cat": "v. tr.",
+      "acepciones": [
+        "Estar en la escuela."
+      ],
+      "ejemplo": "Habitar la escuela de otra manera."
+    },
+    {
+      "lema": "hoja de ruta",
+      "cat": "loc. sust. f.",
+      "acepciones": [
+        "Plan sin fechas."
+      ]
+    },
+    {
+      "lema": "impronta",
+      "cat": "sust. f.",
+      "acepciones": [
+        "Lo que tiene una clase cuando quien la observa no sabe cómo describirla."
+      ],
+      "ejemplo": "La clase tuvo una impronta expositiva."
+    },
+    {
+      "lema": "integral",
+      "cat": "adj.",
+      "acepciones": [
+        "Dicho de una mirada, un abordaje o una formación: que lo incluye todo y, por eso mismo, no especifica nada."
+      ]
+    },
+    {
+      "lema": "interpelar",
+      "cat": "v. tr.",
+      "acepciones": [
+        "Lo que hace un tema con nosotros sin que nadie se lo haya pedido."
+      ],
+      "ejemplo": "Es una problemática que nos interpela."
+    },
+    {
+      "lema": "jornada",
+      "cat": "sust. f.",
+      "acepciones": [
+        "Día en que se suspenden las clases para reflexionar sobre la importancia de las clases."
+      ],
+      "ver": ["afiche", "plenario"]
+    },
+    {
+      "lema": "lógica",
+      "cat": "sust. f.",
+      "acepciones": [
+        "Lo que tienen las cosas que se quieren cambiar: lógica del déficit, lógica homogeneizante, lógica de la queja. Las que se proponen, en cambio, tienen perspectiva."
+      ]
+    },
+    {
+      "lema": "mirada",
+      "cat": "sust. f.",
+      "acepciones": ["Opinión.", "Opinión con pretensiones de integralidad."],
+      "ejemplo": "Ampliar la mirada sobre las trayectorias.",
+      "ver": [
+        "integral"
+      ]
+    },
+    {
+      "lema": "nodo",
+      "cat": "sust. m.",
+      "acepciones": [
+        "Unidad de evaluación que reemplaza a la nota y se completa con una X en una planilla compartida."
+      ]
+    },
+    {
+      "lema": "oportunamente",
+      "cat": "adv.",
+      "acepciones": [
+        "Nunca, pero dicho con buena voluntad."
+      ],
+      "ejemplo": "La fecha será informada oportunamente."
+    },
+    {
+      "lema": "oportunidad",
+      "cat": "sust. f.",
+      "acepciones": [
+        "Desafío visto con optimismo. Problema visto con mucho optimismo."
+      ],
+      "ver": [
+        "desafío"
+      ]
+    },
+    {
+      "lema": "paradigma",
+      "cat": "sust. m.",
+      "acepciones": [
+        "Cosa que se cambia cada cinco años en los documentos y cada cincuenta en las aulas."
+      ]
+    },
+    {
+      "lema": "pienso que",
+      "cat": "loc.",
+      "acepciones": [
+        "Fórmula de apertura de toda intervención en una reunión de departamento. Suele seguirla una pregunta."
+      ]
+    },
+    {
+      "lema": "plenario",
+      "cat": "sust. m.",
+      "acepciones": [
+        "Momento de la jornada en que cada grupo cuenta lo mismo que el anterior."
+      ],
+      "ver": [
+        "relator, ra"
+      ]
+    },
+    {
+      "lema": "poner en tensión",
+      "cat": "loc. verb.",
+      "acepciones": [
+        "Juntar dos conceptos y dejarlos ahí."
+      ]
+    },
+    {
+      "lema": "potenciar",
+      "cat": "v. tr.",
+      "acepciones": [
+        "Mejorar, en versión capacitación."
+      ]
+    },
+    {
+      "lema": "práctica",
+      "cat": "sust. f.",
+      "acepciones": [
+        "Lo que se hace en el aula. Se usa siempre en plural y casi siempre con el adjetivo «propias»."
+      ],
+      "ejemplo": "Revisar las propias prácticas."
+    },
+    {
+      "lema": "problematizar",
+      "cat": "v. tr.",
+      "acepciones": [
+        "Convertir una respuesta en una pregunta. Operación irreversible."
+      ]
+    },
+    {
+      "lema": "propuesta superadora",
+      "cat": "loc. sust. f.",
+      "acepciones": [
+        "Propuesta que todavía no existe, pero que ya supera a la anterior."
+      ]
+    },
+    {
+      "lema": "relator, ra",
+      "cat": "sust.",
+      "acepciones": [
+        "Integrante del grupo que no logró esquivar la tarea de leer el afiche en el plenario."
+      ]
+    },
+    {
+      "lema": "resignificar",
+      "cat": "v. tr.",
+      "acepciones": ["Seguir haciendo lo mismo, pero pensándolo distinto.", "Seguir haciendo lo mismo."],
+      "ejemplo": "Resignificar el acto escolar."
+    },
+    {
+      "lema": "significativo, va",
+      "cat": "adj.",
+      "acepciones": [
+        "Dicho de un aprendizaje: el que vale la pena. No se registran ejemplos del otro tipo."
+      ]
+    },
+    {
+      "lema": "situado, da",
+      "cat": "adj.",
+      "acepciones": [
+        "Que ocurre en algún lugar. Se aplica a cualquier práctica para aclarar que no ocurre en el vacío."
+      ]
+    },
+    {
+      "lema": "sujeto",
+      "cat": "sust. m.",
+      "acepciones": [
+        "Alumno, cuando se lo nombra en un documento."
+      ],
+      "ver": [
+        "territorio"
+      ]
+    },
+    {
+      "lema": "territorio",
+      "cat": "sust. m.",
+      "acepciones": [
+        "Barrio, cuando se lo nombra en un documento."
+      ],
+      "ver": [
+        "sujeto"
+      ]
+    },
+    {
+      "lema": "transversal",
+      "cat": "adj.",
+      "acepciones": [
+        "Que corresponde a todas las materias y, por lo tanto, a ninguna en particular."
+      ],
+      "ejemplo": "La ESI es transversal."
+    },
+    {
+      "lema": "trayectoria",
+      "cat": "sust. f.",
+      "acepciones": ["Recorrido escolar de un estudiante.", "Lo que se acompaña.", "En plural, lo que hay que fortalecer, resignificar y sostener al mismo tiempo."],
+      "ver": [
+        "acompañar"
+      ]
+    },
+    {
+      "lema": "visibilizar",
+      "cat": "v. tr.",
+      "acepciones": [
+        "Hacer visible, mediante un afiche, algo que ya se veía."
+      ]
+    },
+    {
+      "lema": "vincular (lo)",
+      "cat": "loc. sust. m.",
+      "acepciones": [
+        "Todo aquello que no es contenido pero que, según la jornada, importa más."
+      ]
+    }
+  ]
 }

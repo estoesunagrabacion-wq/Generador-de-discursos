@@ -494,6 +494,25 @@ main { max-width: 760px; margin: 0 auto; padding: 16px; }
 .diapo-pie { position: absolute; left: 7%; right: 7%; bottom: 4%; display: flex; justify-content: space-between; font-size: .62em; color: #8a8a8a; }
 .portada .diapo-pie { color: rgba(255,255,255,.7); }
 
+
+/* ---------- diccionario ---------- */
+.dic-guia { display: flex; justify-content: space-between; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; border-bottom: 1px solid #1d2433; padding-bottom: 4px; margin-bottom: 14px; }
+.dic-pag { font-variant-numeric: oldstyle-nums; letter-spacing: 0; }
+.dic-cabecera { text-align: center; margin-bottom: 14px; }
+.dic-cabecera h2 { margin-bottom: 2px !important; font-size: 1.05rem !important; }
+.dic-cabecera p { margin: 0; font-style: italic; font-size: .85rem; color: #3d4354; }
+.dic-cuerpo { font-size: .95rem; line-height: 1.45; }
+@media (min-width: 640px) { .dic-cuerpo { column-count: 2; column-gap: 28px; column-rule: 1px solid #ddd5c2; } }
+.dic-entrada { margin: 0 0 9px; text-align: justify; hyphens: auto; -webkit-hyphens: auto; padding-left: 1em; text-indent: -1em; break-inside: avoid; }
+.dic-entrada .lema { font-size: 1.05em; font-style: normal; }
+.dic-entrada .cat, .dic-entrada .marca { color: #5a6072; }
+.dic-entrada .num { font-size: .9em; }
+.dic-entrada .ejemplo { color: #3d4354; }
+.dic-entrada .ver { font-variant: small-caps; }
+.dic-entrada .remision { font-variant: small-caps; letter-spacing: .03em; }
+.dic-entrada.propia { background: #fbf3dc; padding-top: 3px; padding-bottom: 3px; }
+.dic-entrada.nuevo { animation: resalta 1.6s ease-out; }
+
 /* ---------- bingo ---------- */
 .hoja.formato-bingo { font-family: var(--sans); }
 .bingo-cabecera { text-align: center; margin-bottom: 10px; }

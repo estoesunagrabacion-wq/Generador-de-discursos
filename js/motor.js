@@ -64,6 +64,7 @@
     var formatos = datos.formatos || { tipos: {}, simbolos: {} };
     this.reglas = Object.assign({}, lexico, propios, sinMetadatos(formatos.simbolos), membrete);
     this.tipos = Object.assign({}, datos.documentos.tipos, formatos.tipos);
+    this.reglas.DICC_ENTRADA = formatos.diccionario || [];
     this.temasEjemplo = datos.temas || [];
   }
 
@@ -207,6 +208,18 @@
     if (doc.formato === 'diapositivas') {
       doc.subtitulo = this._expandir(tipo.subtitulo);
       doc.diapositivas = this._diapositivas(doc);
+    }
+    if (doc.formato === 'diccionario') {
+      doc.subtitulo = this._expandir(tipo.subtitulo);
+      doc.entradas = [];
+      this._sumarEntradas(doc, 8);
+      var lema = doc.tema.replace(/^(el|la|los|las|lo|un|una) /i, '');
+      doc.entradas.push({
+        lema: lema, cat: 'sust.', propia: true,
+        acepciones: [this._elegir('DIC_TEMA'), this._elegir('DIC_TEMA')],
+        ver: [doc.entradas[azar(doc.entradas.length)].lema]
+      });
+      this._ordenarEntradas(doc);
     }
     if (doc.formato === 'bingo') {
       var casillas = [];
@@ -366,12 +379,35 @@
     ];
   };
 
+  Motor.prototype._sumarEntradas = function (doc, n) {
+    var nuevas = [];
+    for (var i = 0; i < n; i++) {
+      var e = this._elegir('DICC_ENTRADA');
+      if (doc.entradas.some(function (x) { return x.lema === e.lema; })) continue;
+      var copia = JSON.parse(JSON.stringify(e));
+      doc.entradas.push(copia);
+      nuevas.push(copia);
+    }
+    return nuevas;
+  };
+
+  Motor.prototype._ordenarEntradas = function (doc) {
+    doc.entradas.sort(function (a, b) { return a.lema.localeCompare(b.lema, 'es', { sensitivity: 'base' }); });
+  };
+
   /* Agrega un párrafo más a la sección extensible, antes del cierre. */
   Motor.prototype.extender = function (doc) {
     var tipo = this.tipos[doc.tipoId];
     this._usados = doc._estado.usados;
     this._ctx = doc._estado.ctx;
     if (doc.formato === 'bingo') return doc;
+    if (doc.formato === 'diccionario') {
+      var nuevas = this._sumarEntradas(doc, 4);
+      this._ordenarEntradas(doc);
+      doc.ultimoNuevo = nuevas.map(function (e) { return e.lema; });
+      doc.extensiones++;
+      return doc;
+    }
     if (doc.formato === 'whatsapp') {
       var otras = Object.keys(tipo.escenas).filter(function (k) { return k !== tipo.escena_fija; });
       var nuevos = this._escena(otras[azar(otras.length)], tipo, doc);
@@ -427,6 +463,18 @@
       });
       return out.join('\n').trim();
     }
+    if (doc.formato === 'diccionario') {
+      out.push(doc.titulo.toUpperCase(), doc.subtitulo, '');
+      doc.entradas.forEach(function (e) {
+        var l = e.lema + ', ' + e.cat + ' ' + e.acepciones.map(function (a, i) {
+          return (e.acepciones.length > 1 ? (i + 1) + '. ' : '') + a;
+        }).join(' ');
+        if (e.ejemplo) l += ' Ej.: «' + e.ejemplo.replace(/\.$/, '') + '».';
+        if (e.ver) l += ' V. ' + e.ver.join(', ') + '.';
+        out.push(l, '');
+      });
+      return out.join('\n').trim();
+    }
     if (doc.formato === 'bingo') {
       out.push(doc.titulo.toUpperCase(), 'Eje: ' + doc.tema, '');
       for (var f = 0; f < 5; f++) out.push(doc.bingo.slice(f * 5, f * 5 + 5).join(' | '));
@@ -478,6 +526,7 @@
       minutos: Math.max(1, Math.round(palabras / 130)),
       mensajes: doc.mensajes ? doc.mensajes.length : 0,
       diapositivas: doc.diapositivas ? doc.diapositivas.length : 0,
+      entradas: doc.entradas ? doc.entradas.length : 0,
       ideas: 0
     };
   };
