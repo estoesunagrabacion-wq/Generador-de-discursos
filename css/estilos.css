@@ -158,19 +158,37 @@ main { max-width: 760px; margin: 0 auto; padding: 16px; }
 .ayuda { font-size: .8rem; color: var(--tinta-suave); margin: 6px 0 16px; }
 
 .tipos { margin: 0 0 16px; }
-.grupo-tipos + .grupo-tipos { margin-top: 8px; }
-.subetiqueta { display: block; font-size: .74rem; color: var(--tinta-suave); margin: 0 0 4px; }
-.tipos-fila {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  margin: 0 -16px;
-  padding-left: 16px;
-  padding-right: 16px;
-  scrollbar-width: none;
+.pestanas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--linea);
+  border-radius: 10px;
+  padding: 2px;
+  margin-bottom: 10px;
 }
-.tipos-fila::-webkit-scrollbar { display: none; }
+.pestana {
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  padding: 8px 1px 10px;
+  font-size: .8rem;
+  color: var(--tinta);
+  position: relative;
+}
+.pestana[aria-selected="true"] { background: var(--superficie); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+.pestana.contiene-actual::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  margin-left: -2.5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--institucional);
+}
+.tipos-fila { display: flex; flex-wrap: wrap; gap: 8px; }
 .tipo {
   flex: none;
   border: 1px solid var(--linea);
@@ -608,7 +626,6 @@ main { max-width: 760px; margin: 0 auto; padding: 16px; }
 
 @media (min-width: 640px) {
   main { padding: 24px 16px; }
-  .tipos-fila { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; }
   .hoja { padding: 52px 60px 40px; font-size: 1.06rem; }
   .membrete .lineas { font-size: .82rem; }
   .sello-recibido { top: 170px; left: 56px; font-size: .68rem; }

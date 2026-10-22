@@ -74,19 +74,35 @@
     generar(false, true);
   }
 
+  var grupoVisible = null;
+  var GRUPOS = [['escrito', 'Documentos'], ['oral', 'Discursos'], ['mensaje', 'Mensajes'], ['juego', 'Extras']];
+
+  function grupoDe(id) { return motor.tipos[id].grupo || 'escrito'; }
+
+  // Pestañas por grupo; debajo, los tipos del grupo elegido en varias líneas.
   function pintarTipos() {
     var cont = $('tipos');
     cont.textContent = '';
-    var grupos = { escrito: 'Documentos', oral: 'Discursos', mensaje: 'Mensajes', juego: 'Extras' };
-    var filas = {};
-    Object.keys(grupos).forEach(function (g) {
-      var bloque = el('div', 'grupo-tipos');
-      bloque.appendChild(el('span', 'subetiqueta', grupos[g]));
-      filas[g] = el('div', 'tipos-fila');
-      bloque.appendChild(filas[g]);
-      cont.appendChild(bloque);
+    if (!grupoVisible) grupoVisible = grupoDe(tipoActual);
+    var pestanas = el('div', 'pestanas');
+    pestanas.setAttribute('role', 'tablist');
+    GRUPOS.forEach(function (g) {
+      var t = el('button', 'pestana', g[1]);
+      t.type = 'button';
+      t.setAttribute('role', 'tab');
+      t.setAttribute('aria-selected', String(g[0] === grupoVisible));
+      if (g[0] === grupoDe(tipoActual)) t.classList.add('contiene-actual');
+      t.addEventListener('click', function () {
+        grupoVisible = g[0];
+        pintarTipos();
+      });
+      pestanas.appendChild(t);
     });
+    cont.appendChild(pestanas);
+    var fila = el('div', 'tipos-fila');
+    fila.setAttribute('role', 'radiogroup');
     Object.keys(motor.tipos).forEach(function (id) {
+      if (grupoDe(id) !== grupoVisible) return;
       var b = el('button', 'tipo', motor.tipos[id].nombre);
       b.type = 'button';
       b.setAttribute('role', 'radio');
@@ -97,8 +113,9 @@
         pintarTipos();
         generar();
       });
-      (filas[motor.tipos[id].grupo] || filas.escrito).appendChild(b);
+      fila.appendChild(b);
     });
+    cont.appendChild(fila);
   }
 
   function generar(soloOtra, inicial) {
