@@ -20,7 +20,7 @@ Discursos orales, presentados como versión taquigráfica, con acotaciones del t
 - Palabras del rector/a en un acto
 - Exposición de especialista en una capacitación
 - Declaraciones de funcionario/a ante la prensa
-- Diapositivas de capacitación (viñetas sin verbos, nube de palabras, actividad con pósits)
+- Diapositivas de capacitación (viñetas sin verbos, nube de palabras, actividad con post-its)
 
 Mensajes:
 
