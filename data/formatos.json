@@ -369,7 +369,7 @@
     "DIAPO_EJE": ["Eje 1: {CONCEPTO}", "Eje 2: {OBJETO}", "Eje 3: {CONCEPTO} (transversal)"],
     "DIAPO_ACTIVIDAD": [
       "En pequeños grupos, conversen: ¿qué lugar ocupa {tema} en su escuela? (15 minutos)",
-      "Escriban en un post-it una palabra que asocien con {tema}. Péguenla en el afiche.",
+      "Escriban en un papel una palabra que asocien con {tema}. Después la compartimos en voz alta.",
       "Lean el fragmento de la página siguiente y subrayen las ideas que les resuenen.",
       "Armen una nube de palabras con el celular. (Si no funciona el wifi, en papel.)",
       "Recuperen una situación de su práctica vinculada con {tema} y analícenla a la luz de lo trabajado."
@@ -397,7 +397,7 @@
       "Acompañar",
       "Video disparador",
       "Afiche",
-      "Post-it",
+      "Fotocopias del documento abrochadas",
       "Plenario",
       "Trabajo en grupos",
       "Alguien pregunta por el sueldo",
